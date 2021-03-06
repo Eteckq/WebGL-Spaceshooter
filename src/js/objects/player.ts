@@ -2,8 +2,11 @@ import { gl } from '../utils/gl'
 import Object3D from './abstract/object3d'
 import * as glMatrix from 'gl-matrix'
 import currentlyPressedKeys from '../utils/inputs'
+import Splat from './splat'
 
 export default class Player extends Object3D {
+  public static COOLDOWN = 15
+
   private modelMatrix: any
   private viewMatrix: any
   private projMatrix: any
@@ -11,6 +14,8 @@ export default class Player extends Object3D {
   private rotation: any
   private scale: any
   private acc: any
+
+  private cooldown: number = 0
 
   constructor() {
     super()
@@ -123,6 +128,8 @@ export default class Player extends Object3D {
   }
 
   public tick(elapsed: number) {
+    this.cooldown--
+
     if (currentlyPressedKeys[68]) {
       // D
       this.move(1, 0)
@@ -175,7 +182,24 @@ export default class Player extends Object3D {
   }
 
   public shoot() {
-    console.log('shoot')
+    console.log(this.cooldown)
+
+    if (this.cooldown <= 0) {
+      this.cooldown = Player.COOLDOWN
+      let newSplat = new Splat()
+
+      newSplat.setPosition(this.getCoords())
+    }
+  }
+
+  public getCoords() {
+    // exemple: comment positionner un splat devant le vaisseau
+    var p = this.getBBox() // boite englobante du vaisseau sur l'�cran
+    var x = (p[0][0] + p[1][0]) / 2
+    var y = p[1][1]
+    var z = p[1][2] + 0.005 // profondeur du splat (juste derri�re le vaisseau)
+
+    return { x, y, z }
   }
 
   public move(x: number, y: number) {

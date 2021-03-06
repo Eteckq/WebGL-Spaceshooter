@@ -16,7 +16,13 @@ export default class Splat extends Rectangle {
   public tick(elapsed: number) {
     this.time += 0.01 * elapsed
 
-    // this.position[1] += this.speed * 0.05 * this.direction // permet de déplacer le splat vers le haut au fil du temps
-    // this.position[0] += this.speed * 0.0007 * this.angle // permet de déplacer le splat sur l'axe X
+    this.position[1] += this.speed * 0.05 * this.direction // permet de déplacer le splat vers le haut au fil du temps
+    this.position[0] += this.speed * 0.0007 * this.angle // permet de déplacer le splat sur l'axe X
+  }
+
+  setPosition(position: { x: number; y: any; z: any }) {
+    this.position[0] = position.x
+    this.position[1] = position.y
+    this.position[2] = position.z
   }
 }
