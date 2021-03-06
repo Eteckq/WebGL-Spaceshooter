@@ -1,8 +1,8 @@
 # Web GL Project - Spaceshooter 🚀
 
-Live Exemple
+Live Exemple [here](https://yohangastoud.fr)
 
-School project, build in Typescript from a js code
+School project, built in Typescript from a js code base
 
 ## Features
 
@@ -34,7 +34,9 @@ You can view the development server at `localhost:8080`.
 npm run build
 ```
 
-> Note: Install [http-server](https://www.npmjs.com/package/http-server) globally to deploy a simple server.
+You need to deploy a server:
+Example with http-server module
+> Install [http-server](https://www.npmjs.com/package/http-server) globally to deploy a simple server.
 
 ```bash
 npm i -g http-server
