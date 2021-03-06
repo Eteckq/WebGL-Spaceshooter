@@ -83,8 +83,8 @@ export default class Background extends Object {
   }
 
   public sendUniformVariables() {
-    gl.uniform2fv(Background.SHADER.resolutionUniform, [500, 500])
-    gl.uniform1f(Background.SHADER.timeUniform, this.time / 10)
+    gl.uniform1f(Background.SHADER.time, this.time * 0.1)
+    gl.uniform2fv(Background.SHADER.resolution, [1, 500])
   }
   public draw() {
     gl.bindVertexArray(this.vao)

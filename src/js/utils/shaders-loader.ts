@@ -85,8 +85,8 @@ async function initBackgroundShaders() {
   gl.useProgram(shader)
 
   // adresse des variables dans le shader associé
-  shader.resolutionUniform = gl.getUniformLocation(shader, 'uResolution')
-  shader.timeUniform = gl.getUniformLocation(shader, 'uTime')
+  shader.time = gl.getUniformLocation(shader, 'time')
+  shader.resolution = gl.getUniformLocation(shader, 'resolution')
 }
 
 export async function initAllShaders() {
