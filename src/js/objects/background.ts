@@ -78,16 +78,13 @@ export default class Background extends Object {
   public tick(elapsed: number) {
     this.time += 0.01 * elapsed
 
-    this.offset[1] += 0.005
     this.persistence = 0.5 + 0.2 * Math.sin(this.time)
     this.frequency = 4.0 - 2.0 * Math.sin(this.time)
   }
 
   public sendUniformVariables() {
-    gl.uniform2fv(Background.SHADER.offsetUniform, this.offset)
-    gl.uniform1f(Background.SHADER.amplitudeUniform, this.amplitude)
-    gl.uniform1f(Background.SHADER.frequencyUniform, this.frequency)
-    gl.uniform1f(Background.SHADER.persistenceUniform, this.persistence)
+    gl.uniform2fv(Background.SHADER.resolutionUniform, [500, 500])
+    gl.uniform1f(Background.SHADER.timeUniform, this.time / 10)
   }
   public draw() {
     gl.bindVertexArray(this.vao)

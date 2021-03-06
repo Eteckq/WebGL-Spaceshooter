@@ -3,6 +3,7 @@ import { gl } from './utils/gl'
 import Rectangle from './objects/abstract/rectangle'
 import Background from './objects/background'
 import Player from './objects/player'
+import WebGLManager from './webgl-manager'
 
 export default class GameManager {
   private objectsInScene: Object[] = []
@@ -28,6 +29,13 @@ export default class GameManager {
     this.objectsInScene.splice(this.objectsInScene.indexOf(object), 1)
   }
 
+  public tick() {
+    this.draw()
+    this.animate()
+  }
+
+  // WEB GL
+
   private lastTime: number = 0
   private animate() {
     let timeNow = new Date().getTime()
@@ -38,11 +46,6 @@ export default class GameManager {
       })
     }
     this.lastTime = timeNow
-  }
-
-  public tick() {
-    this.draw()
-    this.animate()
   }
 
   private draw() {
@@ -65,6 +68,12 @@ export default class GameManager {
 
       object.sendUniformVariables()
       object.draw()
+    })
+  }
+
+  public destroy() {
+    this.objectsInScene.forEach((object) => {
+      object.clear()
     })
   }
 }
