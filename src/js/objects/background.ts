@@ -2,6 +2,14 @@ import Object from './abstract/object'
 import { gl } from '../utils/gl'
 
 export default class Background extends Object {
+  checkCollisions(objects: Object[]) {}
+  getPosition(): { x: number; y: number; z?: number } {
+    return { x: 0, y: 0 }
+  }
+  getSize(): { width: number; height: number } {
+    return { width: 0, height: 0 }
+  }
+
   protected speed: number = 0.5
 
   protected offset: any

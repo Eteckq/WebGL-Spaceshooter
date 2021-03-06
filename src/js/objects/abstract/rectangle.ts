@@ -4,7 +4,7 @@ import Object from './object2d'
 export default abstract class Rectangle extends Object {
   protected texture: WebGLTexture
 
-  protected customHitboxScale: [number, number]
+  protected customHitboxScale: { width: number; height: number }
 
   constructor(protected width: number = 0.1, protected height: number = 0.1) {
     super()
@@ -12,7 +12,7 @@ export default abstract class Rectangle extends Object {
     let wo2 = this.width
     let ho2 = this.height
 
-    this.customHitboxScale = [this.width, this.height]
+    this.customHitboxScale = { width: this.width, height: this.height }
 
     // un tableau contenant les positions des sommets (sur CPU donc)
     let vertices = [
@@ -73,20 +73,15 @@ export default abstract class Rectangle extends Object {
     }
   }
 
-  public isCoordInBox(x: number, y: number) {
-    let pos = { x: this.position[0], y: this.position[1] }
+  public getSize() {
+    return this.customHitboxScale
+  }
 
-    let box = {
-      x1: pos.x - this.customHitboxScale[0],
-      x2: pos.x + this.customHitboxScale[0],
-      y1: pos.y - this.customHitboxScale[1],
-      y2: pos.y + this.customHitboxScale[1],
+  public getPosition() {
+    return {
+      x: this.position[0],
+      y: this.position[1],
     }
-
-    if (x > box.x1 && x < box.x2 && y > box.y1 && y < box.y2) {
-      return true
-    }
-    return false
   }
 
   public tick(elapsed: number) {}

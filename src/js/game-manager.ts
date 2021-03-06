@@ -3,12 +3,18 @@ import { gl } from './utils/gl'
 import Rectangle from './objects/abstract/rectangle'
 import Background from './objects/background'
 import Player from './objects/player'
-import WebGLManager from './webgl-manager'
+import Enemy from './objects/enemy'
+import Hitbox from './objects/hitbox'
 
 export default class GameManager {
   private objectsInScene: Object[] = []
 
   static Instance: GameManager
+
+  private currentWave = 0
+  private waveCooldown = 20000000
+
+  private player: Player
 
   constructor() {
     if (!GameManager.Instance) {
@@ -17,9 +23,52 @@ export default class GameManager {
       console.error('More than one game manager instance')
     }
 
-    const player = new Player()
-    const back = new Background()
+    this.player = new Player()
+    new Enemy()
+    // Use to debug hitboxs
+    new Hitbox(0.03, 0.03)
+    new Background()
   }
+
+  public tick() {
+    this.checkCollisions()
+
+    this.draw()
+    this.animate()
+
+    this.waveCooldown--
+    if (this.waveCooldown < 0) {
+      this.spawnNewWave()
+    }
+  }
+
+  private checkCollisions() {
+    this.objectsInScene.map((object) => {
+      if (object instanceof Hitbox) {
+        object.checkCollisions(this.objectsInScene)
+      }
+      /* if (object instanceof Player) {
+        object.checkCollisions(
+          this.objectsInScene.filter(
+            (o) => o instanceof Splat && o.tag === 'EnemyShoot'
+          )
+        )
+      } */
+    })
+  }
+
+  // Waves gestion
+
+  private spawnNewWave() {
+    this.currentWave++
+    this.waveCooldown = 500 * this.currentWave * 100
+
+    for (let i = 0; i < this.currentWave * 2; i++) {
+      new Enemy()
+    }
+  }
+
+  // Used by objects
 
   public addObject(object: Object) {
     this.objectsInScene.push(object)
@@ -27,11 +76,6 @@ export default class GameManager {
 
   public removeFromScene(object: Object) {
     this.objectsInScene.splice(this.objectsInScene.indexOf(object), 1)
-  }
-
-  public tick() {
-    this.draw()
-    this.animate()
   }
 
   // WEB GL

@@ -2,9 +2,10 @@ import { gl } from '../utils/gl'
 import Object3D from './abstract/object3d'
 import * as glMatrix from 'gl-matrix'
 import currentlyPressedKeys from '../utils/inputs'
-import Splat from './splat'
+import Damageable from './interface/damageable'
+import BasicMissile from './projectiles/player/basicMissile'
 
-export default class Player extends Object3D {
+export default class Player extends Object3D implements Damageable {
   public static COOLDOWN = 15
 
   private modelMatrix: any
@@ -17,12 +18,18 @@ export default class Player extends Object3D {
 
   private cooldown: number = 0
 
+  public health: number = 50
+
   constructor() {
     super()
 
     this.load('/assets/models/plane.obj')
 
     this.initParameters()
+  }
+
+  damage(amount: number): void {
+    this.health -= amount
   }
 
   private initParameters() {
@@ -175,13 +182,13 @@ export default class Player extends Object3D {
   public shoot() {
     if (this.cooldown <= 0) {
       this.cooldown = Player.COOLDOWN
-      let newSplat = new Splat()
+      let newSplat = new BasicMissile()
 
-      newSplat.setPosition(this.getCoords())
+      newSplat.setPosition(this.getPosition())
     }
   }
 
-  public getCoords() {
+  public getPosition() {
     // exemple: comment positionner un splat devant le vaisseau
     let p = this.getBBox() // boite englobante du vaisseau sur l'�cran
     let x = (p[0][0] + p[1][0]) / 2
@@ -191,22 +198,42 @@ export default class Player extends Object3D {
     return { x, y, z }
   }
 
+  public getSize() {
+    return { height: 0.1, width: 0.1 }
+  }
+
+  public getBoundBox() {
+    let { x, y } = this.getPosition()
+    let { width, height } = this.getSize()
+    return {
+      x1: x - width / 2,
+      x2: x + width / 2,
+      y1: y - height,
+      y2: y,
+    }
+  }
+
   public move(x: number, y: number) {
-    this.rotation = this.position[0] * 0.2
-
-    if (this.position[0] > 4.1) {
-      this.position[0] = -4.1
+    x = x * 0.1
+    y = y * 0.1
+    let pos = this.getPosition()
+    this.rotation = pos.x * 1
+    let xMax = 1.1
+    let yMax = 1
+    let scale = 5
+    if (pos.x > xMax) {
+      this.position[0] = -xMax * scale
     }
 
-    if (this.position[0] < -4.1) {
-      this.position[0] = 4.1
+    if (pos.x < -xMax) {
+      this.position[0] = xMax * scale
     }
 
-    if (this.position[1] + y > -4.1 && this.position[1] + y < 4.1) {
-      this.position[1] += y * 0.1
+    if (pos.y + y > -yMax && pos.y + y < yMax) {
+      this.position[1] += y
     }
 
-    this.position[0] += x * 0.1
+    this.position[0] += x
   }
 }
 
