@@ -1,20 +1,4 @@
-const vertex = `#version 300 es
-      // *** le vertex shader *** 
-      layout(location=0) in vec3 aVertexPosition; // la position du sommet 
-      layout(location=1) in vec2 aVertexCoord; // sa coordonnee de texture 
-
-      out vec2 vTextureCoord; // on souhaite rasteriser la coordonnee
-
-      void main(void) {
-          // projection de la position
-          gl_Position = vec4(aVertexPosition, 1.0);
-
-          // stockage de la coordonnee de texture
-          vTextureCoord = aVertexCoord;
-      }
-`
-
-const fragment = `#version 300 es
+#version 300 es
       // *** le fragment shader ***
       precision highp float; // precision des nombres flottant
       
@@ -120,16 +104,3 @@ const fragment = `#version 300 es
 	  outColor = mix(mix(c2,c1,d),c2,d); // interpolation entre c1 et c2 en fonction de la profondeur
 	  
       }
-      
-`
-
-export default {
-  vs: {
-    type: 'vertex',
-    str: vertex,
-  },
-  fs: {
-    type: 'fragment',
-    str: fragment,
-  },
-}

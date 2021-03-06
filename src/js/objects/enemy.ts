@@ -1,5 +1,6 @@
 import { initTexture } from '../utils/utils'
 import Rectangle from './abstract/rectangle'
+import Splat from './splat'
 
 export default class Enemy extends Rectangle {
   protected speed: number = 0.5
@@ -24,9 +25,9 @@ export default class Enemy extends Rectangle {
 
     let speed = 0.8
 
-    /* if (Math.round(Math.random() * 150) === 0) {
+    if (Math.round(Math.random() * 150) === 0) {
       this.shoot()
-    } */
+    }
 
     if (Math.round(Math.random() * 1000) === 0) {
       this.directionX = -this.directionX
@@ -49,5 +50,16 @@ export default class Enemy extends Rectangle {
 
     this.position[1] -= newY
     this.position[0] -= newX
+  }
+  public shoot() {
+    let newSplat = new Splat(Math.random() * 20 - 10, -1, 'Red03')
+    newSplat.setPosition(this.getPosition())
+
+  }
+
+  public getPosition(){
+    return {  
+     x: this.position[0], y:this.position[1], z:this.position[2]
+    }
   }
 }

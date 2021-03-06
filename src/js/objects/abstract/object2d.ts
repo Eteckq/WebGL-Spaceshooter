@@ -1,4 +1,3 @@
-import { objectsInScene } from '../../../app'
 import { gl } from '../../utils/gl'
 import Object from './object'
 export default abstract class Object2D extends Object {
@@ -43,6 +42,6 @@ export default abstract class Object2D extends Object {
     gl.deleteBuffer(this.coordBuffer)
     gl.deleteVertexArray(this.vao)
     this.loaded = false
-    objectsInScene.splice(objectsInScene.indexOf(this), 1)
+    this.gameManager.removeFromScene(this)
   }
 }

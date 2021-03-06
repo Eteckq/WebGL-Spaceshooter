@@ -4,10 +4,14 @@ import Rectangle from './abstract/rectangle'
 export default class Splat extends Rectangle {
   protected speed: number = 0.5
 
-  constructor(protected angle: number = 0, protected direction: number = 1) {
+  constructor(
+    protected angle: number = 0,
+    protected direction: number = 1,
+    color: string = 'Blue06'
+  ) {
     super(0.02, 0.06)
     this.texture = initTexture(
-      `/assets/images/PNG/Lasers/laserBlue03.png`,
+      `/assets/images/PNG/Lasers/laser${color}.png`,
       this.width,
       this.height
     )

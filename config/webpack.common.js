@@ -7,7 +7,7 @@ const paths = require('./paths')
 
 module.exports = {
   // Where webpack looks to start building the bundle
-  entry: [paths.src + '/index.js'],
+  entry: [paths.src + '/index.ts'],
 
   // Where webpack outputs the assets and bundles
   output: {

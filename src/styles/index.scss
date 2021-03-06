@@ -1,7 +1,17 @@
-@font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter.ttf');
+@import 'reset';
+
+html {
+  background: #121212;
 }
 
-@import 'variables';
-@import 'scaffolding';
+body {
+  display: flex;
+}
+
+.left {
+}
+
+.right {
+  font-size: xx-large;
+  color: white;
+}

@@ -1,21 +1,4 @@
-const vertex = `#version 300 es
-      // *** le vertex shader *** 
-      layout(location=0) in vec3 aVertexPosition; // la position du sommet 
-      layout(location=1) in vec2 aVertexCoord; // sa coordonnee de texture 
-      
-      uniform vec3 uPosition; // position du vaisseau
-      out vec2 vTextureCoord; // on souhaite rasteriser la coordonnee
-      
-      void main(void) {
-	  // projection de la position
-	  gl_Position = vec4(aVertexPosition.xy+uPosition.xy,uPosition.z, 1.0);
-	  
-	  // stockage de la coordonnee de texture
-	  vTextureCoord = aVertexCoord;
-      }
-`
-
-const fragment = `#version 300 es
+#version 300 es
       precision highp float; // precision des nombres flottant
 
       uniform vec3 maCouleur;
@@ -41,15 +24,3 @@ const fragment = `#version 300 es
 	  // float alpha = 1.-smoothstep(0.2,0.25,distance(vec2(.5),vTextureCoord));
 	  // outColor = vec4(alpha*maCouleur,alpha);
       }
-`
-
-export default {
-  vs: {
-    type: 'vertex',
-    str: vertex,
-  },
-  fs: {
-    type: 'fragment',
-    str: fragment,
-  },
-}

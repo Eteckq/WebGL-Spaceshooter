@@ -1,7 +1,7 @@
-import { objectsInScene } from '../../../app'
 import { gl } from '../../utils/gl'
 import * as glMatrix from 'gl-matrix'
 import Object from './object'
+import { getFile } from '../../utils/utils'
 export default abstract class Object3D extends Object {
   public static SHADER?: any
   protected loaded: boolean = false
@@ -13,16 +13,24 @@ export default abstract class Object3D extends Object {
 
   protected vao: any
 
-  protected bbmin: any
-  protected bbmax: any
-  protected bbminP: any
-  protected bbmaxP: any
+  protected bbmin = [0, 0, 0]
+  protected bbmax = [0, 0, 0]
+  protected bbminP = [0, 0, 0, 0]
+  protected bbmaxP = [0, 0, 0, 0]
 
   protected position: [number, number, number] = [0, 0, 0]
   protected time: number = 0
 
   constructor() {
     super()
+    this.vertexBuffer = gl.createBuffer()
+    this.vertexBuffer.itemSize = 0
+    this.vertexBuffer.numItems = 0
+
+    this.normalBuffer = gl.createBuffer()
+    this.normalBuffer.itemSize = 0
+    this.normalBuffer.numItems = 0
+
     this.vao = gl.createVertexArray()
     gl.bindVertexArray(this.vao)
 
@@ -42,7 +50,7 @@ export default abstract class Object3D extends Object {
   }
 
   protected computeBoundingBox(vertices: any) {
-    var i, j
+    let i, j
 
     if (vertices.length >= 3) {
       this.bbmin = [vertices[0], vertices[1], vertices[2]]
@@ -63,8 +71,8 @@ export default abstract class Object3D extends Object {
   }
 
   protected handleLoadedObject(objData: any) {
-    var vertices = objData[0]
-    var normals = objData[1]
+    let vertices = objData[0]
+    let normals = objData[1]
 
     // console.log("Nb vertices: " + vertices.length / 3);
 
@@ -102,102 +110,81 @@ export default abstract class Object3D extends Object {
     gl.deleteBuffer(this.normalBuffer)
     gl.deleteVertexArray(this.vao)
     this.loaded = false
-    this.loaded = false
-    let i = objectsInScene.indexOf(this)
-
-    objectsInScene.splice(i, 1)
+    this.gameManager.removeFromScene(this)
   }
 
-  protected load(filename: string) {
+  protected async load(filename: string) {
     // lecture du fichier, récupération des positions et des normales
-    var vertices = null
-    var xmlhttp = new XMLHttpRequest()
-    var instance = this
+    let data = await getFile(filename)
 
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-        if (xmlhttp.status == 200) {
-          var data = xmlhttp.responseText
+    let lines = data.split('\n')
 
-          var lines = data.split('\n')
+    let positions: any = []
+    let normals: any = []
+    let arrayVertex: any = []
+    let arrayNormal: any = []
 
-          var positions: any = []
-          var normals: any = []
-          var arrayVertex: any = []
-          var arrayNormal: any = []
+    for (let i = 0; i < lines.length; i++) {
+      let parts = lines[i].trimRight().split(' ')
+      if (parts.length > 0) {
+        switch (parts[0]) {
+          case 'v':
+            positions.push(
+              glMatrix.vec3.fromValues(
+                parseFloat(parts[1]),
+                parseFloat(parts[2]),
+                parseFloat(parts[3])
+              )
+            )
 
-          for (var i = 0; i < lines.length; i++) {
-            var parts = lines[i].trimRight().split(' ')
-            if (parts.length > 0) {
-              switch (parts[0]) {
-                case 'v':
-                  positions.push(
-                    glMatrix.vec3.fromValues(
-                      parseFloat(parts[1]),
-                      parseFloat(parts[2]),
-                      parseFloat(parts[3])
-                    )
-                  )
+            break
+          case 'vn':
+            normals.push(
+              glMatrix.vec3.fromValues(
+                parseFloat(parts[1]),
+                parseFloat(parts[2]),
+                parseFloat(parts[3])
+              )
+            )
+            break
+          case 'f': {
+            let f1 = parts[1].split('/')
+            let f2 = parts[2].split('/')
+            let f3 = parts[3].split('/')
+            Array.prototype.push.apply(
+              arrayVertex,
+              positions[parseInt(f1[0]) - 1]
+            )
+            Array.prototype.push.apply(
+              arrayVertex,
+              positions[parseInt(f2[0]) - 1]
+            )
+            Array.prototype.push.apply(
+              arrayVertex,
+              positions[parseInt(f3[0]) - 1]
+            )
 
-                  break
-                case 'vn':
-                  normals.push(
-                    glMatrix.vec3.fromValues(
-                      parseFloat(parts[1]),
-                      parseFloat(parts[2]),
-                      parseFloat(parts[3])
-                    )
-                  )
-                  break
-                case 'f': {
-                  var f1 = parts[1].split('/')
-                  var f2 = parts[2].split('/')
-                  var f3 = parts[3].split('/')
-                  Array.prototype.push.apply(
-                    arrayVertex,
-                    positions[parseInt(f1[0]) - 1]
-                  )
-                  Array.prototype.push.apply(
-                    arrayVertex,
-                    positions[parseInt(f2[0]) - 1]
-                  )
-                  Array.prototype.push.apply(
-                    arrayVertex,
-                    positions[parseInt(f3[0]) - 1]
-                  )
-
-                  Array.prototype.push.apply(
-                    arrayNormal,
-                    normals[parseInt(f1[2]) - 1]
-                  )
-                  Array.prototype.push.apply(
-                    arrayNormal,
-                    normals[parseInt(f2[2]) - 1]
-                  )
-                  Array.prototype.push.apply(
-                    arrayNormal,
-                    normals[parseInt(f3[2]) - 1]
-                  )
-                  break
-                }
-                default:
-                  break
-              }
-            }
+            Array.prototype.push.apply(
+              arrayNormal,
+              normals[parseInt(f1[2]) - 1]
+            )
+            Array.prototype.push.apply(
+              arrayNormal,
+              normals[parseInt(f2[2]) - 1]
+            )
+            Array.prototype.push.apply(
+              arrayNormal,
+              normals[parseInt(f3[2]) - 1]
+            )
+            break
           }
-
-          var objData = [
-            new Float32Array(arrayVertex),
-            new Float32Array(arrayNormal),
-          ]
-          instance.handleLoadedObject(objData)
+          default:
+            break
         }
       }
     }
 
-    // console.log("Loading Model <" + filename + ">...");
-
-    xmlhttp.open('GET', filename, true)
-    xmlhttp.send()
+    let objData = [new Float32Array(arrayVertex), new Float32Array(arrayNormal)]
+    this.handleLoadedObject(objData)
   }
 }

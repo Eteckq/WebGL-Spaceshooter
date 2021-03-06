@@ -19,19 +19,6 @@ export default class Player extends Object3D {
 
   constructor() {
     super()
-    this.vertexBuffer = gl.createBuffer()
-    this.vertexBuffer.itemSize = 0
-    this.vertexBuffer.numItems = 0
-
-    this.normalBuffer = gl.createBuffer()
-    this.normalBuffer.itemSize = 0
-    this.normalBuffer.numItems = 0
-
-    this.bbmin = [0, 0, 0]
-    this.bbmax = [0, 0, 0]
-
-    this.bbminP = [0, 0, 0, 0]
-    this.bbmaxP = [0, 0, 0, 0]
 
     this.load('/assets/models/plane.obj')
 
@@ -75,9 +62,9 @@ export default class Player extends Object3D {
     if (this.loaded) {
       gl.uniform1f(Player.SHADER.timerUniform, this.acc)
 
-      var m = this.modelMatrix
-      var v = this.viewMatrix
-      var p = this.projMatrix
+      let m = this.modelMatrix
+      let v = this.viewMatrix
+      let p = this.projMatrix
 
       // envoie des matrices aux GPU
       gl.uniformMatrix4fv(
@@ -130,6 +117,36 @@ export default class Player extends Object3D {
   public tick(elapsed: number) {
     this.cooldown--
 
+    this.handleInputs()
+    this.time += 0.01 * elapsed
+
+    let rMat = glMatrix.mat4.rotate(
+      glMatrix.mat4.create(),
+      glMatrix.mat4.identity(glMatrix.mat4.create()),
+      this.rotation,
+      [0, 1, 0]
+    )
+    let tMat = glMatrix.mat4.translate(
+      glMatrix.mat4.create(),
+      glMatrix.mat4.identity(glMatrix.mat4.create()),
+      [this.position[0], this.position[1], this.position[2]]
+    )
+    let sMat = glMatrix.mat4.scale(
+      glMatrix.mat4.create(),
+      glMatrix.mat4.identity(glMatrix.mat4.create()),
+      [this.scale, this.scale, this.scale]
+    )
+
+    // on applique les transformations successivement
+    this.modelMatrix = glMatrix.mat4.identity(glMatrix.mat4.create())
+    this.modelMatrix = multiply(sMat as any, this.modelMatrix)
+    this.modelMatrix = multiply(rMat as any, this.modelMatrix)
+    this.modelMatrix = multiply(tMat as any, this.modelMatrix)
+
+    this.acc += 0.01
+  }
+
+  private handleInputs() {
     if (currentlyPressedKeys[68]) {
       // D
       this.move(1, 0)
@@ -153,37 +170,9 @@ export default class Player extends Object3D {
     if (currentlyPressedKeys[32]) {
       this.shoot()
     }
-    this.time += 0.01 * elapsed
-
-    var rMat = glMatrix.mat4.rotate(
-      glMatrix.mat4.create(),
-      glMatrix.mat4.identity(glMatrix.mat4.create()),
-      this.rotation,
-      [0, 1, 0]
-    )
-    var tMat = glMatrix.mat4.translate(
-      glMatrix.mat4.create(),
-      glMatrix.mat4.identity(glMatrix.mat4.create()),
-      [this.position[0], this.position[1], this.position[2]]
-    )
-    var sMat = glMatrix.mat4.scale(
-      glMatrix.mat4.create(),
-      glMatrix.mat4.identity(glMatrix.mat4.create()),
-      [this.scale, this.scale, this.scale]
-    )
-
-    // on applique les transformations successivement
-    this.modelMatrix = glMatrix.mat4.identity(glMatrix.mat4.create())
-    this.modelMatrix = multiply(sMat as any, this.modelMatrix)
-    this.modelMatrix = multiply(rMat as any, this.modelMatrix)
-    this.modelMatrix = multiply(tMat as any, this.modelMatrix)
-
-    this.acc += 0.01
   }
 
   public shoot() {
-    console.log(this.cooldown)
-
     if (this.cooldown <= 0) {
       this.cooldown = Player.COOLDOWN
       let newSplat = new Splat()
@@ -194,10 +183,10 @@ export default class Player extends Object3D {
 
   public getCoords() {
     // exemple: comment positionner un splat devant le vaisseau
-    var p = this.getBBox() // boite englobante du vaisseau sur l'�cran
-    var x = (p[0][0] + p[1][0]) / 2
-    var y = p[1][1]
-    var z = p[1][2] + 0.005 // profondeur du splat (juste derri�re le vaisseau)
+    let p = this.getBBox() // boite englobante du vaisseau sur l'�cran
+    let x = (p[0][0] + p[1][0]) / 2
+    let y = p[1][1]
+    let z = p[1][2] + 0.005 // profondeur du splat (juste derri�re le vaisseau)
 
     return { x, y, z }
   }
@@ -226,7 +215,7 @@ const multiplyVec4 = function (mat: number[], vec: any[], dest?: number[]) {
     dest = vec
   }
 
-  var x = vec[0],
+  let x = vec[0],
     y = vec[1],
     z = vec[2],
     w = vec[3]
@@ -245,7 +234,7 @@ const multiply = function (mat: any[], mat2: any[], dest?: number[]) {
   }
 
   // Cache the matrix values (makes for huge speed increases!)
-  var a00 = mat[0],
+  let a00 = mat[0],
     a01 = mat[1],
     a02 = mat[2],
     a03 = mat[3],

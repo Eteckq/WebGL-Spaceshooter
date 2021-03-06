@@ -9,13 +9,13 @@ export default abstract class Rectangle extends Object {
   constructor(protected width: number = 0.1, protected height: number = 0.1) {
     super()
 
-    var wo2 = this.width
-    var ho2 = this.height
+    let wo2 = this.width
+    let ho2 = this.height
 
     this.customHitboxScale = [this.width, this.height]
 
     // un tableau contenant les positions des sommets (sur CPU donc)
-    var vertices = [
+    let vertices = [
       -wo2,
       -ho2,
       -0.8,
@@ -30,9 +30,9 @@ export default abstract class Rectangle extends Object {
       -0.8,
     ]
 
-    var coords = [0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]
+    let coords = [0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]
 
-    var tri = [0, 1, 2, 0, 2, 3]
+    let tri = [0, 1, 2, 0, 2, 3]
 
     // cree un nouveau buffer sur le GPU et l'active
     this.vertexBuffer = gl.createBuffer()

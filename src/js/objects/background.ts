@@ -26,7 +26,7 @@ export default class Background extends Object {
     this.persistence = 0.5
 
     // un tableau contenant les positions des sommets (sur CPU donc)
-    var vertices = [
+    let vertices = [
       -1.0,
       -1.0,
       0.9999,
@@ -41,9 +41,9 @@ export default class Background extends Object {
       0.9999,
     ]
 
-    var coords = [0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]
+    let coords = [0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]
 
-    var tri = [0, 1, 2, 0, 2, 3]
+    let tri = [0, 1, 2, 0, 2, 3]
 
     this.vao = gl.createVertexArray()
     gl.bindVertexArray(this.vao)
