@@ -13,6 +13,21 @@ class View {
   public setScore(score: number) {
     $('#info_SCORE').html(score.toString())
   }
+
+  public setBonus(list: string[]) {
+    $('#bonusList').html('')
+    for (const bonus of list) {
+      $('#bonusList').append(`
+        <li>
+          <img
+            src="${bonus}"
+            height="30px"
+            width="30px"
+          />
+        </li>
+        `)
+    }
+  }
 }
 
 class HealthBar {
