@@ -5,35 +5,32 @@ export default class BasicWeapon extends Weapon {
   constructor() {
     super()
     this.maxLevel = 6
-    this.level = 1
+    this.level = 0
     this.SHOOT_COOLDOWN = 25
   }
 
-  public shoot(position: { x: number; y: number; z?: number }) {
-    if (this.shootCooldown <= 0) {
-      this.shootCooldown = this.SHOOT_COOLDOWN
-      if (this.level >= 5) {
-        this.shootCooldown -= 8
-      }
-      if (this.level >= 6) {
-        this.shootCooldown -= 6
-      }
-      switch (this.level) {
-        case 1:
-          this.shootLevel1(position)
-          break
-        case 2:
-          this.shootLevel2(position)
-          break
-        case 3:
-          this.shootLevel3(position)
-          break
-        case 4:
-        case 5:
-        case 6:
-          this.shootLevel4(position)
-          break
-      }
+  public use(position: { x: number; y: number; z?: number }) {
+    if (this.level >= 5) {
+      this.shootCooldown -= 8
+    }
+    if (this.level >= 6) {
+      this.shootCooldown -= 6
+    }
+    switch (this.level) {
+      case 1:
+        this.shootLevel1(position)
+        break
+      case 2:
+        this.shootLevel2(position)
+        break
+      case 3:
+        this.shootLevel3(position)
+        break
+      case 4:
+      case 5:
+      case 6:
+        this.shootLevel4(position)
+        break
     }
   }
 

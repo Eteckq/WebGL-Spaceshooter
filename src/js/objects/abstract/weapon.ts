@@ -5,7 +5,14 @@ export default abstract class Weapon {
 
   protected maxLevel: number = 10
 
-  abstract shoot(pos: { x: number; y: number; z: number }): void
+  shoot(pos: { x: number; y: number; z: number }) {
+    if (this.shootCooldown <= 0 && this.level > 0) {
+      this.shootCooldown = this.SHOOT_COOLDOWN
+      this.use(pos)
+    }
+  }
+
+  abstract use(pos: { x: number; y: number; z: number }): void
 
   public tick() {
     this.shootCooldown--

@@ -3,14 +3,14 @@ import { gl } from './utils/gl'
 import Rectangle from './objects/abstract/rectangle'
 import Background from './objects/background'
 import Player from './objects/player'
-import BasicEnemyMissile from './objects/projectiles/enemy/basic-enemy-missile'
 import Enemy from './objects/abstract/enemy'
-import BasicMissile from './objects/projectiles/player/basic-missile'
 import WaveManager from './wave-manager'
 import View from './view'
 import Bonus from './objects/abstract/bonus'
 import PlayerManager from './player-manager'
 import Hitbox from './objects/hitbox'
+import PlayerMissile from './objects/abstract/player-missile'
+import EnemyMissile from './objects/abstract/enemy-missile'
 
 const DEBUG = false
 
@@ -73,7 +73,7 @@ export default class GameManager {
         }
       if (object instanceof Enemy) {
         object.checkCollisions([
-          ...this.objectsInScene.filter((o) => o instanceof BasicMissile),
+          ...this.objectsInScene.filter((o) => o instanceof PlayerMissile),
           this.playerManager.player,
         ])
       }
@@ -84,7 +84,7 @@ export default class GameManager {
     })
 
     this.playerManager.player.checkCollisions(
-      this.objectsInScene.filter((o) => o instanceof BasicEnemyMissile)
+      this.objectsInScene.filter((o) => o instanceof EnemyMissile)
     )
   }
 

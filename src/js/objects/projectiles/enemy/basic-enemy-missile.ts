@@ -1,6 +1,6 @@
-import Missile from '../../abstract/missile'
+import EnemyMissile from '../../abstract/enemy-missile'
 
-export default class BasicEnemyMissile extends Missile {
+export default class BasicEnemyMissile extends EnemyMissile {
   constructor() {
     super(`/assets/images/PNG/Lasers/laserRed06.png`, 0.02, 0.06)
   }

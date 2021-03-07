@@ -1,9 +1,8 @@
 import GameManager from './game-manager'
 import Player from './objects/player'
-import BasicMissile from './objects/projectiles/player/basic-missile'
-import BasicWeapon from './objects/weapons/basic-weapon'
 import currentlyPressedKeys from './utils/inputs'
 import View from './view'
+import WeaponManager from './weapon-manager'
 
 export default class PlayerManager {
   public player: Player
@@ -14,13 +13,11 @@ export default class PlayerManager {
   private speed: number = 1
   public health: number = 20
 
-  private basicWeapon: BasicWeapon
+  public weaponManager = new WeaponManager()
 
   constructor() {
     this.player = new Player()
     View.setHp(this.health)
-
-    this.basicWeapon = new BasicWeapon()
   }
 
   public damage(amount: number) {
@@ -35,10 +32,6 @@ export default class PlayerManager {
     }
   }
 
-  public basicWeaponUpgrade() {
-    this.basicWeapon.levelUp()
-  }
-
   public healthBonus() {
     if (this.health < 50) {
       this.health += 10
@@ -49,13 +42,10 @@ export default class PlayerManager {
     View.setHp(this.health)
   }
 
-  public shoot() {
-    this.basicWeapon.shoot(this.player.getPosition())
-  }
-
   public tick() {
     this.damageCooldown--
-    this.basicWeapon.tick()
+    this.weaponManager.tick()
+
     this.handleInputs()
   }
 
@@ -81,7 +71,7 @@ export default class PlayerManager {
     }
 
     if (currentlyPressedKeys[32]) {
-      this.shoot()
+      this.weaponManager.shoot()
     }
   }
 

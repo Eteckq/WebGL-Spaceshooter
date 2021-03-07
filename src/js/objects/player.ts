@@ -2,8 +2,8 @@ import { gl } from '../utils/gl'
 import Object3D from './abstract/object3d'
 import * as glMatrix from 'gl-matrix'
 
-import BasicEnemyMissile from './projectiles/enemy/basic-enemy-missile'
 import GameManager from '../game-manager'
+import EnemyMissile from './abstract/enemy-missile'
 
 export default class Player extends Object3D {
   private modelMatrix: any
@@ -27,7 +27,7 @@ export default class Player extends Object3D {
   }
 
   protected onCollision(other: Object) {
-    if (other instanceof BasicEnemyMissile) {
+    if (other instanceof EnemyMissile) {
       this.damage(other.attack)
       other.clear()
     }

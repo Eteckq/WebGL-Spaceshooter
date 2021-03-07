@@ -5,6 +5,7 @@ import Player from '../player'
 import BasicMissile from '../projectiles/player/basic-missile'
 import GameManager from '../../game-manager'
 import BoundedEntity from './bounded-entity'
+import PlayerMissile from './player-missile'
 
 export default abstract class Enemy
   extends BoundedEntity
@@ -23,7 +24,7 @@ export default abstract class Enemy
     if (other instanceof Player) {
       other.damage(this.attack)
       this.damage(5)
-    } else if (other instanceof BasicMissile) {
+    } else if (other instanceof PlayerMissile) {
       this.damage(other.attack)
       other.clear()
     }

@@ -1,6 +1,7 @@
-import Bonus from './objects/abstract/bonus'
-import AttackSpeedBonus from './objects/bonus/basic-weapon-upgrade'
+import WeaponUpgrade from './objects/abstract/weapon-upgrade'
+import BasicWeaponUpgrade from './objects/bonus/basic-weapon-upgrade'
 import HealthBonus from './objects/bonus/health'
+import WaveWeaponUpgrade from './objects/bonus/wave-weapon-upgrade'
 import Enemy01 from './objects/enemies/enemy01'
 
 export default class WaveManager {
@@ -11,7 +12,11 @@ export default class WaveManager {
 
   private playing = false
 
-  constructor() {}
+  private bonus: any
+
+  constructor() {
+    this.bonus = [WaveWeaponUpgrade, BasicWeaponUpgrade, HealthBonus]
+  }
 
   start() {
     this.playing = true
@@ -45,7 +50,6 @@ export default class WaveManager {
   }
 
   private spawnRandomBonus() {
-    let bonus = [AttackSpeedBonus, HealthBonus]
-    new bonus[Math.floor(Math.random() * bonus.length)]()
+    new this.bonus[Math.floor(Math.random() * this.bonus.length)]()
   }
 }
