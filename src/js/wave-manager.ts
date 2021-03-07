@@ -47,17 +47,14 @@ export default class WaveManager {
       this.numberOfEnemies++
     }
 
-    if (generateOdds(1)) {
+    if (generateOdds(3)) {
       this.spawnRandomBonus()
     }
   }
 
   private spawnRandomBonus() {
-    // new this.spawnableBonus[
-    //   Math.floor(Math.random() * this.spawnableBonus.length)
-    // ]()
-
-    new SlotBonus()
-    new WaveWeaponUpgrade()
+    new this.spawnableBonus[
+      Math.floor(Math.random() * this.spawnableBonus.length)
+    ]()
   }
 }

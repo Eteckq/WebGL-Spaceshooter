@@ -1,6 +1,6 @@
 # Web GL Project - Spaceshooter 🚀
 
-Live Exemple [here](https://yohangastoud.fr)
+Live Exemple [here](https://spaceshooter.yohangastoud.fr)
 
 School project, built in Typescript from a js code base
 
