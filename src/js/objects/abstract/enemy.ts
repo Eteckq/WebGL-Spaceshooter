@@ -32,9 +32,9 @@ export default abstract class Enemy
       this.height
     )
     this.position[0] = getRandom(-1, 1)
-    this.position[1] = getRandom(1, 0.5)
+    this.position[1] = getRandom(1.1, 1.4)
     this.directionX = getRandom(-1, 1)
-    this.directionY = getRandom(-1, 1)
+    this.directionY = getRandom(0.2, 1)
   }
 
   protected onCollision(other: Object) {
@@ -83,7 +83,7 @@ export default abstract class Enemy
     }
 
     let newY = speed * 0.01 * this.directionY
-    if (this.position[1] - newY < -0.5 || this.position[1] - newY > 1.2) {
+    if (this.position[1] - newY < -0.5 || this.position[1] - newY > 1.5) {
       this.directionY = -this.directionY
       newY = -newY
     }

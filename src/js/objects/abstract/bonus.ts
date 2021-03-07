@@ -28,21 +28,14 @@ export default abstract class Bonus extends Rectangle {
 
     let speed = 0.8
 
-    if (Math.round(Math.random() * 1000) === 0) {
-      this.directionX = -this.directionX
-    }
-    if (Math.round(Math.random() * 500) === 0) {
-      this.directionY = -this.directionY
-    }
-
     let newX = speed * 0.03 * this.directionX
-    if (this.position[0] - newX < -1.2 || this.position[0] - newX > 1.2) {
+    if (this.position[0] - newX < -1 || this.position[0] - newX > 1) {
       this.directionX = -this.directionX
       newX = -newX
     }
 
     let newY = speed * 0.01 * this.directionY
-    if (this.position[1] - newY < -0.5 || this.position[1] - newY > 1.2) {
+    if (this.position[1] - newY < -1 || this.position[1] - newY > 1) {
       this.directionY = -this.directionY
       newY = -newY
     }

@@ -34,7 +34,6 @@ export default class GameManager {
     this.player = new Player()
     // uncomment to debug hitboxs
     // new Hitbox(0.03, 0.03)
-    new BasicEnemyMissile()
     new Background()
     this.waveManager = new WaveManager()
 

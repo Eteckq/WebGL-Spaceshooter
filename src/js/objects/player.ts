@@ -33,6 +33,7 @@ export default class Player extends Object3D implements Damageable {
     this.load('/assets/models/plane.obj')
 
     this.initParameters()
+    View.setHp(this.health)
   }
 
   public upgradeSpeedBonus(): number {
@@ -43,8 +44,13 @@ export default class Player extends Object3D implements Damageable {
   }
 
   public healthBonus() {
-    this.health += 10
-    View.setHP(this.health)
+    if (this.health < 50) {
+      this.health += 10
+    }
+    if (this.health > 50) {
+      this.health = 50
+    }
+    View.setHp(this.health)
   }
 
   public getCooldown() {
@@ -55,8 +61,8 @@ export default class Player extends Object3D implements Damageable {
     if (this.damageCooldown <= 0) {
       this.damageCooldown = this.DAMAGE_COOLDOWN
       this.health -= amount
-      View.setHP(this.health)
 
+      View.setHp(this.health)
       if (this.health <= 0) {
         GameManager.Instance.gameOver()
       }
