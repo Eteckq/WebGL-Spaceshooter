@@ -19,6 +19,10 @@ function handleLoadedTexture(texture: any) {
   gl.bindTexture(gl.TEXTURE_2D, null)
 }
 
+export function generateOdds(number: number) {
+  return Math.round(Math.random() * number) === 0
+}
+
 export function getRandomFloat(min: number, max: number) {
   return Math.random() * (max - min) + min
 }

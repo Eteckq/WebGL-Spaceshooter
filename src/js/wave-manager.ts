@@ -4,6 +4,7 @@ import HealthBonus from './objects/bonus/health'
 import SlotBonus from './objects/bonus/slot'
 import WaveWeaponUpgrade from './objects/bonus/wave-weapon-upgrade'
 import Enemy01 from './objects/enemies/enemy01'
+import { generateOdds } from './utils/utils'
 
 export default class WaveManager {
   private currentWave = 0
@@ -16,7 +17,7 @@ export default class WaveManager {
   private spawnableBonus: any = [
     WaveWeaponUpgrade,
     BasicWeaponUpgrade,
-    // HealthBonus,
+    HealthBonus,
     SlotBonus,
   ]
 
@@ -46,14 +47,17 @@ export default class WaveManager {
       this.numberOfEnemies++
     }
 
-    for (let i = 0; i < 5; i++) {
+    if (generateOdds(1)) {
       this.spawnRandomBonus()
     }
   }
 
   private spawnRandomBonus() {
-    new this.spawnableBonus[
-      Math.floor(Math.random() * this.spawnableBonus.length)
-    ]()
+    // new this.spawnableBonus[
+    //   Math.floor(Math.random() * this.spawnableBonus.length)
+    // ]()
+
+    new SlotBonus()
+    new WaveWeaponUpgrade()
   }
 }

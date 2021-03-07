@@ -1,23 +1,28 @@
-import { getRandomBoolValue, getRandomInt } from '../../utils/utils'
+import {
+  generateOdds,
+  getRandomBoolValue,
+  getRandomFloat,
+  getRandomInt,
+} from '../../utils/utils'
 import Enemy from '../abstract/enemy'
 import BasicEnemyMissile from '../projectiles/enemy/basic-enemy-missile'
 
 export default class Enemy01 extends Enemy {
   constructor() {
     super('Black1', 0.08, 0.08)
-    this.speed = 0.5
+    this.speed = getRandomFloat(0.4, 0.7)
     this.health = 10
   }
 
   public update() {
-    if (Math.round(Math.random() * 150) === 0) {
+    if (generateOdds(150)) {
       this.shoot()
     }
 
-    if (Math.round(Math.random() * 1000) === 0) {
+    if (generateOdds(1000)) {
       this.directionX = getRandomBoolValue()
     }
-    if (Math.round(Math.random() * 500) === 0) {
+    if (generateOdds(500)) {
       this.directionY = getRandomInt(-1, 1)
     }
 

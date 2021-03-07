@@ -7,7 +7,7 @@ import WaveWeapon from './objects/weapons/wave-weapon'
 import view from './view'
 
 export default class WeaponManager {
-  private upgrades: WeaponUpgrade[] = []
+  private upgrades: WeaponUpgrade[] = [new WaveWeaponUpgrade()]
 
   private maxBonusSlots: number = 8
   private currentBonusSlots: number = 3
@@ -55,7 +55,7 @@ export default class WeaponManager {
     }
 
     while (bonusPngs.length < this.currentBonusSlots) {
-      bonusPngs.push(`/assets/images/PNG/Power-ups/star_silver.png`)
+      bonusPngs.push(`/assets/images/PNG/Power-ups/slot.png`)
     }
     view.setBonus(bonusPngs)
   }

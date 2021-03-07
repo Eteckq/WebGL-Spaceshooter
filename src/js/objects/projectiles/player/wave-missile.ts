@@ -2,11 +2,12 @@ import PlayerMissile from '../../abstract/player-missile'
 
 export default class WaveMissile extends PlayerMissile {
   constructor(protected angle: number = 0) {
-    super(`/assets/images/PNG/Lasers/laserGreen06.png`, 0.02, 0.06)
+    super(`/assets/images/PNG/Lasers/laserGreen14.png`, 0.03, 0.03)
   }
 
   public update() {
-    this.position[1] += this.speed * 0.05 * 2 // permet de déplacer le splat vers le haut au fil du temps
-    this.position[0] += this.speed * 0.0007 * this.angle // permet de déplacer le splat sur l'axe X
+    this.position[1] += this.speed * 0.04 // permet de déplacer le splat vers le haut au fil du temps
+    this.position[0] +=
+      this.speed * 0.01 * Math.sin(this.time) + this.angle * 0.001 // permet de déplacer le splat sur l'axe X
   }
 }
