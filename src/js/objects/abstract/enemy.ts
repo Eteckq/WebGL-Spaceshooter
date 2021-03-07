@@ -1,4 +1,4 @@
-import { initTexture } from '../../utils/utils'
+import { getRandom, initTexture } from '../../utils/utils'
 import Damageable from '../interface/damageable'
 import Damager from '../interface/damager'
 import Player from '../player'
@@ -7,10 +7,6 @@ import BasicEnemyMissile from '../projectiles/enemy/basicEnemyMissile'
 import Rectangle from './rectangle'
 import BasicMissile from '../projectiles/player/basicMissile'
 import GameManager from '../../game-manager'
-
-function getRandom(min: number, max: number) {
-  return Math.random() * (max - min) + min
-}
 
 export default abstract class Enemy
   extends Rectangle

@@ -9,6 +9,7 @@ import Enemy from './objects/abstract/enemy'
 import BasicMissile from './objects/projectiles/player/basicMissile'
 import WaveManager from './wave-manager'
 import View from './view'
+import Bonus from './objects/abstract/bonus'
 
 export default class GameManager {
   private objectsInScene: Object[] = []
@@ -43,6 +44,14 @@ export default class GameManager {
     }, 3000)
   }
 
+  public upgradeSpeedBonus() {
+    this.player.upgradeSpeedBonus()
+  }
+
+  healthBonus() {
+    this.player.healthBonus()
+  }
+
   public killEnemy(enemy: Enemy) {
     this.waveManager.numberOfEnemies--
     this.score += enemy.score
@@ -75,6 +84,10 @@ export default class GameManager {
           ...this.objectsInScene.filter((o) => o instanceof BasicMissile),
           this.player,
         ])
+      }
+
+      if (object instanceof Bonus) {
+        object.checkCollisions([this.player])
       }
     })
 

@@ -1,3 +1,6 @@
+import Bonus from './objects/abstract/bonus'
+import AttackSpeedBonus from './objects/bonus/attack-speed'
+import HealthBonus from './objects/bonus/health'
 import Enemy01 from './objects/enemies/enemy01'
 
 export default class WaveManager {
@@ -34,5 +37,14 @@ export default class WaveManager {
       new Enemy01()
       this.numberOfEnemies++
     }
+
+    if (true) {
+      this.spawnRandomBonus()
+    }
+  }
+
+  private spawnRandomBonus() {
+    let bonus = [AttackSpeedBonus, HealthBonus]
+    new bonus[Math.floor(Math.random() * bonus.length)]()
   }
 }

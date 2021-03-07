@@ -19,6 +19,10 @@ function handleLoadedTexture(texture: any) {
   gl.bindTexture(gl.TEXTURE_2D, null)
 }
 
+export function getRandom(min: number, max: number) {
+  return Math.random() * (max - min) + min
+}
+
 export function initTexture(filename: string, width: number, height: number) {
   const texture = gl.createTexture()
   texture.image = new Image()

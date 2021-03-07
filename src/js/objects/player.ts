@@ -10,8 +10,6 @@ import BasicEnemyMissile from './projectiles/enemy/basicEnemyMissile'
 import GameManager from '../game-manager'
 
 export default class Player extends Object3D implements Damageable {
-  public static COOLDOWN = 30
-
   private modelMatrix: any
   private viewMatrix: any
   private projMatrix: any
@@ -37,16 +35,25 @@ export default class Player extends Object3D implements Damageable {
     this.initParameters()
   }
 
-  upgradeSpeedBonus(): number {
+  public upgradeSpeedBonus(): number {
     if (this.speedBonusLevel < 4) {
       this.speedBonusLevel++
     }
     return this.speedBonusLevel
   }
 
+  public healthBonus() {
+    this.health += 10
+    View.setHP(this.health)
+  }
+
+  public getCooldown() {
+    return 30 - this.speedBonusLevel * 5
+  }
+
   damage(amount: number): void {
     if (this.damageCooldown <= 0) {
-      this.damageCooldown = this.DAMAGE_COOLDOWN - this.speedBonusLevel * 5
+      this.damageCooldown = this.DAMAGE_COOLDOWN
       this.health -= amount
       View.setHP(this.health)
 
@@ -213,7 +220,7 @@ export default class Player extends Object3D implements Damageable {
 
   public shoot() {
     if (this.shootCooldown <= 0) {
-      this.shootCooldown = Player.COOLDOWN
+      this.shootCooldown = this.getCooldown()
       let newSplat = new BasicMissile()
 
       newSplat.setPosition(this.getPosition())
