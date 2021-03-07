@@ -1,6 +1,6 @@
 import GameManager from './game-manager'
 import Player from './objects/player'
-import currentlyPressedKeys from './utils/inputs'
+import { currentlyPressedKeys, registerOnShiftCallback } from './utils/inputs'
 import View from './view'
 import WeaponManager from './weapon-manager'
 
@@ -42,6 +42,10 @@ export default class PlayerManager {
     View.setHp(this.health)
   }
 
+  public slotBonus() {
+    this.weaponManager.addSlot()
+  }
+
   public tick() {
     this.damageCooldown--
     this.weaponManager.tick()
@@ -70,9 +74,18 @@ export default class PlayerManager {
       this.move(0, -1)
     }
 
+    registerOnShiftCallback(() => {
+      this.onShift()
+    })
+
     if (currentlyPressedKeys[32]) {
-      this.weaponManager.shoot()
+      //Space
+      this.weaponManager.shoot(this.player.getPosition())
     }
+  }
+
+  private onShift() {
+    this.weaponManager.removeFirstUpgrade()
   }
 
   public move(x: number, y: number) {

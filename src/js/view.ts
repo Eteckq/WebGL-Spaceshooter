@@ -11,7 +11,7 @@ class View {
   }
 
   public setScore(score: number) {
-    document.getElementById('info_SCORE').innerHTML = score.toString()
+    $('#info_SCORE').html(score.toString())
   }
 }
 

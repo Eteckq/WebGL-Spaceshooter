@@ -4,19 +4,14 @@ import BasicMissile from '../projectiles/player/basic-missile'
 export default class BasicWeapon extends Weapon {
   constructor() {
     super()
-    this.maxLevel = 6
-    this.level = 0
     this.SHOOT_COOLDOWN = 25
   }
 
-  public use(position: { x: number; y: number; z?: number }) {
-    if (this.level >= 5) {
-      this.shootCooldown -= 8
+  public use(position: { x: number; y: number; z?: number }, level: number) {
+    if (level >= 5) {
+      this.shootCooldown -= 4 * (level - 4)
     }
-    if (this.level >= 6) {
-      this.shootCooldown -= 6
-    }
-    switch (this.level) {
+    switch (level) {
       case 1:
         this.shootLevel1(position)
         break
@@ -28,7 +23,7 @@ export default class BasicWeapon extends Weapon {
         break
       case 4:
       case 5:
-      case 6:
+      default:
         this.shootLevel4(position)
         break
     }

@@ -18,6 +18,11 @@ export default abstract class Enemy
   constructor(texture = 'Black1', width: number, height: number) {
     super(`/assets/images/PNG/Enemies/enemy${texture}.png`, width, height)
     this.directionX = getRandomBoolValue()
+
+    this.maxTop = 1
+    this.maxBottom = 0.3
+    this.maxLeft = 1.1
+    this.maxRight = 1.1
   }
 
   protected onCollision(other: Object) {

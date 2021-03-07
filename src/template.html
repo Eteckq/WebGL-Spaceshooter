@@ -18,6 +18,7 @@
   </head>
 
   <body>
+    <!-- Game -->
     <div class="left">
       <canvas
         id="SpaceShip"
@@ -25,14 +26,16 @@
         width="800"
         height="800"
       ></canvas>
+      <!-- Score -->
+      <p>Score: <span id="info_SCORE"></span></p>
+      <!-- Health -->
       <div class="health-bar" data-total="50" data-value="0">
         <div class="bar">
           <div class="hit"></div>
         </div>
       </div>
     </div>
-    <div class="right">
-      <p>Score: <span id="info_SCORE"></span></p>
-    </div>
+    <!-- Leaderboard -->
+    <div class="right"></div>
   </body>
 </html>

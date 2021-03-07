@@ -1,13 +1,14 @@
-import Enemy from './enemy'
-import Damager from '../interface/damager'
 import Player from '../player'
-import Rectangle from './rectangle'
-import { getRandomFloat, getRandomInt, initTexture } from '../../utils/utils'
 import BoundedEntity from './bounded-entity'
 
 export default abstract class Bonus extends BoundedEntity {
   constructor(texture: string) {
     super(`/assets/images/PNG/Power-ups/${texture}.png`, 0.03, 0.03)
+
+    this.maxTop = 1
+    this.maxBottom = 1
+    this.maxLeft = 1
+    this.maxRight = 1
   }
 
   public tick(elapsed: number) {

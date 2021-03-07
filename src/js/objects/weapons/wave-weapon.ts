@@ -5,19 +5,17 @@ import WaveMissile from '../projectiles/player/wave-missile'
 export default class WaveWeapon extends Weapon {
   constructor() {
     super()
-    this.maxLevel = 6
-    this.level = 1
     this.SHOOT_COOLDOWN = 15
   }
 
-  public use(position: { x: number; y: number; z?: number }) {
-    switch (this.level) {
+  public use(position: { x: number; y: number; z?: number }, level: number) {
+    switch (level) {
       case 1:
       case 2:
       case 3:
       case 4:
       case 5:
-      case 6:
+      default:
         this.shootLevel1(position)
         break
     }

@@ -7,6 +7,8 @@ export default class BasicWeaponUpgrade extends WeaponUpgrade {
   }
 
   actionOnCatch(): void {
-    GameManager.Instance.playerManager.weaponManager.basicWeaponUpgrade()
+    GameManager.Instance.playerManager.weaponManager.pushUpgrade(
+      BasicWeaponUpgrade
+    )
   }
 }

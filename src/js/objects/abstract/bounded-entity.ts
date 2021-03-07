@@ -7,6 +7,11 @@ export default abstract class BoundedEntity extends Rectangle {
   protected directionX: number
   protected directionY: number
 
+  protected maxTop: number = 1
+  protected maxBottom: number = 0.3
+  protected maxLeft: number = 1.2
+  protected maxRight: number = 1.2
+
   constructor(texture: string, width: number, height: number) {
     super(width, height)
     this.texture = initTexture(texture, this.width, this.height)
@@ -17,17 +22,17 @@ export default abstract class BoundedEntity extends Rectangle {
   }
 
   public move(newX: number, newY: number) {
-    if (this.position[0] - newX > 1.2) {
+    if (this.position[0] - newX > this.maxRight) {
       this.directionX = -1
     }
-    if (this.position[0] - newX < -1.2) {
+    if (this.position[0] - newX < -this.maxLeft) {
       this.directionX = 1
     }
 
-    if (this.position[1] - newY > 1) {
+    if (this.position[1] - newY > this.maxTop) {
       this.directionY = -1
     }
-    if (this.position[1] - newY < -0.3) {
+    if (this.position[1] - newY < -this.maxBottom) {
       this.directionY = 1
     }
 
