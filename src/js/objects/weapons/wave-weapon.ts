@@ -39,64 +39,51 @@ export default class WaveWeapon extends Weapon {
   }
 
   private shootLevel1(position: { x: number; y: number; z?: number }) {
-    this.spawnMissile(position, 5)
+    this.spawnMissile(position, 1, 3)
   }
 
   private shootLevel2(position: { x: number; y: number; z?: number }) {
-    this.spawnMissile(position, 5)
-    this.spawnMissile(position, 5)
+    this.spawnMissile(position, 2, 7)
   }
 
   private shootLevel3(position: { x: number; y: number; z?: number }) {
-    this.shootLevel2(position)
     this.shootCooldown -= 13
+    this.spawnMissile(position, 2, 8)
   }
 
   private shootLevel4(position: { x: number; y: number; z?: number }) {
     this.shootCooldown -= 15
-    this.spawnMissile(position, 10)
-    this.spawnMissile(position, 10)
-    this.spawnMissile(position, 10)
+    this.spawnMissile(position, 3, 11)
   }
 
   private shootLevel5(position: { x: number; y: number; z?: number }) {
     this.shootCooldown -= 18
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
+    this.spawnMissile(position, 3, 13)
   }
 
   private shootLevel6(position: { x: number; y: number; z?: number }) {
     this.shootCooldown -= 18
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
+    this.spawnMissile(position, 4, 13)
   }
 
   private shootLevel7(position: { x: number; y: number; z?: number }) {
     this.shootCooldown -= 18
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
+    this.spawnMissile(position, 5, 14)
   }
 
   private shootLevel8(position: { x: number; y: number; z?: number }) {
     this.shootCooldown -= 22
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
-    this.spawnMissile(position, 13)
+    this.spawnMissile(position, 5, 15)
   }
 
   private spawnMissile(
     position: { x: number; y: number; z?: number },
+    count: number,
     angleMax: number
   ) {
-    let wm2 = new WaveMissile(getRandomFloat(-angleMax, angleMax))
-    wm2.setPosition(position)
+    for (let i = 0; i < count; i++) {
+      let m = new WaveMissile(getRandomFloat(-angleMax, angleMax))
+      m.setPosition(position)
+    }
   }
 }
