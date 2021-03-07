@@ -3,22 +3,22 @@ import { gl } from './utils/gl'
 import Rectangle from './objects/abstract/rectangle'
 import Background from './objects/background'
 import Player from './objects/player'
-import Enemy01 from './objects/enemies/enemy01'
 import BasicEnemyMissile from './objects/projectiles/enemy/basicEnemyMissile'
 import Enemy from './objects/abstract/enemy'
 import BasicMissile from './objects/projectiles/player/basicMissile'
 import WaveManager from './wave-manager'
 import View from './view'
 import Bonus from './objects/abstract/bonus'
+import PlayerManager from './player-manager'
+import Hitbox from './objects/hitbox'
 
 export default class GameManager {
   private objectsInScene: Object[] = []
 
   static Instance: GameManager
+  public playerManager: PlayerManager
 
   public waveManager: WaveManager
-
-  private player: Player
 
   private over: boolean = false
 
@@ -30,10 +30,9 @@ export default class GameManager {
     } else {
       console.error('More than one game manager instance')
     }
-
-    this.player = new Player()
+    this.playerManager = new PlayerManager()
     // uncomment to debug hitboxs
-    // new Hitbox(0.03, 0.03)
+    new Hitbox(0.03, 0.03)
     new Background()
     this.waveManager = new WaveManager()
 
@@ -41,14 +40,6 @@ export default class GameManager {
     setTimeout(() => {
       this.waveManager.start()
     }, 3000)
-  }
-
-  public upgradeSpeedBonus() {
-    this.player.upgradeSpeedBonus()
-  }
-
-  healthBonus() {
-    this.player.healthBonus()
   }
 
   public killEnemy(enemy: Enemy) {
@@ -70,27 +61,28 @@ export default class GameManager {
     this.draw()
     this.animate()
     this.waveManager.tick()
+    this.playerManager.tick()
   }
 
   private checkCollisions() {
     this.objectsInScene.map((object) => {
       // uncomment to debug hitboxs
-      /* if (object instanceof Hitbox) {
+      if (object instanceof Hitbox) {
         object.checkCollisions(this.objectsInScene)
-      } */
+      }
       if (object instanceof Enemy) {
         object.checkCollisions([
           ...this.objectsInScene.filter((o) => o instanceof BasicMissile),
-          this.player,
+          this.playerManager.player,
         ])
       }
 
       if (object instanceof Bonus) {
-        object.checkCollisions([this.player])
+        object.checkCollisions([this.playerManager.player])
       }
     })
 
-    this.player.checkCollisions(
+    this.playerManager.player.checkCollisions(
       this.objectsInScene.filter((o) => o instanceof BasicEnemyMissile)
     )
   }

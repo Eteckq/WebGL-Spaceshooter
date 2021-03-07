@@ -18,7 +18,7 @@ export default abstract class Object3D extends Object {
   protected bbminP = [0, 0, 0, 0]
   protected bbmaxP = [0, 0, 0, 0]
 
-  protected position: [number, number, number] = [0, 0, 0]
+  public position: [number, number, number] = [0, 0, 0]
   protected time: number = 0
 
   constructor() {

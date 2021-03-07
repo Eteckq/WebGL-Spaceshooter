@@ -1,15 +1,11 @@
 import { gl } from '../utils/gl'
 import Object3D from './abstract/object3d'
 import * as glMatrix from 'gl-matrix'
-import currentlyPressedKeys from '../utils/inputs'
-import Damageable from './interface/damageable'
-import BasicMissile from './projectiles/player/basicMissile'
-import View from '../view'
-import Enemy from './abstract/enemy'
+
 import BasicEnemyMissile from './projectiles/enemy/basicEnemyMissile'
 import GameManager from '../game-manager'
 
-export default class Player extends Object3D implements Damageable {
+export default class Player extends Object3D {
   private modelMatrix: any
   private viewMatrix: any
   private projMatrix: any
@@ -18,55 +14,16 @@ export default class Player extends Object3D implements Damageable {
   private scale: any
   private acc: any
 
-  private shootCooldown: number = 0
-
-  public damageCooldown: number = 0
-  public DAMAGE_COOLDOWN: number = 20
-
-  public health: number = 20
-
-  private speedBonusLevel: number = 0
-
   constructor() {
     super()
 
-    this.load('/assets/models/plane.obj')
+    this.load('/assets/models/SmallSpaceFighter.obj')
 
     this.initParameters()
-    View.setHp(this.health)
-  }
-
-  public upgradeSpeedBonus(): number {
-    if (this.speedBonusLevel < 4) {
-      this.speedBonusLevel++
-    }
-    return this.speedBonusLevel
-  }
-
-  public healthBonus() {
-    if (this.health < 50) {
-      this.health += 10
-    }
-    if (this.health > 50) {
-      this.health = 50
-    }
-    View.setHp(this.health)
-  }
-
-  public getCooldown() {
-    return 30 - this.speedBonusLevel * 5
   }
 
   damage(amount: number): void {
-    if (this.damageCooldown <= 0) {
-      this.damageCooldown = this.DAMAGE_COOLDOWN
-      this.health -= amount
-
-      View.setHp(this.health)
-      if (this.health <= 0) {
-        GameManager.Instance.gameOver()
-      }
-    }
+    GameManager.Instance.playerManager.damage(amount)
   }
 
   protected onCollision(other: Object) {
@@ -74,6 +31,10 @@ export default class Player extends Object3D implements Damageable {
       this.damage(other.attack)
       other.clear()
     }
+  }
+
+  public setRotation(rotation: number) {
+    this.rotation = rotation
   }
 
   private initParameters() {
@@ -102,7 +63,7 @@ export default class Player extends Object3D implements Damageable {
     // rotation, translation, scaling de l'objet
     this.position = [0, 0, 0] // position de l'objet dans l'espace
     this.rotation = 0 // angle de rotation en radian autour de l'axe Y
-    this.scale = 0.1 // mise à l'echelle (car l'objet est trop  gros par défaut)
+    this.scale = 0.2 // mise à l'echelle (car l'objet est trop  gros par défaut)
 
     this.acc = 0.0
   }
@@ -166,10 +127,6 @@ export default class Player extends Object3D implements Damageable {
   }
 
   public tick(elapsed: number) {
-    this.damageCooldown--
-    this.shootCooldown--
-
-    this.handleInputs()
     this.time += 0.01 * elapsed
 
     let rMat = glMatrix.mat4.rotate(
@@ -198,41 +155,6 @@ export default class Player extends Object3D implements Damageable {
     this.acc += 0.01
   }
 
-  private handleInputs() {
-    if (currentlyPressedKeys[68]) {
-      // D
-      this.move(1, 0)
-    }
-
-    if (currentlyPressedKeys[81]) {
-      // Q
-      this.move(-1, 0)
-    }
-
-    if (currentlyPressedKeys[90]) {
-      // Z
-      this.move(0, 1)
-    }
-
-    if (currentlyPressedKeys[83]) {
-      // S
-      this.move(0, -1)
-    }
-
-    if (currentlyPressedKeys[32]) {
-      this.shoot()
-    }
-  }
-
-  public shoot() {
-    if (this.shootCooldown <= 0) {
-      this.shootCooldown = this.getCooldown()
-      let newSplat = new BasicMissile()
-
-      newSplat.setPosition(this.getPosition())
-    }
-  }
-
   public getPosition() {
     // exemple: comment positionner un splat devant le vaisseau
     let p = this.getBBox() // boite englobante du vaisseau sur l'�cran
@@ -253,32 +175,9 @@ export default class Player extends Object3D implements Damageable {
     return {
       x1: x - width / 2,
       x2: x + width / 2,
-      y1: y - height,
-      y2: y,
+      y1: y - height * 2,
+      y2: y - height * 0.2,
     }
-  }
-
-  public move(x: number, y: number) {
-    x = x * 0.1
-    y = y * 0.1
-    let pos = this.getPosition()
-    this.rotation = pos.x * 1
-    let xMax = 1.1
-    let yMax = 1
-    let scale = 5
-    if (pos.x > xMax) {
-      this.position[0] = -xMax * scale
-    }
-
-    if (pos.x < -xMax) {
-      this.position[0] = xMax * scale
-    }
-
-    if (pos.y + y > -yMax && pos.y + y < yMax) {
-      this.position[1] += y
-    }
-
-    this.position[0] += x
   }
 }
 

@@ -16,9 +16,6 @@ export default abstract class Enemy
   protected directionX: number
   protected directionY: number
 
-  public damageCooldown: number = 0
-  public DAMAGE_COOLDOWN: number = 10
-
   public attack: number = 20
   public health: number = 10
 
@@ -48,19 +45,15 @@ export default abstract class Enemy
   }
 
   damage(amount: number): void {
-    if (this.damageCooldown <= 0) {
-      this.damageCooldown = this.DAMAGE_COOLDOWN
-      this.health -= amount
+    this.health -= amount
 
-      if (this.health <= 0) {
-        GameManager.Instance.killEnemy(this)
-        this.clear()
-      }
+    if (this.health <= 0) {
+      GameManager.Instance.killEnemy(this)
+      this.clear()
     }
   }
 
   public tick(elapsed: number) {
-    this.damageCooldown--
     this.time += 0.01 * elapsed
 
     let speed = 0.8

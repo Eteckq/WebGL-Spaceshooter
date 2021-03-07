@@ -7,6 +7,6 @@ export default class AttackSpeedBonus extends Bonus {
   }
 
   actionOnCatch(): void {
-    GameManager.Instance.upgradeSpeedBonus()
+    GameManager.Instance.playerManager.upgradeSpeedBonus()
   }
 }

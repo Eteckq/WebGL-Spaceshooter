@@ -7,6 +7,6 @@ export default class HealthBonus extends Bonus {
   }
 
   actionOnCatch(): void {
-    GameManager.Instance.healthBonus()
+    GameManager.Instance.playerManager.healthBonus()
   }
 }
