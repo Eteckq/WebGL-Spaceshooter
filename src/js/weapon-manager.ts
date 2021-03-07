@@ -1,11 +1,13 @@
 import Weapon from './objects/abstract/weapon'
 import WeaponUpgrade from './objects/abstract/weapon-upgrade'
+import BasicWeaponUpgrade from './objects/bonus/basic-weapon-upgrade'
+import WaveWeaponUpgrade from './objects/bonus/wave-weapon-upgrade'
 import BasicWeapon from './objects/weapons/basic-weapon'
 import WaveWeapon from './objects/weapons/wave-weapon'
 import view from './view'
 
 export default class WeaponManager {
-  private upgrades: typeof WeaponUpgrade[] = []
+  private upgrades: WeaponUpgrade[] = []
 
   private maxBonusSlots: number = 8
   private currentBonusSlots: number = 3
@@ -29,7 +31,7 @@ export default class WeaponManager {
     }
   }
 
-  public pushUpgrade(upgrade: typeof WeaponUpgrade) {
+  public pushUpgrade(upgrade: WeaponUpgrade) {
     if (this.upgrades.length === this.currentBonusSlots) {
       this.removeLastUpgrade()
     }
@@ -41,21 +43,15 @@ export default class WeaponManager {
     //
     this.basicWeaponLevel =
       1 +
-      this.upgrades.filter((upgrade) => upgrade.name === 'BasicWeaponUpgrade')
+      this.upgrades.filter((upgrade) => upgrade instanceof BasicWeaponUpgrade)
         .length
     //
     this.waveWeaponLevel = this.upgrades.filter(
-      (upgrade) => upgrade.name === 'WaveWeaponUpgrade'
+      (upgrade) => upgrade instanceof WaveWeaponUpgrade
     ).length
     let bonusPngs = []
-    for (let i = 0; i < this.upgrades.length; i++) {
-      const upgrade = this.upgrades[i]
-      if (upgrade.name === 'BasicWeaponUpgrade') {
-        bonusPngs.push(`/assets/images/PNG/Power-ups/powerupBlue.png`)
-      }
-      if (upgrade.name === 'WaveWeaponUpgrade') {
-        bonusPngs.push(`/assets/images/PNG/Power-ups/powerupGreen.png`)
-      }
+    for (const upgrade of this.upgrades) {
+      bonusPngs.push(upgrade.textureName)
     }
 
     while (bonusPngs.length < this.currentBonusSlots) {
@@ -75,7 +71,7 @@ export default class WeaponManager {
     this.updateLevels()
   }
 
-  private activatePower(upgrade: typeof WeaponUpgrade) {
+  private activatePower(upgrade: WeaponUpgrade) {
     console.log('Power: ', upgrade)
   }
 

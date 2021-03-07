@@ -7,8 +7,6 @@ export default class WaveWeaponUpgrade extends WeaponUpgrade {
   }
 
   actionOnCatch(): void {
-    GameManager.Instance.playerManager.weaponManager.pushUpgrade(
-      WaveWeaponUpgrade
-    )
+    GameManager.Instance.playerManager.weaponManager.pushUpgrade(this)
   }
 }
