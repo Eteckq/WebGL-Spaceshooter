@@ -1,20 +1,35 @@
-import { initTexture } from '../utils/utils'
-import Rectangle from './abstract/rectangle'
-import Damageable from './interface/damageable'
-import BasicEnemyMissile from './projectiles/enemy/basicMissile'
+import { initTexture } from '../../utils/utils'
+import Damageable from '../interface/damageable'
+import Damager from '../interface/damager'
+import Player from '../player'
+import Missile from './missile'
+import BasicEnemyMissile from '../projectiles/enemy/basicEnemyMissile'
+import Rectangle from './rectangle'
+import BasicMissile from '../projectiles/player/basicMissile'
+import GameManager from '../../game-manager'
 
 function getRandom(min: number, max: number) {
   return Math.random() * (max - min) + min
 }
 
-export default class Enemy extends Rectangle implements Damageable {
+export default abstract class Enemy
+  extends Rectangle
+  implements Damageable, Damager {
   protected speed: number = 0.5
 
   protected directionX: number
   protected directionY: number
 
-  constructor(public health: number = 10, texture = 'Black1') {
-    super(0.08, 0.08)
+  public damageCooldown: number = 0
+  public DAMAGE_COOLDOWN: number = 10
+
+  public attack: number = 20
+  public health: number = 10
+
+  public score: number = 1
+
+  constructor(texture = 'Black1', width: number, height: number) {
+    super(width, height)
     this.texture = initTexture(
       `/assets/images/PNG/Enemies/enemy${texture}.png`,
       this.width,
@@ -26,11 +41,30 @@ export default class Enemy extends Rectangle implements Damageable {
     this.directionY = getRandom(-1, 1)
   }
 
+  protected onCollision(other: Object) {
+    if (other instanceof Player) {
+      other.damage(this.attack)
+      this.damage(10)
+    } else if (other instanceof BasicMissile) {
+      this.damage(other.attack)
+      other.clear()
+    }
+  }
+
   damage(amount: number): void {
-    this.health -= amount
+    if (this.damageCooldown <= 0) {
+      this.damageCooldown = this.DAMAGE_COOLDOWN
+      this.health -= amount
+
+      if (this.health <= 0) {
+        GameManager.Instance.killEnemy(this)
+        this.clear()
+      }
+    }
   }
 
   public tick(elapsed: number) {
+    this.damageCooldown--
     this.time += 0.01 * elapsed
 
     let speed = 0.8
@@ -58,19 +92,11 @@ export default class Enemy extends Rectangle implements Damageable {
       newY = -newY
     }
 
-    // this.position[1] -= newY
-    // this.position[0] -= newX
+    this.position[1] -= newY
+    this.position[0] -= newX
   }
   public shoot() {
     let newSplat = new BasicEnemyMissile(Math.random() * 20 - 10)
     newSplat.setPosition(this.getPosition())
-  }
-
-  public getPosition() {
-    return {
-      x: this.position[0],
-      y: this.position[1],
-      z: this.position[2],
-    }
   }
 }

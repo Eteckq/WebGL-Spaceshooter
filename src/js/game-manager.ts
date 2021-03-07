@@ -3,18 +3,25 @@ import { gl } from './utils/gl'
 import Rectangle from './objects/abstract/rectangle'
 import Background from './objects/background'
 import Player from './objects/player'
-import Enemy from './objects/enemy'
-import Hitbox from './objects/hitbox'
+import Enemy01 from './objects/enemies/enemy01'
+import BasicEnemyMissile from './objects/projectiles/enemy/basicEnemyMissile'
+import Enemy from './objects/abstract/enemy'
+import BasicMissile from './objects/projectiles/player/basicMissile'
+import WaveManager from './wave-manager'
+import View from './view'
 
 export default class GameManager {
   private objectsInScene: Object[] = []
 
   static Instance: GameManager
 
-  private currentWave = 0
-  private waveCooldown = 20000000
+  public waveManager: WaveManager
 
   private player: Player
+
+  private over: boolean = false
+
+  private score: number = 0
 
   constructor() {
     if (!GameManager.Instance) {
@@ -24,48 +31,56 @@ export default class GameManager {
     }
 
     this.player = new Player()
-    new Enemy()
-    // Use to debug hitboxs
-    new Hitbox(0.03, 0.03)
+    // uncomment to debug hitboxs
+    // new Hitbox(0.03, 0.03)
+    new BasicEnemyMissile()
     new Background()
+    this.waveManager = new WaveManager()
+
+    // Wait 3s before starting waves
+    setTimeout(() => {
+      this.waveManager.start()
+    }, 3000)
+  }
+
+  public killEnemy(enemy: Enemy) {
+    this.waveManager.numberOfEnemies--
+    this.score += enemy.score
+    View.setScore(this.score)
+  }
+
+  public gameOver() {
+    console.log('Game over !')
+    this.over = true
+    this.destroy()
   }
 
   public tick() {
+    if (this.over) return
     this.checkCollisions()
 
     this.draw()
     this.animate()
-
-    this.waveCooldown--
-    if (this.waveCooldown < 0) {
-      this.spawnNewWave()
-    }
+    this.waveManager.tick()
   }
 
   private checkCollisions() {
     this.objectsInScene.map((object) => {
-      if (object instanceof Hitbox) {
+      // uncomment to debug hitboxs
+      /* if (object instanceof Hitbox) {
         object.checkCollisions(this.objectsInScene)
-      }
-      /* if (object instanceof Player) {
-        object.checkCollisions(
-          this.objectsInScene.filter(
-            (o) => o instanceof Splat && o.tag === 'EnemyShoot'
-          )
-        )
       } */
+      if (object instanceof Enemy) {
+        object.checkCollisions([
+          ...this.objectsInScene.filter((o) => o instanceof BasicMissile),
+          this.player,
+        ])
+      }
     })
-  }
 
-  // Waves gestion
-
-  private spawnNewWave() {
-    this.currentWave++
-    this.waveCooldown = 500 * this.currentWave * 100
-
-    for (let i = 0; i < this.currentWave * 2; i++) {
-      new Enemy()
-    }
+    this.player.checkCollisions(
+      this.objectsInScene.filter((o) => o instanceof BasicEnemyMissile)
+    )
   }
 
   // Used by objects

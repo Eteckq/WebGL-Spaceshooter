@@ -4,9 +4,13 @@ import * as glMatrix from 'gl-matrix'
 import currentlyPressedKeys from '../utils/inputs'
 import Damageable from './interface/damageable'
 import BasicMissile from './projectiles/player/basicMissile'
+import View from '../view'
+import Enemy from './abstract/enemy'
+import BasicEnemyMissile from './projectiles/enemy/basicEnemyMissile'
+import GameManager from '../game-manager'
 
 export default class Player extends Object3D implements Damageable {
-  public static COOLDOWN = 15
+  public static COOLDOWN = 30
 
   private modelMatrix: any
   private viewMatrix: any
@@ -16,9 +20,14 @@ export default class Player extends Object3D implements Damageable {
   private scale: any
   private acc: any
 
-  private cooldown: number = 0
+  private shootCooldown: number = 0
 
-  public health: number = 50
+  public damageCooldown: number = 0
+  public DAMAGE_COOLDOWN: number = 20
+
+  public health: number = 20
+
+  private speedBonusLevel: number = 0
 
   constructor() {
     super()
@@ -28,8 +37,30 @@ export default class Player extends Object3D implements Damageable {
     this.initParameters()
   }
 
+  upgradeSpeedBonus(): number {
+    if (this.speedBonusLevel < 4) {
+      this.speedBonusLevel++
+    }
+    return this.speedBonusLevel
+  }
+
   damage(amount: number): void {
-    this.health -= amount
+    if (this.damageCooldown <= 0) {
+      this.damageCooldown = this.DAMAGE_COOLDOWN - this.speedBonusLevel * 5
+      this.health -= amount
+      View.setHP(this.health)
+
+      if (this.health <= 0) {
+        GameManager.Instance.gameOver()
+      }
+    }
+  }
+
+  protected onCollision(other: Object) {
+    if (other instanceof BasicEnemyMissile) {
+      this.damage(other.attack)
+      other.clear()
+    }
   }
 
   private initParameters() {
@@ -122,7 +153,8 @@ export default class Player extends Object3D implements Damageable {
   }
 
   public tick(elapsed: number) {
-    this.cooldown--
+    this.damageCooldown--
+    this.shootCooldown--
 
     this.handleInputs()
     this.time += 0.01 * elapsed
@@ -180,8 +212,8 @@ export default class Player extends Object3D implements Damageable {
   }
 
   public shoot() {
-    if (this.cooldown <= 0) {
-      this.cooldown = Player.COOLDOWN
+    if (this.shootCooldown <= 0) {
+      this.shootCooldown = Player.COOLDOWN
       let newSplat = new BasicMissile()
 
       newSplat.setPosition(this.getPosition())

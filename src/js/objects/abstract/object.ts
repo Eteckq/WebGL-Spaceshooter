@@ -45,7 +45,7 @@ export default abstract class Object {
   }
 
   protected onCollision(other: Object) {
-    console.log('Collision')
+    console.log('Collision not handled !')
   }
 
   abstract sendUniformVariables(): any

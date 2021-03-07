@@ -77,10 +77,17 @@ export default abstract class Rectangle extends Object {
     return this.customHitboxScale
   }
 
+  setPosition(position: { x: number; y: any; z: any }) {
+    this.position[0] = position.x
+    this.position[1] = position.y
+    this.position[2] = position.z
+  }
+
   public getPosition() {
     return {
       x: this.position[0],
       y: this.position[1],
+      z: this.position[2],
     }
   }
 
