@@ -1,15 +1,19 @@
-import Enemy from './enemy'
+import { initTexture } from '../../utils/utils'
 import Damager from '../interface/damager'
-import Player from '../player'
 import Rectangle from './rectangle'
 
 export default abstract class Missile extends Rectangle implements Damager {
   protected speed: number = 0.5
   public attack: number = 10
 
-  constructor(width: number, height: number) {
+  constructor(texture: string, width: number, height: number) {
     super(width, height)
+    this.texture = initTexture(texture, this.width, this.height)
   }
 
-  abstract tick(elapsed: number): void
+  public tick(elapsed: number) {
+    this.time += 0.01 * elapsed
+    this.update()
+  }
+  abstract update(): void
 }

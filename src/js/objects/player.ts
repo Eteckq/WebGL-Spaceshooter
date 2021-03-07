@@ -2,7 +2,7 @@ import { gl } from '../utils/gl'
 import Object3D from './abstract/object3d'
 import * as glMatrix from 'gl-matrix'
 
-import BasicEnemyMissile from './projectiles/enemy/basicEnemyMissile'
+import BasicEnemyMissile from './projectiles/enemy/basic-enemy-missile'
 import GameManager from '../game-manager'
 
 export default class Player extends Object3D {

@@ -1,13 +1,12 @@
 import GameManager from './game-manager'
 import Player from './objects/player'
-import BasicMissile from './objects/projectiles/player/basicMissile'
+import BasicMissile from './objects/projectiles/player/basic-missile'
+import BasicWeapon from './objects/weapons/basic-weapon'
 import currentlyPressedKeys from './utils/inputs'
 import View from './view'
 
 export default class PlayerManager {
   public player: Player
-
-  private shootCooldown: number = 0
 
   public damageCooldown: number = 0
   public DAMAGE_COOLDOWN: number = 20
@@ -15,15 +14,13 @@ export default class PlayerManager {
   private speed: number = 1
   public health: number = 20
 
-  private speedBonusLevel: number = 0
+  private basicWeapon: BasicWeapon
 
   constructor() {
     this.player = new Player()
     View.setHp(this.health)
-  }
 
-  public getCooldown() {
-    return 30 - this.speedBonusLevel * 5
+    this.basicWeapon = new BasicWeapon()
   }
 
   public damage(amount: number) {
@@ -38,11 +35,8 @@ export default class PlayerManager {
     }
   }
 
-  public upgradeSpeedBonus(): number {
-    if (this.speedBonusLevel < 4) {
-      this.speedBonusLevel++
-    }
-    return this.speedBonusLevel
+  public basicWeaponUpgrade() {
+    this.basicWeapon.levelUp()
   }
 
   public healthBonus() {
@@ -56,17 +50,12 @@ export default class PlayerManager {
   }
 
   public shoot() {
-    if (this.shootCooldown <= 0) {
-      this.shootCooldown = this.getCooldown()
-      let newSplat = new BasicMissile()
-
-      newSplat.setPosition(this.player.getPosition())
-    }
+    this.basicWeapon.shoot(this.player.getPosition())
   }
 
   public tick() {
     this.damageCooldown--
-    this.shootCooldown--
+    this.basicWeapon.tick()
     this.handleInputs()
   }
 

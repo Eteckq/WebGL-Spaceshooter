@@ -3,14 +3,16 @@ import { gl } from './utils/gl'
 import Rectangle from './objects/abstract/rectangle'
 import Background from './objects/background'
 import Player from './objects/player'
-import BasicEnemyMissile from './objects/projectiles/enemy/basicEnemyMissile'
+import BasicEnemyMissile from './objects/projectiles/enemy/basic-enemy-missile'
 import Enemy from './objects/abstract/enemy'
-import BasicMissile from './objects/projectiles/player/basicMissile'
+import BasicMissile from './objects/projectiles/player/basic-missile'
 import WaveManager from './wave-manager'
 import View from './view'
 import Bonus from './objects/abstract/bonus'
 import PlayerManager from './player-manager'
 import Hitbox from './objects/hitbox'
+
+const DEBUG = false
 
 export default class GameManager {
   private objectsInScene: Object[] = []
@@ -31,8 +33,7 @@ export default class GameManager {
       console.error('More than one game manager instance')
     }
     this.playerManager = new PlayerManager()
-    // uncomment to debug hitboxs
-    new Hitbox(0.03, 0.03)
+    if (DEBUG) new Hitbox(0.03, 0.03)
     new Background()
     this.waveManager = new WaveManager()
 
@@ -49,7 +50,6 @@ export default class GameManager {
   }
 
   public gameOver() {
-    console.log('Game over !')
     this.over = true
     this.destroy()
   }
@@ -67,9 +67,10 @@ export default class GameManager {
   private checkCollisions() {
     this.objectsInScene.map((object) => {
       // uncomment to debug hitboxs
-      if (object instanceof Hitbox) {
-        object.checkCollisions(this.objectsInScene)
-      }
+      if (DEBUG)
+        if (object instanceof Hitbox) {
+          object.checkCollisions(this.objectsInScene)
+        }
       if (object instanceof Enemy) {
         object.checkCollisions([
           ...this.objectsInScene.filter((o) => o instanceof BasicMissile),
@@ -94,7 +95,7 @@ export default class GameManager {
   }
 
   public removeFromScene(object: Object) {
-    this.objectsInScene.splice(this.objectsInScene.indexOf(object), 1)
+    this.objectsInScene = this.objectsInScene.filter((o) => o.id !== object.id)
   }
 
   // WEB GL

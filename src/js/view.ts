@@ -32,8 +32,6 @@ class HealthBar {
 
     let diff = hp - value
 
-    console.log(total, value)
-
     if (value < 0) {
       return
     }

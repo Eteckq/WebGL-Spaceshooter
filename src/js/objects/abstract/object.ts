@@ -3,6 +3,8 @@ export default abstract class Object {
   public static SHADER?: any
   protected loaded: boolean = false
 
+  public id: string = '#' + Math.random() * 10000 + '#'
+
   protected gameManager: GameManager
 
   constructor() {

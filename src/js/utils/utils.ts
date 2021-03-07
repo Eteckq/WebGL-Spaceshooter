@@ -19,8 +19,16 @@ function handleLoadedTexture(texture: any) {
   gl.bindTexture(gl.TEXTURE_2D, null)
 }
 
-export function getRandom(min: number, max: number) {
+export function getRandomFloat(min: number, max: number) {
   return Math.random() * (max - min) + min
+}
+
+export function getRandomInt(min: number, max: number) {
+  return Math.round(Math.random() * (max - min) + min)
+}
+
+export function getRandomBoolValue() {
+  return Math.round(Math.random()) === 0 ? 1 : -1
 }
 
 export function initTexture(filename: string, width: number, height: number) {

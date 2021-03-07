@@ -1,5 +1,5 @@
 import Bonus from './objects/abstract/bonus'
-import AttackSpeedBonus from './objects/bonus/attack-speed'
+import AttackSpeedBonus from './objects/bonus/basic-weapon-upgrade'
 import HealthBonus from './objects/bonus/health'
 import Enemy01 from './objects/enemies/enemy01'
 
@@ -31,7 +31,8 @@ export default class WaveManager {
 
   private spawnNewWave() {
     this.currentWave++
-    this.waveCooldown = 100 * this.currentWave * 100
+    this.waveCooldown = 500
+    console.log('WAVE')
 
     for (let i = 0; i < this.currentWave * 2; i++) {
       new Enemy01()

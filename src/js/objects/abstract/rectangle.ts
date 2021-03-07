@@ -4,6 +4,7 @@ import Object from './object2d'
 export default abstract class Rectangle extends Object {
   protected texture: WebGLTexture
 
+  protected speed: number = 0.4
   protected customHitboxScale: { width: number; height: number }
 
   constructor(protected width: number = 0.1, protected height: number = 0.1) {
@@ -77,9 +78,12 @@ export default abstract class Rectangle extends Object {
     return this.customHitboxScale
   }
 
-  setPosition(position: { x: number; y: any; z: any }) {
+  setPosition(position: { x: number; y: any; z?: any }) {
     this.position[0] = position.x
     this.position[1] = position.y
+    if (!position.z) {
+      position.z = 0.99
+    }
     this.position[2] = position.z
   }
 
