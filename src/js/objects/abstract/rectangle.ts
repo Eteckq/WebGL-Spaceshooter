@@ -1,15 +1,19 @@
 import { gl } from '../../utils/gl'
-import Object from './object2d'
+import { initTexture } from '../../utils/utils'
+import Object2D from './object2d'
 
-export default abstract class Rectangle extends Object {
+export default abstract class Rectangle extends Object2D {
   protected texture: WebGLTexture
-
   protected speed: number = 0.4
   protected customHitboxScale: { width: number; height: number }
 
-  constructor(protected width: number = 0.1, protected height: number = 0.1) {
+  constructor(
+    public textureName: string,
+    protected width: number = 0.1,
+    protected height: number = 0.1
+  ) {
     super()
-
+    this.texture = initTexture(this.textureName, this.width, this.height)
     let wo2 = this.width
     let ho2 = this.height
 

@@ -45,8 +45,8 @@ class View {
         const score = data[i]
         leaderboard.append(`
           <tr>
-            <td class="position">${i}</td>
-            <td class="pseudo">${score.pseudo}</td>
+            <td class="position">#${i + 1}</td>
+            <td class="pseudo">${score.pseudo} ${i === 0 ? '👑' : ''}</td>
             <td class="score">${score.score}</td>
           </tr>
         `)

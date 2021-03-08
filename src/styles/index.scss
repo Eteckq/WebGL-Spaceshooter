@@ -123,16 +123,27 @@ body {
   .leaderboard {
     margin: 10px;
     color: white;
+    font-size: xx-large;
+    text-align: center;
 
     #LeaderboardList {
+      text-align: left;
       width: 100%;
+      font-size: x-large;
+      border-collapse: collapse;
+      border-spacing: 0;
       tr {
+        border-top: 10px solid transparent;
+
+        .position {
+          color: #adadad;
+        }
         .score {
-          color: #c54;
+          color: rgb(235, 132, 116);
         }
 
         .pseudo {
-          color: blue;
+          color: rgb(255, 252, 239);
         }
       }
     }

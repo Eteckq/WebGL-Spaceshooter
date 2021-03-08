@@ -7,8 +7,7 @@ export default abstract class Missile extends Rectangle implements Damager {
   public attack: number = 10
 
   constructor(texture: string, width: number, height: number) {
-    super(width, height)
-    this.texture = initTexture(texture, this.width, this.height)
+    super(texture, width, height)
   }
 
   public tick(elapsed: number) {

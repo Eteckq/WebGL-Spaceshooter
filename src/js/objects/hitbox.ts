@@ -4,12 +4,7 @@ import Rectangle from './abstract/rectangle'
 
 export default class Hitbox extends Rectangle {
   constructor(width: number, height: number) {
-    super(width, height)
-    this.texture = initTexture(
-      `/assets/images/Backgrounds/black.png`,
-      this.width,
-      this.height
-    )
+    super(`/assets/images/Backgrounds/black.png`, width, height)
     document.onmousemove = (e) => {
       this.handleMouseMove(e)
     }
