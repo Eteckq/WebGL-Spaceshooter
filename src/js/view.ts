@@ -1,7 +1,10 @@
 import * as $ from 'jquery'
 
+const api = 'https://api-score.yohangastoud.fr/scores'
 class View {
   private healtBar
+  public pseudo: string = ''
+
   constructor() {
     this.healtBar = new HealthBar()
   }
@@ -12,6 +15,43 @@ class View {
 
   public setScore(score: number) {
     $('#info_SCORE').html(score.toString())
+  }
+
+  public sendScore(score: number) {
+    $.post(api, {
+      payload: btoa(
+        btoa(
+          JSON.stringify({
+            score: btoa(btoa(score.toString())),
+            pseudo: btoa(this.pseudo),
+          })
+        )
+      ),
+    }).then(() => {
+      this.setLeaderboard()
+    })
+  }
+
+  public getLeaderboard() {
+    return $.get(api)
+  }
+
+  public setLeaderboard() {
+    let leaderboard = $('#LeaderboardList')
+    leaderboard.html('')
+
+    this.getLeaderboard().then((data) => {
+      for (let i = 0; i < data.length; i++) {
+        const score = data[i]
+        leaderboard.append(`
+          <tr>
+            <td class="position">${i}</td>
+            <td class="pseudo">${score.pseudo}</td>
+            <td class="score">${score.score}</td>
+          </tr>
+        `)
+      }
+    })
   }
 
   public setBonus(list: string[]) {
@@ -77,4 +117,26 @@ class HealthBar {
   }
 }
 
-export default new View()
+const view = new View()
+
+$(() => {
+  view.setLeaderboard()
+
+  $('ul.tabs li').click(function () {
+    var tab_id = $(this).attr('data-tab')
+
+    $('ul.tabs li').removeClass('current')
+    $('.tab-content').removeClass('current')
+
+    $(this).addClass('current')
+    $('#' + tab_id).addClass('current')
+  })
+
+  window.addEventListener('keydown', function (e) {
+    if (e.keyCode == 32 && e.target == document.body) {
+      e.preventDefault()
+    }
+  })
+})
+
+export default view

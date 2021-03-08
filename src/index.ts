@@ -4,10 +4,33 @@ import * as $ from 'jquery'
 import { initGL, gl } from './js/utils/gl'
 import { startGame } from './app'
 import { initAllShaders } from './js/utils/shaders-loader'
+import view from './js/view'
 
-// eslint-disable-next-line no-unused-vars
-$(async () => {
+// Call when pseudo set
+async function start() {
   initGL()
   await initAllShaders()
-  startGame()
+  await startGame()
+}
+
+$(() => {
+  $('.pseudoModal').on('keydown', (e: any) => {
+    if (e.key === 'Enter') {
+      setPseudo()
+    }
+  })
+
+  $('#pseudoBtn').on('click', () => {
+    setPseudo()
+  })
 })
+
+function setPseudo() {
+  let pseudo = $('#pseudoTxt').val().toString()
+
+  if (pseudo !== '') {
+    $('.pseudoModal').hide()
+    view.pseudo = pseudo
+    start()
+  }
+}

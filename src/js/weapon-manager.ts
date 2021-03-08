@@ -72,7 +72,7 @@ export default class WeaponManager {
   }
 
   private activatePower(upgrade: WeaponUpgrade) {
-    console.log('Power: ', upgrade)
+    // TODO Active power when throw bonus
   }
 
   public tick() {

@@ -26,8 +26,19 @@
         width="800"
         height="800"
       ></canvas>
+      <!-- Pseudo Modal -->
+      <div class="pseudoModal">
+        <input
+          type="text"
+          name="pseudoTxt"
+          id="pseudoTxt"
+          value=""
+          placeholder="Pseudo"
+        />
+        <p id="pseudoBtn">START</p>
+      </div>
       <!-- Score -->
-      <p id="score">Score: <span id="info_SCORE"></span></p>
+      <p id="score">Score: <span id="info_SCORE">0</span></p>
       <!-- Health -->
       <div class="health-bar" data-total="50" data-value="0">
         <div class="bar">
@@ -39,7 +50,24 @@
         <li>cc</li>
       </ul>
     </div>
-    <!-- Leaderboard -->
-    <div class="right"></div>
+    <div class="right">
+      <ul class="tabs">
+        <li class="tab-link current" data-tab="tab-1">Leaderboard</li>
+        <li class="tab-link" data-tab="tab-2">Enemies</li>
+        <li class="tab-link" data-tab="tab-3">Armes</li>
+        <li class="tab-link" data-tab="tab-4">Bonus</li>
+      </ul>
+
+      <div id="tab-1" class="tab-content current">
+        <!-- Leaderboard -->
+        <div class="leaderboard">
+          <h1>Leaderboard</h1>
+          <table id="LeaderboardList"></table>
+        </div>
+      </div>
+      <div id="tab-2" class="tab-content">Info monstre</div>
+      <div id="tab-3" class="tab-content">Info arme</div>
+      <div id="tab-4" class="tab-content">Info bonus</div>
+    </div>
   </body>
 </html>

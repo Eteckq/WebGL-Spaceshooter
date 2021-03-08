@@ -11,6 +11,12 @@ import PlayerManager from './player-manager'
 import Hitbox from './objects/hitbox'
 import PlayerMissile from './objects/abstract/player-missile'
 import EnemyMissile from './objects/abstract/enemy-missile'
+import BasicWeaponUpgrade from './objects/bonus/basic-weapon-upgrade'
+import HealthBonus from './objects/bonus/health'
+import SlotBonus from './objects/bonus/slot'
+import WaveWeaponUpgrade from './objects/bonus/wave-weapon-upgrade'
+import { generateOdds } from './utils/utils'
+import view from './view'
 
 const DEBUG = false
 
@@ -22,16 +28,20 @@ export default class GameManager {
 
   public waveManager: WaveManager
 
-  private over: boolean = false
+  public over: boolean = false
 
   private score: number = 0
 
+  private spawnableBonus: any = [
+    WaveWeaponUpgrade,
+    BasicWeaponUpgrade,
+    HealthBonus,
+    SlotBonus,
+  ]
+
   constructor() {
-    if (!GameManager.Instance) {
-      GameManager.Instance = this
-    } else {
-      console.error('More than one game manager instance')
-    }
+    GameManager.Instance = this
+
     this.playerManager = new PlayerManager()
     if (DEBUG) new Hitbox(0.03, 0.03)
     new Background()
@@ -47,11 +57,22 @@ export default class GameManager {
     this.waveManager.numberOfEnemies--
     this.score += enemy.score
     View.setScore(this.score)
+
+    if (generateOdds(2)) {
+      this.spawnRandomBonus(enemy.getPosition())
+    }
+  }
+
+  private spawnRandomBonus(position: { x: number; y: number; z: number }) {
+    new this.spawnableBonus[
+      Math.floor(Math.random() * this.spawnableBonus.length)
+    ](position)
   }
 
   public gameOver() {
     this.over = true
     this.destroy()
+    view.sendScore(this.score)
   }
 
   public tick() {
