@@ -2,7 +2,7 @@ import EnemyMissile from '../../abstract/enemy-missile'
 
 export default class BasicEnemyMissile extends EnemyMissile {
   constructor() {
-    super(`/assets/images/PNG/Lasers/laserRed06.png`, 0.02, 0.06)
+    super('laserRed06', 0.02, 0.06)
   }
 
   public update() {

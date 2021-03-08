@@ -3,7 +3,7 @@ import BoundedEntity from './bounded-entity'
 
 export default abstract class Bonus extends BoundedEntity {
   constructor(texture: string, position: { x: number; y: number; z: number }) {
-    super(`/assets/images/PNG/Power-ups/${texture}.png`, 0.03, 0.03)
+    super(`/assets/images/PNG/Bonus/${texture}.png`, 0.03, 0.03)
     this.maxTop = 1
     this.maxBottom = 1
     this.maxLeft = 1

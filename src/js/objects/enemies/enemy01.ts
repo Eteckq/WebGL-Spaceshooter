@@ -9,7 +9,7 @@ import BasicEnemyMissile from '../projectiles/enemy/basic-enemy-missile'
 
 export default class Enemy01 extends Enemy {
   constructor() {
-    super('Black1', 0.08, 0.08)
+    super('enemyBlack1', 0.08, 0.08)
     this.speed = getRandomFloat(0.4, 0.7)
     this.health = 10
   }

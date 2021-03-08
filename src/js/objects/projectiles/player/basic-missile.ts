@@ -2,7 +2,7 @@ import PlayerMissile from '../../abstract/player-missile'
 
 export default class BasicMissile extends PlayerMissile {
   constructor(protected angle: number = 0) {
-    super(`/assets/images/PNG/Lasers/laserBlue06.png`, 0.02, 0.06)
+    super(`laserBlue06`, 0.02, 0.06)
   }
 
   public update() {

@@ -138,11 +138,13 @@ export default class GameManager {
     // eslint-disable-next-line no-bitwise
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
-    // gl.enable(gl.BLEND)
+    gl.enable(gl.BLEND)
 
     this.objectsInScene.forEach((object) => {
       if (object instanceof Background) {
+        gl.disable(gl.BLEND)
         gl.useProgram(Background.SHADER)
+        gl.enable(gl.BLEND)
       }
       if (object instanceof Rectangle) {
         gl.useProgram(Rectangle.SHADER)
