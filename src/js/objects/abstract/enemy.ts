@@ -26,10 +26,7 @@ export default abstract class Enemy
   }
 
   protected onCollision(other: Object) {
-    if (other instanceof Player) {
-      other.damage(this.attack)
-      this.damage(5)
-    } else if (other instanceof PlayerMissile) {
+    if (other instanceof PlayerMissile) {
       this.damage(other.attack)
       other.clear()
     }

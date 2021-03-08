@@ -5,6 +5,7 @@ import * as glMatrix from 'gl-matrix'
 import GameManager from '../game-manager'
 import EnemyMissile from './abstract/enemy-missile'
 import Bonus from './abstract/bonus'
+import Enemy from './abstract/enemy'
 
 export default class Player extends Object3D {
   private modelMatrix: any
@@ -36,6 +37,11 @@ export default class Player extends Object3D {
     if (other instanceof Bonus) {
       other.actionOnCatch()
       other.clear()
+    }
+
+    if (other instanceof Enemy) {
+      this.damage(other.attack)
+      other.damage(5)
     }
   }
 

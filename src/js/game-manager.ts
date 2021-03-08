@@ -94,10 +94,9 @@ export default class GameManager {
           object.checkCollisions(this.objectsInScene)
         }
       if (object instanceof Enemy) {
-        object.checkCollisions([
-          ...this.objectsInScene.filter((o) => o instanceof PlayerMissile),
-          this.playerManager.player,
-        ])
+        object.checkCollisions(
+          this.objectsInScene.filter((o) => o instanceof PlayerMissile)
+        )
       }
 
       /* if (object instanceof Bonus) {
@@ -107,7 +106,8 @@ export default class GameManager {
 
     this.playerManager.player.checkCollisions(
       this.objectsInScene.filter(
-        (o) => o instanceof EnemyMissile || o instanceof Bonus
+        (o) =>
+          o instanceof EnemyMissile || o instanceof Bonus || o instanceof Enemy
       )
     )
   }
