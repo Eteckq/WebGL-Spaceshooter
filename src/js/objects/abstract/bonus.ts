@@ -26,12 +26,5 @@ export default abstract class Bonus extends BoundedEntity {
     this.move(newX, newY)
   }
 
-  protected onCollision(other: Object) {
-    if (other instanceof Player) {
-      this.actionOnCatch()
-      this.clear()
-    }
-  }
-
   abstract actionOnCatch(): void
 }

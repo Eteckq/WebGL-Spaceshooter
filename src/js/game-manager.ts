@@ -100,13 +100,15 @@ export default class GameManager {
         ])
       }
 
-      if (object instanceof Bonus) {
+      /* if (object instanceof Bonus) {
         object.checkCollisions([this.playerManager.player])
-      }
+      } */
     })
 
     this.playerManager.player.checkCollisions(
-      this.objectsInScene.filter((o) => o instanceof EnemyMissile)
+      this.objectsInScene.filter(
+        (o) => o instanceof EnemyMissile || o instanceof Bonus
+      )
     )
   }
 
