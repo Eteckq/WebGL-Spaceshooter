@@ -99,6 +99,19 @@ export default class Background extends Object {
     gl.drawElements(gl.TRIANGLES, this.triangles.numItems, gl.UNSIGNED_SHORT, 0)
     gl.bindVertexArray(null)
   }
+
+  public static INIT_SHADERS(shader: any): void {
+    {
+      Background.SHADER = shader
+      // active ce shader
+      gl.useProgram(shader)
+
+      // adresse des variables dans le shader associé
+      shader.time = gl.getUniformLocation(shader, 'time')
+      shader.resolution = gl.getUniformLocation(shader, 'resolution')
+    }
+  }
+
   public clear() {
     gl.deleteBuffer(this.vertexBuffer)
     gl.deleteBuffer(this.coordBuffer)

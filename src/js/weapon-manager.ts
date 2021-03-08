@@ -55,7 +55,7 @@ export default class WeaponManager {
     }
 
     while (bonusPngs.length < this.currentBonusSlots) {
-      bonusPngs.push(`/assets/images/PNG/Power-ups/slot.png`)
+      bonusPngs.push(`/assets/images/UI/slot.png`)
     }
     view.setBonus(bonusPngs)
   }

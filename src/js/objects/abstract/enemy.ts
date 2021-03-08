@@ -16,7 +16,7 @@ export default abstract class Enemy
   public score: number = 1
 
   constructor(texture: string, width: number, height: number) {
-    super(`/assets/images/PNG/Enemies/${texture}.png`, width, height)
+    super(`/assets/images/Enemies/${texture}.png`, width, height)
     this.directionX = getRandomBoolValue()
 
     this.maxTop = 1

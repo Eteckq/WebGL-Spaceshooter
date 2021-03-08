@@ -126,6 +126,19 @@ export default class Player extends Object3D {
     return [this.bbminP, this.bbmaxP]
   }
 
+  static INIT_SHADERS(shader: any) {
+    Player.SHADER = shader
+
+    // active ce shader
+    gl.useProgram(shader)
+
+    // adresse des variables de type uniform dans le shader
+    shader.modelMatrixUniform = gl.getUniformLocation(shader, 'uModelMatrix')
+    shader.viewMatrixUniform = gl.getUniformLocation(shader, 'uViewMatrix')
+    shader.projMatrixUniform = gl.getUniformLocation(shader, 'uProjMatrix')
+    shader.timerUniform = gl.getUniformLocation(shader, 'timer')
+  }
+
   public tick(elapsed: number) {
     this.time += 0.01 * elapsed
 

@@ -1,4 +1,5 @@
 import GameManager from '../../game-manager'
+import { gl } from '../../utils/gl'
 export default abstract class Object {
   public static SHADER?: any
   protected loaded: boolean = false

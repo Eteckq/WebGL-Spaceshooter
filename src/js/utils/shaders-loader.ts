@@ -51,46 +51,8 @@ async function initShaders(id: string) {
   return shaderProgram
 }
 
-async function initRectangleShaders() {
-  const shader = await initShaders('rectangle')
-  Rectangle.SHADER = shader
-
-  // active ce shader
-  gl.useProgram(shader)
-
-  // adresse des variables uniform dans le shader
-  shader.positionUniform = gl.getUniformLocation(shader, 'uPosition')
-  shader.texUniform = gl.getUniformLocation(shader, 'uTex')
-  shader.couleurUniform = gl.getUniformLocation(shader, 'maCouleur')
-}
-
-async function initPlayerShaders() {
-  const shader = await initShaders('player')
-  Player.SHADER = shader
-
-  // active ce shader
-  gl.useProgram(shader)
-
-  // adresse des variables de type uniform dans le shader
-  shader.modelMatrixUniform = gl.getUniformLocation(shader, 'uModelMatrix')
-  shader.viewMatrixUniform = gl.getUniformLocation(shader, 'uViewMatrix')
-  shader.projMatrixUniform = gl.getUniformLocation(shader, 'uProjMatrix')
-  shader.timerUniform = gl.getUniformLocation(shader, 'timer')
-}
-
-async function initBackgroundShaders() {
-  const shader = await initShaders('background')
-  Background.SHADER = shader
-  // active ce shader
-  gl.useProgram(shader)
-
-  // adresse des variables dans le shader associé
-  shader.time = gl.getUniformLocation(shader, 'time')
-  shader.resolution = gl.getUniformLocation(shader, 'resolution')
-}
-
 export async function initAllShaders() {
-  await initBackgroundShaders()
-  await initRectangleShaders()
-  await initPlayerShaders()
+  Background.INIT_SHADERS(await initShaders('background'))
+  Rectangle.INIT_SHADERS(await initShaders('rectangle'))
+  Player.INIT_SHADERS(await initShaders('player'))
 }

@@ -85,6 +85,7 @@ export default class GameManager {
     this.playerManager.tick()
   }
 
+  // Pour les collisions, je teste uniquement les objets qui peuvent entrer en collision (évite de surcharger)
   private checkCollisions() {
     this.objectsInScene.map((object) => {
       // uncomment to debug hitboxs

@@ -91,6 +91,20 @@ export default abstract class Rectangle extends Object2D {
     this.position[2] = position.z
   }
 
+  public static INIT_SHADERS(shader: any): void {
+    {
+      Rectangle.SHADER = shader
+
+      // active ce shader
+      gl.useProgram(shader)
+
+      // adresse des variables uniform dans le shader
+      shader.positionUniform = gl.getUniformLocation(shader, 'uPosition')
+      shader.texUniform = gl.getUniformLocation(shader, 'uTex')
+      shader.couleurUniform = gl.getUniformLocation(shader, 'maCouleur')
+    }
+  }
+
   public getPosition() {
     return {
       x: this.position[0],
