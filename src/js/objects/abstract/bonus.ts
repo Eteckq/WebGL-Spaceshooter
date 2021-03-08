@@ -1,7 +1,7 @@
-import Player from '../player'
 import BoundedEntity from './bounded-entity'
 
 export default abstract class Bonus extends BoundedEntity {
+  public description: string = 'Bonus description'
   constructor(texture: string, position: { x: number; y: number; z: number }) {
     super(`/assets/images/Bonus/${texture}.png`, 0.03, 0.03)
     this.maxTop = 1

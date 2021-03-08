@@ -1,5 +1,6 @@
 import Object from './abstract/object'
 import { gl } from '../utils/gl'
+import GameManager from '../game-manager'
 
 export default class Background extends Object {
   checkCollisions(objects: Object[]) {}
@@ -90,26 +91,28 @@ export default class Background extends Object {
     this.frequency = 4.0 - 2.0 * Math.sin(this.time)
   }
 
+  public static INIT_SHADERS(shader: any): void {
+    {
+      Background.SHADER = shader
+      gl.useProgram(shader)
+      shader.time = gl.getUniformLocation(shader, 'uTime')
+      shader.resolution = gl.getUniformLocation(shader, 'uResolution')
+      shader.offset = gl.getUniformLocation(shader, 'uOffset')
+    }
+  }
   public sendUniformVariables() {
-    gl.uniform1f(Background.SHADER.time, this.time * 0.1)
-    gl.uniform2fv(Background.SHADER.resolution, [1, 500])
+    gl.uniform1f(Background.SHADER.time, this.time * 0.5)
+    gl.uniform2fv(Background.SHADER.resolution, [1, 1])
+
+    gl.uniform2fv(Background.SHADER.offset, [
+      GameManager.Instance.playerManager.player.getPosition().x * 0.3,
+      this.time * 0.05,
+    ])
   }
   public draw() {
     gl.bindVertexArray(this.vao)
     gl.drawElements(gl.TRIANGLES, this.triangles.numItems, gl.UNSIGNED_SHORT, 0)
     gl.bindVertexArray(null)
-  }
-
-  public static INIT_SHADERS(shader: any): void {
-    {
-      Background.SHADER = shader
-      // active ce shader
-      gl.useProgram(shader)
-
-      // adresse des variables dans le shader associé
-      shader.time = gl.getUniformLocation(shader, 'time')
-      shader.resolution = gl.getUniformLocation(shader, 'resolution')
-    }
   }
 
   public clear() {

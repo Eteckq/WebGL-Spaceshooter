@@ -13,7 +13,7 @@
 	  vec3 l = normalize(vec3(-1.0,0.0,1.0));
 
 	  // une couleur (ex. rouge)
-	  vec3 Kd = vec3(1.0,0.0,0.0);
+	  vec3 Kd = vec3(0.8,0.0,0.2);
 
 	  // un �clairage simple
 	  vec3 diff = Kd*max(dot(n,l),0.0);

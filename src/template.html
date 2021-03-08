@@ -51,28 +51,110 @@
         </div>
       </div>
       <!-- Bonus -->
-      <ul id="bonusList">
-        <li>cc</li>
-      </ul>
+      <ul id="bonusList"></ul>
     </div>
     <div class="right">
       <ul class="tabs">
         <li class="tab-link current" data-tab="tab-1">Leaderboard</li>
         <li class="tab-link" data-tab="tab-2">Enemies</li>
-        <li class="tab-link" data-tab="tab-3">Armes</li>
+        <li class="tab-link" data-tab="tab-3">Weapons</li>
         <li class="tab-link" data-tab="tab-4">Bonus</li>
       </ul>
 
       <div id="tab-1" class="tab-content current">
         <!-- Leaderboard -->
         <div class="leaderboard">
-          <h1>Leaderboard</h1>
+          <h1>Top 10</h1>
           <table id="LeaderboardList"></table>
         </div>
       </div>
-      <div id="tab-2" class="tab-content">Info monstre</div>
-      <div id="tab-3" class="tab-content">Info arme</div>
-      <div id="tab-4" class="tab-content">Info bonus</div>
+      <div id="tab-2" class="tab-content">
+        <table>
+          <thead>
+            <tr>
+              <td></td>
+              <td>PV</td>
+              <td>Score</td>
+              <td>Capacity</td>
+              <td>Weapon</td>
+            </tr>
+          </thead>
+          <tbody class="">
+            <tr>
+              <td><img src="/assets/images/Enemies/enemyBlack1.png" /></td>
+              <td>10❤️</td>
+              <td>+1</td>
+              <td>Random movements</td>
+              <td>
+                <img src="/assets/images/Missiles/Enemy/laserRed06.png" />
+                10❤️
+              </td>
+            </tr>
+            <tr>
+              <td><img src="/assets/images/Enemies/enemyRed4.png" /></td>
+              <td>50❤️</td>
+              <td>+10</td>
+              <td>Go forward, without stopping</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="tab-3" class="tab-content">
+        <table>
+          <thead>
+            <tr>
+              <td></td>
+              <td>Description</td>
+              <td>Damages</td>
+            </tr>
+          </thead>
+          <tbody id="weaponsTable">
+            <tr>
+              <td style="text-align: center">
+                <img src="/assets/images/Missiles/Player/laserBlue06.png" />
+              </td>
+              <td>Basic weapon missile. Go forward</td>
+              <td>10❤️</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">
+                <img src="/assets/images/Missiles/Player/laserGreen14.png" />
+              </td>
+              <td>Green weapon missile. Go forward, making random movements</td>
+              <td>10❤️</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="tab-4" class="tab-content">
+        <table>
+          <thead>
+            <tr>
+              <td></td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody id="bonusTable">
+            <tr>
+              <td>
+                <img src="/assets/images/Bonus/red.png" />
+                <img src="/assets/images/Bonus/blue.png" />
+                <img src="/assets/images/Bonus/green.png" />
+              </td>
+              <td>Weapon upgrades</td>
+            </tr>
+            <tr>
+              <td><img src="/assets/images/Bonus/health.png" /></td>
+              <td>Add 10❤️ (max 50❤️)</td>
+            </tr>
+            <tr>
+              <td><img src="/assets/images/Bonus/slot.png" /></td>
+              <td>Add a new weapon slot (max 8)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

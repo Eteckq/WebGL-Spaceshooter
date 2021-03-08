@@ -3,11 +3,24 @@
 
 html {
   background: #121212;
+  color: white;
   font-family: 'Roboto';
 }
 
 body {
   display: flex;
+}
+
+table {
+  width: 100%;
+  font-size: x-large;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: center;
+
+  tr {
+    border-top: 10px solid transparent;
+  }
 }
 
 .left {
@@ -23,12 +36,12 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     text-align: center;
-    color: white;
+
     font-size: xx-large;
     display: none;
     .info_SCORE {
       margin-top: 50px;
-      font-size: 25rem;
+      font-size: 15;
     }
     #restartBtn {
       margin-top: 25px;
@@ -46,7 +59,7 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     text-align: center;
-    color: white;
+
     font-size: xx-large;
     #pseudoTxt {
       margin-top: 300px;
@@ -62,7 +75,7 @@ body {
   // Score
   #score {
     font-size: xx-large;
-    color: white;
+
     position: absolute;
     top: 10px;
     left: 10px;
@@ -121,7 +134,7 @@ body {
     border-bottom: 1px solid white;
     li {
       background: none;
-      color: white;
+
       display: inline-block;
       padding: 10px 15px;
       cursor: pointer;
@@ -144,19 +157,14 @@ body {
 
   .leaderboard {
     margin: 10px;
-    color: white;
+
     font-size: xx-large;
     text-align: center;
 
     #LeaderboardList {
       text-align: left;
-      width: 100%;
-      font-size: x-large;
-      border-collapse: collapse;
-      border-spacing: 0;
-      tr {
-        border-top: 10px solid transparent;
 
+      tr {
         .position {
           color: #adadad;
         }
@@ -169,5 +177,14 @@ body {
         }
       }
     }
+  }
+
+  #weaponsTable {
+    font-size: x-large;
+  }
+
+  #bonusTable {
+    text-align: left;
+    font-size: x-large;
   }
 }

@@ -42,8 +42,6 @@ export default class GameManager {
   constructor() {
     GameManager.Instance = this
 
-    console.log('start')
-
     this.playerManager = new PlayerManager()
     if (DEBUG) new Hitbox(0.03, 0.03)
     new Background()

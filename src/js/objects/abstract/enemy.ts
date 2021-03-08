@@ -1,24 +1,24 @@
 import { getRandomBoolValue } from '../../utils/utils'
 import Damageable from '../interface/damageable'
 import Damager from '../interface/damager'
-import Player from '../player'
-import BasicMissile from '../projectiles/player/basic-missile'
 import GameManager from '../../game-manager'
 import BoundedEntity from './bounded-entity'
 import PlayerMissile from './player-missile'
+import { gl } from '../../utils/gl'
 
 export default abstract class Enemy
   extends BoundedEntity
   implements Damageable, Damager {
   public attack: number = 20
   public health: number = 10
+  public description: string = 'Enemy description'
 
   public score: number = 1
 
   constructor(texture: string, width: number, height: number) {
     super(`/assets/images/Enemies/${texture}.png`, width, height)
     this.directionX = getRandomBoolValue()
-
+    GameManager.Instance.waveManager.numberOfEnemies++
     this.maxTop = 1
     this.maxBottom = 0.3
     this.maxLeft = 1.1
@@ -46,5 +46,15 @@ export default abstract class Enemy
       GameManager.Instance.killEnemy(this)
       this.clear()
     }
+  }
+
+  public clear() {
+    GameManager.Instance.waveManager.numberOfEnemies--
+    // clear all GPU memory
+    this.loaded = false
+    gl.deleteBuffer(this.vertexBuffer)
+    gl.deleteBuffer(this.coordBuffer)
+    gl.deleteVertexArray(this.vao)
+    this.gameManager.removeFromScene(this)
   }
 }

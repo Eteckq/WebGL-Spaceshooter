@@ -1,5 +1,6 @@
 import * as $ from 'jquery'
 import { startGame } from '../app'
+import SlotBonus from './objects/bonus/consumables/slot'
 
 const api = 'https://api-score.yohangastoud.fr/scores'
 class View {
@@ -14,6 +15,7 @@ class View {
     this.healtBar.setHp(hp)
   }
 
+  // TODO Use UI icon to display score
   public setScore(score: number) {
     $('.info_SCORE').html(score.toString())
   }
@@ -139,6 +141,8 @@ $(() => {
     startGame()
     $('#endgameModal').hide()
   })
+
+  // SET TABLES
 
   window.addEventListener('keydown', function (e) {
     if (e.keyCode == 32 && e.target == document.body) {
