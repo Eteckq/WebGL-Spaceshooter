@@ -13,10 +13,10 @@ import PlayerMissile from './objects/abstract/player-missile'
 import EnemyMissile from './objects/abstract/enemy-missile'
 import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
 import HealthBonus from './objects/bonus/consumables/health'
-import SlotBonus from './objects/bonus/slot'
-import WaveWeaponUpgrade from './objects/bonus/wave-weapon-upgrade'
 import { generateOdds } from './utils/utils'
 import view from './view'
+import SlotBonus from './objects/bonus/consumables/slot'
+import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
 
 const DEBUG = false
 
@@ -41,6 +41,8 @@ export default class GameManager {
 
   constructor() {
     GameManager.Instance = this
+
+    console.log('start')
 
     this.playerManager = new PlayerManager()
     if (DEBUG) new Hitbox(0.03, 0.03)

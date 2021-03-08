@@ -1,4 +1,5 @@
 import * as $ from 'jquery'
+import { startGame } from '../app'
 
 const api = 'https://api-score.yohangastoud.fr/scores'
 class View {
@@ -14,10 +15,12 @@ class View {
   }
 
   public setScore(score: number) {
-    $('#info_SCORE').html(score.toString())
+    $('.info_SCORE').html(score.toString())
   }
 
   public sendScore(score: number) {
+    $('#endgameModal').show()
+
     $.post(api, {
       payload: btoa(
         btoa(
@@ -130,6 +133,11 @@ $(() => {
 
     $(this).addClass('current')
     $('#' + tab_id).addClass('current')
+  })
+
+  $('#restartBtn').on('click', () => {
+    startGame()
+    $('#endgameModal').hide()
   })
 
   window.addEventListener('keydown', function (e) {

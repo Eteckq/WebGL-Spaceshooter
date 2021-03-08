@@ -13,8 +13,30 @@ body {
 .left {
   position: relative;
 
-  //Pseudo modal
+  // Restart Modal
+  #endgameModal {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+    color: white;
+    font-size: xx-large;
+    display: none;
+    .info_SCORE {
+      margin-top: 50px;
+      font-size: 25rem;
+    }
+    #restartBtn {
+      margin-top: 25px;
+      cursor: pointer;
+    }
+  }
 
+  //Pseudo modal
   .pseudoModal {
     position: absolute;
     top: 0px;
