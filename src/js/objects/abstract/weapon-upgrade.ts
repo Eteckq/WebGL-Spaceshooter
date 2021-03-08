@@ -1,3 +1,4 @@
+import GameManager from '../../game-manager'
 import Player from '../player'
 import Bonus from './bonus'
 
@@ -13,5 +14,7 @@ export default abstract class WeaponUpgrade extends Bonus {
     }
   }
 
-  abstract actionOnCatch(): void
+  actionOnCatch(): void {
+    GameManager.Instance.playerManager.weaponManager.pushUpgrade(this)
+  }
 }

@@ -11,8 +11,8 @@ import PlayerManager from './player-manager'
 import Hitbox from './objects/hitbox'
 import PlayerMissile from './objects/abstract/player-missile'
 import EnemyMissile from './objects/abstract/enemy-missile'
-import BasicWeaponUpgrade from './objects/bonus/basic-weapon-upgrade'
-import HealthBonus from './objects/bonus/health'
+import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
+import HealthBonus from './objects/bonus/consumables/health'
 import SlotBonus from './objects/bonus/slot'
 import WaveWeaponUpgrade from './objects/bonus/wave-weapon-upgrade'
 import { generateOdds } from './utils/utils'
@@ -89,19 +89,16 @@ export default class GameManager {
   private checkCollisions() {
     this.objectsInScene.map((object) => {
       // uncomment to debug hitboxs
-      if (DEBUG)
-        if (object instanceof Hitbox) {
-          object.checkCollisions(this.objectsInScene)
-        }
+
+      if (DEBUG && object instanceof Hitbox) {
+        object.checkCollisions(this.objectsInScene)
+      }
+
       if (object instanceof Enemy) {
         object.checkCollisions(
           this.objectsInScene.filter((o) => o instanceof PlayerMissile)
         )
       }
-
-      /* if (object instanceof Bonus) {
-        object.checkCollisions([this.playerManager.player])
-      } */
     })
 
     this.playerManager.player.checkCollisions(

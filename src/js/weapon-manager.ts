@@ -1,6 +1,6 @@
 import Weapon from './objects/abstract/weapon'
 import WeaponUpgrade from './objects/abstract/weapon-upgrade'
-import BasicWeaponUpgrade from './objects/bonus/basic-weapon-upgrade'
+import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
 import WaveWeaponUpgrade from './objects/bonus/wave-weapon-upgrade'
 import BasicWeapon from './objects/weapons/basic-weapon'
 import WaveWeapon from './objects/weapons/wave-weapon'
