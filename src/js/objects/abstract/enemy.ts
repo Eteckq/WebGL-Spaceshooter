@@ -11,18 +11,13 @@ export default abstract class Enemy
   implements Damageable, Damager {
   public attack: number = 20
   public health: number = 10
-  public description: string = 'Enemy description'
 
   public score: number = 1
 
   constructor(texture: string, width: number, height: number) {
     super(`/assets/images/Enemies/${texture}.png`, width, height)
-    this.directionX = getRandomBoolValue()
+
     GameManager.Instance.waveManager.numberOfEnemies++
-    this.maxTop = 1
-    this.maxBottom = 0.3
-    this.maxLeft = 1.1
-    this.maxRight = 1.1
   }
 
   protected onCollision(other: Object) {

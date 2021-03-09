@@ -1,3 +1,4 @@
+import { getRandomInt } from '../../utils/utils'
 import BoundedEntity from './bounded-entity'
 
 export default abstract class Bonus extends BoundedEntity {
@@ -8,6 +9,8 @@ export default abstract class Bonus extends BoundedEntity {
     this.maxBottom = 1
     this.maxLeft = 1
     this.maxRight = 1
+
+    this.directionX = getRandomInt(-1, 1)
 
     this.position[0] = position.x
     this.position[1] = position.y

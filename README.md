@@ -7,8 +7,13 @@ School project, built in Typescript from a js code base
 ## Features
 
 
+## Credits
 
+[Health Bar](https://codepen.io/dwidomski/pen/KBzuo)
 
+[Background Shader](https://editor.isf.video/shaders/5e82e88f3fd9680017950218)
+
+[Spaceshooter Sprites](https://opengameart.org/content/space-shooter-redux)
 
 ## Installation
 

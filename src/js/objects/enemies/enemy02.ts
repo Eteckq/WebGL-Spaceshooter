@@ -6,12 +6,13 @@ import {
 } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
 import BasicEnemyMissile from '../projectiles/enemy/basic-enemy-missile'
+import FastEnemyMissile from '../projectiles/enemy/fast-enemy-missile'
 
-export default class Enemy01 extends Enemy {
+export default class Enemy02 extends Enemy {
   constructor() {
-    super('enemyBlack1', 0.08, 0.08)
-    this.speed = getRandomFloat(0.4, 0.7)
-    this.health = 20
+    super('enemyBlue2', 0.06, 0.06)
+    this.speed = getRandomFloat(0.7, 1)
+    this.health = 10
     this.score = 2
 
     this.directionX = getRandomBoolValue()
@@ -37,11 +38,13 @@ export default class Enemy01 extends Enemy {
     let newX = this.speed * 0.03 * this.directionX
     let newY = this.speed * 0.01 * this.directionY
 
-    this.move(newX, newY)
+    if (Math.round(this.time) % 15 < 10) {
+      this.move(newX, newY)
+    }
   }
 
   public shoot() {
-    let newSplat = new BasicEnemyMissile()
+    let newSplat = new FastEnemyMissile()
     newSplat.setPosition(this.getPosition())
   }
 }

@@ -1,4 +1,5 @@
 import Enemy01 from './objects/enemies/enemy01'
+import Enemy02 from './objects/enemies/enemy02'
 import Enemy03 from './objects/enemies/enemy03'
 
 export default class WaveManager {
@@ -30,7 +31,8 @@ export default class WaveManager {
     this.waveCooldown = 500
 
     // TODO Waves Logic
-    new Enemy03()
+
+    new Enemy02()
     /* for (let i = 0; i < this.currentWave * 2; i++) {
       new Enemy01()
       

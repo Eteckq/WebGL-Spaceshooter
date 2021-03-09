@@ -15,9 +15,9 @@ export default abstract class BoundedEntity extends Rectangle {
   constructor(texture: string, width: number, height: number) {
     super(texture, width, height)
 
-    this.position[0] = getRandomFloat(-1, 1)
+    this.position[0] = getRandomFloat(-0.9, 0.9)
     this.position[1] = this.maxTop + 0.5
-    this.directionX = getRandomInt(-1, 1)
+
     this.directionY = 1
   }
 
