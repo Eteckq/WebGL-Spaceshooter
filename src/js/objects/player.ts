@@ -173,9 +173,9 @@ export default class Player extends Object3D {
 
     // on applique les transformations successivement
     this.modelMatrix = new Matrix4(Matrix4.IDENTITY)
-    this.modelMatrix = multiply(sMat as any, this.modelMatrix)
-    this.modelMatrix = multiply(rMat as any, this.modelMatrix)
-    this.modelMatrix = multiply(tMat as any, this.modelMatrix)
+    this.modelMatrix = this.modelMatrix.multiplyLeft(sMat)
+    this.modelMatrix = this.modelMatrix.multiplyLeft(rMat)
+    this.modelMatrix = this.modelMatrix.multiplyLeft(tMat)
 
     /* 
 
