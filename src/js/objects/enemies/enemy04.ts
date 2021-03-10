@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import {
   generateOdds,
   getRandomBoolValue,
@@ -8,8 +9,8 @@ import UfoEnemyMissile from '../projectiles/enemy/ufo-enemy-missile'
 
 export default class Enemy04 extends Enemy {
   private isShooting = false
-  constructor() {
-    super('ufoYellow', 0.15, 0.15)
+  constructor(position: Vector3 = new Vector3(Vector3.ZERO)) {
+    super(position, 'ufoYellow', 0.15, 0.15)
     // this.speed = getRandomFloat(0.4, 0.9)
 
     this.speed = 2
@@ -55,8 +56,7 @@ export default class Enemy04 extends Enemy {
         let x = x0 + r * Math.cos(t)
         let y = y0 + r * Math.sin(t)
 
-        let newSplat = new UfoEnemyMissile()
-        newSplat.setPosition({ x, y })
+        let newSplat = new UfoEnemyMissile(new Vector3(x, y, 0.5))
       }, i * delayBetweenShots)
     }
 

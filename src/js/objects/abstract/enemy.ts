@@ -5,6 +5,7 @@ import GameManager from '../../game-manager'
 import BoundedEntity from './bounded-entity'
 import PlayerMissile from './player-missile'
 import { gl } from '../../utils/gl'
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 
 export default abstract class Enemy
   extends BoundedEntity
@@ -14,8 +15,13 @@ export default abstract class Enemy
 
   public score: number = 1
 
-  constructor(texture: string, width: number, height: number) {
-    super(`/assets/images/Enemies/${texture}.png`, width, height)
+  constructor(
+    position: Vector3,
+    texture: string,
+    width: number,
+    height: number
+  ) {
+    super(position, `/assets/images/Enemies/${texture}.png`, width, height)
 
     GameManager.Instance.waveManager.numberOfEnemies++
     // TODO Not here, but fix transparency

@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import {
   generateOdds,
   getRandomBoolValue,
@@ -8,8 +9,8 @@ import Enemy from '../abstract/enemy'
 import BasicEnemyMissile from '../projectiles/enemy/basic-enemy-missile'
 
 export default class Enemy01 extends Enemy {
-  constructor() {
-    super('enemyBlack1', 0.08, 0.08)
+  constructor(position: Vector3 = new Vector3(Vector3.ZERO)) {
+    super(position, 'enemyBlack1', 0.08, 0.08)
     this.speed = getRandomFloat(0.4, 0.7)
     this.health = 20
     this.score = 2
@@ -41,7 +42,6 @@ export default class Enemy01 extends Enemy {
   }
 
   public shoot() {
-    let newSplat = new BasicEnemyMissile()
-    newSplat.setPosition(this.getPosition())
+    let newSplat = new BasicEnemyMissile(this.getPosition())
   }
 }

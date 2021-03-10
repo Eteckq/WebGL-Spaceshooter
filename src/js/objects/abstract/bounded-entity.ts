@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { getRandomFloat, getRandomInt, initTexture } from '../../utils/utils'
 import Rectangle from './rectangle'
 
@@ -12,8 +13,13 @@ export default abstract class BoundedEntity extends Rectangle {
   protected maxLeft: number = 1.2
   protected maxRight: number = 1.2
 
-  constructor(texture: string, width: number, height: number) {
-    super(texture, width, height)
+  constructor(
+    position: Vector3,
+    texture: string,
+    width: number,
+    height: number
+  ) {
+    super(position, texture, width, height)
 
     this.position[0] = getRandomFloat(-0.9, 0.9)
     this.position[1] = this.maxTop + 0.5

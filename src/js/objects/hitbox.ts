@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../node_modules/@math.gl/core/src/index'
 import { gl } from '../utils/gl'
 import { initTexture } from '../utils/utils'
 import Rectangle from './abstract/rectangle'
@@ -6,7 +7,12 @@ import UfoEnemyMissile from './projectiles/enemy/ufo-enemy-missile'
 
 export default class Hitbox extends Rectangle {
   constructor(width: number, height: number) {
-    super(`/assets/images/Backgrounds/black.png`, width, height)
+    super(
+      new Vector3(Vector3.ZERO),
+      `/assets/images/Backgrounds/black.png`,
+      width,
+      height
+    )
     document.onmousemove = (e) => {
       this.handleMouseMove(e)
     }
@@ -24,8 +30,7 @@ export default class Hitbox extends Rectangle {
   }
 
   private handleClick(event: any) {
-    let missile = new FastEnemyMissile()
-    missile.setPosition({ x: this.position[0], y: this.position[1] })
+    let missile = new FastEnemyMissile(this.getPosition())
   }
 
   private handleMouseMove(event: any) {

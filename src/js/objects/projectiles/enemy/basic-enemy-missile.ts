@@ -1,8 +1,9 @@
+import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
 import EnemyMissile from '../../abstract/enemy-missile'
 
 export default class BasicEnemyMissile extends EnemyMissile {
-  constructor() {
-    super('laserRed06', 0.02, 0.06)
+  constructor(position: Vector3) {
+    super(position, 'laserRed06', 0.02, 0.06)
   }
 
   public update() {

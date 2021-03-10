@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { gl } from '../../utils/gl'
 import Object from './object'
 export default abstract class Object2D extends Object {
@@ -8,15 +9,16 @@ export default abstract class Object2D extends Object {
 
   protected vao: any
 
-  protected position: [number, number, number] = [0, 0, 0]
+  protected position: Vector3
   protected time: number = 0
 
-  constructor() {
+  constructor(spawnPosition: Vector3) {
     super()
     this.vao = gl.createVertexArray()
     gl.bindVertexArray(this.vao)
 
     this.time = 0.0
+    this.position = spawnPosition
   }
 
   abstract sendUniformVariables(): any

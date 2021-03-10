@@ -1,10 +1,11 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import GameManager from '../../game-manager'
 import Player from '../player'
 import Bonus from './bonus'
 
 export default abstract class WeaponUpgrade extends Bonus {
-  constructor(texture: string, position: { x: number; y: number; z: number }) {
-    super(texture, position)
+  constructor(texture: string, position: Vector3) {
+    super(position, texture)
   }
 
   protected onCollision(other: Object) {

@@ -1,8 +1,9 @@
+import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
 import PlayerMissile from '../../abstract/player-missile'
 
 export default class WaveMissile extends PlayerMissile {
-  constructor(protected angle: number = 0) {
-    super(`laserGreen14`, 0.03, 0.03)
+  constructor(position: Vector3, protected angle: number = 0) {
+    super(position, `laserGreen14`, 0.03, 0.03)
   }
 
   public update() {

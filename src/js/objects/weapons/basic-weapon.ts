@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import Weapon from '../abstract/weapon'
 import BasicMissile from '../projectiles/player/basic-missile'
 
@@ -7,7 +8,7 @@ export default class BasicWeapon extends Weapon {
     this.SHOOT_COOLDOWN = 25
   }
 
-  public use(position: { x: number; y: number; z?: number }, level: number) {
+  public use(position: Vector3, level: number) {
     if (level >= 5) {
       this.shootCooldown -= 4 * (level - 4)
     }
@@ -29,38 +30,38 @@ export default class BasicWeapon extends Weapon {
     }
   }
 
-  private shootLevel1(position: { x: number; y: number; z?: number }) {
-    let bm = new BasicMissile()
-    bm.setPosition(position)
+  private shootLevel1(position: Vector3) {
+    new BasicMissile(position)
   }
-  private shootLevel2(position: { x: number; y: number; z?: number }) {
-    let bm0 = new BasicMissile()
-    bm0.setPosition({ x: position.x - 0.02, y: position.y })
-    let bm1 = new BasicMissile()
-    bm1.setPosition({ x: position.x + 0.02, y: position.y })
+  private shootLevel2(position: Vector3) {
+    new BasicMissile(new Vector3(position.x - 0.02, position.y, 0.5))
+    new BasicMissile(new Vector3(position.x + 0.02, position.y, 0.5))
   }
-  private shootLevel3(position: { x: number; y: number; z?: number }) {
+  private shootLevel3(position: Vector3) {
     this.shootLevel2(position)
 
-    let bm0 = new BasicMissile(10)
-    bm0.setPosition({ x: position.x, y: position.y - 0.05 })
-    let bm1 = new BasicMissile(-10)
-    bm1.setPosition({ x: position.x, y: position.y - 0.05 })
+    new BasicMissile(new Vector3(position.x, position.y - 0.05, 0.5), 10)
+    new BasicMissile(new Vector3(position.x, position.y - 0.05, 0.5), -10)
   }
-  private shootLevel4(position: { x: number; y: number; z?: number }) {
-    let bm6 = new BasicMissile(15)
-    bm6.setPosition({ x: position.x, y: position.y - 0.07 })
-    let bm5 = new BasicMissile(-15)
-    bm5.setPosition({ x: position.x, y: position.y - 0.07 })
-    let bm3 = new BasicMissile(10)
-    bm3.setPosition({ x: position.x, y: position.y - 0.05 })
-    let bm4 = new BasicMissile(-10)
-    bm4.setPosition({ x: position.x, y: position.y - 0.05 })
-    let bm0 = new BasicMissile()
-    bm0.setPosition({ x: position.x, y: position.y })
-    let bm1 = new BasicMissile()
-    bm1.setPosition({ x: position.x + 0.04, y: position.y })
-    let bm2 = new BasicMissile()
-    bm2.setPosition({ x: position.x - 0.04, y: position.y })
+  private shootLevel4(position: Vector3) {
+    let bm6 = new BasicMissile(
+      new Vector3(position.x, position.y - 0.07, 0.5),
+      15
+    )
+    let bm5 = new BasicMissile(
+      new Vector3(position.x + 0.02, position.y - 0.07, 0.5),
+      -15
+    )
+    let bm3 = new BasicMissile(
+      new Vector3(position.x, position.y - 0.05, 0.5),
+      10
+    )
+    let bm4 = new BasicMissile(
+      new Vector3(position.x, position.y - 0.05, 0.5),
+      -10
+    )
+    let bm0 = new BasicMissile(new Vector3(position.x, position.y, 0.5))
+    let bm1 = new BasicMissile(new Vector3(position.x + 0.04, position.y, 0.5))
+    let bm2 = new BasicMissile(new Vector3(position.x - 0.04, position.y, 0.5))
   }
 }

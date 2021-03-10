@@ -18,6 +18,7 @@ import view from './view'
 import SlotBonus from './objects/bonus/consumables/slot'
 import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
 import Enemy04 from './objects/enemies/enemy04'
+import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
 
 const DEBUG = true
 
@@ -64,7 +65,7 @@ export default class GameManager {
     }
   }
 
-  private spawnRandomBonus(position: { x: number; y: number; z: number }) {
+  private spawnRandomBonus(position: Vector3) {
     new this.spawnableBonus[
       Math.floor(Math.random() * this.spawnableBonus.length)
     ](position)

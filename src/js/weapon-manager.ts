@@ -1,3 +1,4 @@
+import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
 import Weapon from './objects/abstract/weapon'
 import WeaponUpgrade from './objects/abstract/weapon-upgrade'
 import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
@@ -83,7 +84,7 @@ export default class WeaponManager {
   }
 
   // On Space
-  public shoot(position: { x: number; y: number; z: number }) {
+  public shoot(position: Vector3) {
     this.weapons.basic.shoot(position, this.basicWeaponLevel)
     this.weapons.wave.shoot(position, this.waveWeaponLevel)
   }

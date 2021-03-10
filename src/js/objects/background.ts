@@ -1,11 +1,12 @@
 import Object from './abstract/object'
 import { gl } from '../utils/gl'
 import GameManager from '../game-manager'
+import { Vector3 } from '../../../node_modules/@math.gl/core/src/index'
 
 export default class Background extends Object {
   checkCollisions(objects: Object[]) {}
-  getPosition(): { x: number; y: number; z?: number } {
-    return { x: 0, y: 0 }
+  getPosition(): Vector3 {
+    return new Vector3(0, 0, 0)
   }
   getSize(): { width: number; height: number } {
     return { width: 0, height: 0 }

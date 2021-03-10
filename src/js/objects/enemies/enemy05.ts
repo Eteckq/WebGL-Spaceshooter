@@ -1,9 +1,10 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { getRandomBoolValue } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
 
 export default class Enemy05 extends Enemy {
-  constructor() {
-    super('enemyGreen5', 0.08, 0.08)
+  constructor(position: Vector3 = new Vector3(Vector3.ZERO)) {
+    super(position, 'enemyGreen5', 0.08, 0.08)
 
     this.speed = 1
     this.health = 50

@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import GameManager from '../../game-manager'
 export default abstract class Object {
   public static SHADER?: any
@@ -23,11 +24,7 @@ export default abstract class Object {
     }
   }
 
-  abstract getPosition(): {
-    x: number
-    y: number
-    z?: number
-  }
+  abstract getPosition(): Vector3
 
   abstract getSize(): {
     width: number

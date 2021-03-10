@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { gl } from '../../utils/gl'
 import { initTexture } from '../../utils/utils'
 import Object2D from './object2d'
@@ -8,11 +9,12 @@ export default abstract class Rectangle extends Object2D {
   protected customHitboxScale: { width: number; height: number }
 
   constructor(
+    position: Vector3,
     public textureName: string,
     protected width: number = 0.1,
     protected height: number = 0.1
   ) {
-    super()
+    super(position)
     this.texture = initTexture(this.textureName, this.width, this.height)
     let wo2 = this.width
     let ho2 = this.height
@@ -82,12 +84,9 @@ export default abstract class Rectangle extends Object2D {
     return this.customHitboxScale
   }
 
-  setPosition(position: { x: number; y: any; z?: any }) {
+  setPosition(position: Vector3) {
     this.position[0] = position.x
     this.position[1] = position.y
-    if (!position.z) {
-      position.z = 0.99
-    }
     this.position[2] = position.z
   }
 
@@ -106,11 +105,7 @@ export default abstract class Rectangle extends Object2D {
   }
 
   public getPosition() {
-    return {
-      x: this.position[0],
-      y: this.position[1],
-      z: this.position[2],
-    }
+    return this.position.clone()
   }
 
   public tick(elapsed: number) {}

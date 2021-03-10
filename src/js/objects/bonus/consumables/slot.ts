@@ -1,9 +1,10 @@
+import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
 import GameManager from '../../../game-manager'
 import Bonus from '../../abstract/bonus'
 
 export default class SlotBonus extends Bonus {
-  constructor(position: { x: number; y: number; z: number }) {
-    super('slot', position)
+  constructor(position: Vector3) {
+    super(position, 'slot')
   }
 
   actionOnCatch(): void {

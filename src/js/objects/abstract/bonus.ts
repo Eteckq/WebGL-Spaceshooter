@@ -1,10 +1,11 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { getRandomInt } from '../../utils/utils'
 import BoundedEntity from './bounded-entity'
 
 export default abstract class Bonus extends BoundedEntity {
   public description: string = 'Bonus description'
-  constructor(texture: string, position: { x: number; y: number; z: number }) {
-    super(`/assets/images/Bonus/${texture}.png`, 0.03, 0.03)
+  constructor(position: Vector3, texture: string) {
+    super(position, `/assets/images/Bonus/${texture}.png`, 0.03, 0.03)
     this.maxTop = 1
     this.maxBottom = 1
     this.maxLeft = 1
@@ -12,9 +13,6 @@ export default abstract class Bonus extends BoundedEntity {
 
     this.directionX = getRandomInt(-1, 1)
     this.directionY = -1
-
-    this.position[0] = position.x
-    this.position[1] = position.y
   }
 
   public tick(elapsed: number) {

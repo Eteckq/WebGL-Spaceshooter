@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { getRandomFloat } from '../../utils/utils'
 import Weapon from '../abstract/weapon'
 import BasicMissile from '../projectiles/player/basic-missile'
@@ -9,7 +10,7 @@ export default class WaveWeapon extends Weapon {
     this.SHOOT_COOLDOWN = 28
   }
 
-  public use(position: { x: number; y: number; z?: number }, level: number) {
+  public use(position: Vector3, level: number) {
     switch (level) {
       case 1:
         this.shootLevel1(position)
@@ -38,52 +39,47 @@ export default class WaveWeapon extends Weapon {
     }
   }
 
-  private shootLevel1(position: { x: number; y: number; z?: number }) {
+  private shootLevel1(position: Vector3) {
     this.spawnMissile(position, 1, 3)
   }
 
-  private shootLevel2(position: { x: number; y: number; z?: number }) {
+  private shootLevel2(position: Vector3) {
     this.spawnMissile(position, 2, 7)
   }
 
-  private shootLevel3(position: { x: number; y: number; z?: number }) {
+  private shootLevel3(position: Vector3) {
     this.shootCooldown -= 13
     this.spawnMissile(position, 2, 8)
   }
 
-  private shootLevel4(position: { x: number; y: number; z?: number }) {
+  private shootLevel4(position: Vector3) {
     this.shootCooldown -= 15
     this.spawnMissile(position, 3, 11)
   }
 
-  private shootLevel5(position: { x: number; y: number; z?: number }) {
+  private shootLevel5(position: Vector3) {
     this.shootCooldown -= 18
     this.spawnMissile(position, 3, 13)
   }
 
-  private shootLevel6(position: { x: number; y: number; z?: number }) {
+  private shootLevel6(position: Vector3) {
     this.shootCooldown -= 18
     this.spawnMissile(position, 4, 13)
   }
 
-  private shootLevel7(position: { x: number; y: number; z?: number }) {
+  private shootLevel7(position: Vector3) {
     this.shootCooldown -= 18
     this.spawnMissile(position, 5, 14)
   }
 
-  private shootLevel8(position: { x: number; y: number; z?: number }) {
+  private shootLevel8(position: Vector3) {
     this.shootCooldown -= 22
     this.spawnMissile(position, 5, 15)
   }
 
-  private spawnMissile(
-    position: { x: number; y: number; z?: number },
-    count: number,
-    angleMax: number
-  ) {
+  private spawnMissile(position: Vector3, count: number, angleMax: number) {
     for (let i = 0; i < count; i++) {
-      let m = new WaveMissile(getRandomFloat(-angleMax, angleMax))
-      m.setPosition(position)
+      new WaveMissile(position, getRandomFloat(-angleMax, angleMax))
     }
   }
 }

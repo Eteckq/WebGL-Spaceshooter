@@ -1,3 +1,4 @@
+import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
 import GameManager from '../../../game-manager'
 import EnemyMissile from '../../abstract/enemy-missile'
 
@@ -6,10 +7,8 @@ export default class FastEnemyMissile extends EnemyMissile {
   speedCoef: number
   xCoef: number
   yCoef: number
-  constructor() {
-    super('laserBlue09', 0.03, 0.03)
-    // TODO Get player position and aim at it
-
+  constructor(position: Vector3) {
+    super(position, 'laserBlue09', 0.03, 0.03)
     this.speed = 2
     let playerPosition = GameManager.Instance.playerManager.player.getPosition()
 
