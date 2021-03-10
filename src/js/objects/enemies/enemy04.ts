@@ -15,7 +15,7 @@ export default class Enemy04 extends Enemy {
 
     this.speed = 2
     this.health = 150
-    this.score = 20
+    this.score = 15
     this.attack = 20
 
     this.directionX = getRandomBoolValue()

@@ -7,8 +7,8 @@ export default class Enemy05 extends Enemy {
     super(position, 'enemyGreen5', 0.08, 0.08)
 
     this.speed = 1
-    this.health = 50
-    this.score = 20
+    this.health = 75
+    this.score = 11
     this.attack = 20
 
     this.directionX = getRandomBoolValue()

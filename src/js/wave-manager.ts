@@ -4,8 +4,9 @@ import Enemy03 from './objects/enemies/enemy03'
 import Enemy04 from './objects/enemies/enemy04'
 
 export default class WaveManager {
+  private WAVE_COOLDOWN = 30
   private currentWave = 0
-  private waveCooldown = 200
+  private waveCooldown = 0
 
   public numberOfEnemies = 0
 
@@ -29,7 +30,7 @@ export default class WaveManager {
 
   private spawnNewWave() {
     this.currentWave++
-    this.waveCooldown = 500
+    this.waveCooldown = this.WAVE_COOLDOWN
 
     // TODO Waves Logic
 

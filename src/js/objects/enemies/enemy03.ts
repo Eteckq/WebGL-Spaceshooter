@@ -8,7 +8,7 @@ export default class Enemy03 extends Enemy {
     this.speed = getRandomFloat(0.4, 0.9)
     this.health = 100
     this.score = 10
-    this.attack = 40
+    this.attack = 50
 
     this.directionX = 0
     this.directionY = 1

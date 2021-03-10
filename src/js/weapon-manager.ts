@@ -2,8 +2,10 @@ import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
 import Weapon from './objects/abstract/weapon'
 import WeaponUpgrade from './objects/abstract/weapon-upgrade'
 import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
+import BombWeaponUpgrade from './objects/bonus/upgrades/bomb-weapon-upgrade'
 import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
 import BasicWeapon from './objects/weapons/basic-weapon'
+import BombWeapon from './objects/weapons/bomb-weapon'
 import WaveWeapon from './objects/weapons/wave-weapon'
 import view from './view'
 
@@ -16,10 +18,12 @@ export default class WeaponManager {
   private weapons = {
     basic: new BasicWeapon(),
     wave: new WaveWeapon(),
+    bomb: new BombWeapon(),
   }
 
   basicWeaponLevel: number = 1
   waveWeaponLevel: number = 0
+  bombWeaponlevel: number = 0
 
   constructor() {
     this.updateLevels()
@@ -49,6 +53,10 @@ export default class WeaponManager {
     //
     this.waveWeaponLevel = this.upgrades.filter(
       (upgrade) => upgrade instanceof WaveWeaponUpgrade
+    ).length
+    //
+    this.bombWeaponlevel = this.upgrades.filter(
+      (upgrade) => upgrade instanceof BombWeaponUpgrade
     ).length
     let bonusPngs = []
     for (const upgrade of this.upgrades) {
@@ -87,5 +95,6 @@ export default class WeaponManager {
   public shoot(position: Vector3) {
     this.weapons.basic.shoot(position, this.basicWeaponLevel)
     this.weapons.wave.shoot(position, this.waveWeaponLevel)
+    this.weapons.bomb.shoot(position, this.bombWeaponlevel)
   }
 }

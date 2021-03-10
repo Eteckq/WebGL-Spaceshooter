@@ -19,6 +19,7 @@ import SlotBonus from './objects/bonus/consumables/slot'
 import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
 import Enemy04 from './objects/enemies/enemy04'
 import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
+import BombWeaponUpgrade from './objects/bonus/upgrades/bomb-weapon-upgrade'
 
 const DEBUG = true
 
@@ -37,6 +38,7 @@ export default class GameManager {
   private spawnableBonus: any = [
     WaveWeaponUpgrade,
     BasicWeaponUpgrade,
+    BombWeaponUpgrade,
     HealthBonus,
     SlotBonus,
   ]
