@@ -12,8 +12,7 @@ export default class FastEnemyMissile extends EnemyMissile {
 
     this.speed = 2
     let playerPosition = GameManager.Instance.playerManager.player.getPosition()
-    
-    
+
     this.d = Math.sqrt(
       Math.pow(playerPosition.x - this.getPosition().x, 2) +
         Math.pow(playerPosition.y - this.getPosition().y, 2)

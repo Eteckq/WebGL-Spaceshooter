@@ -20,7 +20,7 @@ module.exports = merge(common, {
     port: 8080,
   },
   externals: {
-    jquery: 'jQuery',
+    jquery: 'jQuery'
   },
   module: {
     rules: [
