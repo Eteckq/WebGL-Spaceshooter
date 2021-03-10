@@ -2,33 +2,30 @@ import GameManager from '../../../game-manager'
 import EnemyMissile from '../../abstract/enemy-missile'
 
 export default class FastEnemyMissile extends EnemyMissile {
-  private direction: { x: number; y: number }
-  private xMissile: number
-  private yMissile: number
+  d: number
+  speedCoef: number
+  xCoef: number
+  yCoef: number
   constructor() {
     super('laserBlue09', 0.03, 0.03)
-    this.direction = {
-      ...GameManager.Instance.playerManager.player.getPosition(),
-    }
-    this.speed = 0.7
+    // TODO Get player position and aim at it
+
+    this.speed = 2
+    let playerPosition = GameManager.Instance.playerManager.player.getPosition()
+
+    this.d = Math.sqrt(
+      Math.pow(playerPosition.x - this.getPosition().x, 2) +
+        Math.pow(playerPosition.y - this.getPosition().y, 2)
+    )
+
+    this.speedCoef = this.speed / this.d
+
+    this.xCoef = (playerPosition.x - this.getPosition().x) * 0.005
+    this.yCoef = (playerPosition.y - this.getPosition().y) * 0.005
   }
 
   public update() {
-    let xPlayer = this.direction.x
-    let yPlayer = this.direction.y
-
-    let DeltaX = this.position[0] - xPlayer
-    let DeltaY = this.position[1] - yPlayer
-
-    console.log(DeltaX, DeltaY)
-
-    // let distance = Math.sqrt(Math.pow(DeltaX, 2) + Math.pow(DeltaY, 2))
-    // let vitesse = distance / this.time
-
-    let newX = this.speed * -0.01 * DeltaX * this.time
-    let newY = this.speed * -0.01 * DeltaY * this.time
-
-    this.position[0] += newX
-    this.position[1] += newY
+    this.position[0] += this.xCoef * this.speedCoef
+    this.position[1] += this.yCoef * this.speedCoef
   }
 }

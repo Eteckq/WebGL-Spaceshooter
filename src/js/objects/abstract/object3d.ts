@@ -1,7 +1,10 @@
 import { gl } from '../../utils/gl'
-import * as glMatrix from 'gl-matrix'
 import Object from './object'
 import { getFile } from '../../utils/utils'
+import {
+  Vector3,
+  Vector4,
+} from '../../../../node_modules/@math.gl/core/src/index'
 export default abstract class Object3D extends Object {
   public static SHADER?: any
   protected loaded: boolean = false
@@ -13,10 +16,10 @@ export default abstract class Object3D extends Object {
 
   protected vao: any
 
-  protected bbmin = [0, 0, 0]
-  protected bbmax = [0, 0, 0]
-  protected bbminP = [0, 0, 0, 0]
-  protected bbmaxP = [0, 0, 0, 0]
+  protected bbmin: Vector3 = new Vector3(Vector3.ZERO)
+  protected bbmax: Vector3 = new Vector3(Vector3.ZERO)
+  protected bbminP: Vector4 = new Vector4(Vector4.ZERO)
+  protected bbmaxP: Vector4 = new Vector4(Vector4.ZERO)
 
   public position: [number, number, number] = [0, 0, 0]
   protected time: number = 0
@@ -49,12 +52,12 @@ export default abstract class Object3D extends Object {
     }
   }
 
-  protected computeBoundingBox(vertices: any) {
+  protected computeBoundingBox(vertices: number[]) {
     let i, j
 
     if (vertices.length >= 3) {
-      this.bbmin = [vertices[0], vertices[1], vertices[2]]
-      this.bbmax = [vertices[0], vertices[1], vertices[2]]
+      this.bbmin = new Vector3(vertices[0], vertices[1], vertices[2])
+      this.bbmax = new Vector3(vertices[0], vertices[1], vertices[2])
     }
 
     for (i = 3; i < vertices.length; i += 3) {
@@ -130,7 +133,7 @@ export default abstract class Object3D extends Object {
         switch (parts[0]) {
           case 'v':
             positions.push(
-              glMatrix.vec3.fromValues(
+              new Vector3(
                 parseFloat(parts[1]),
                 parseFloat(parts[2]),
                 parseFloat(parts[3])
@@ -140,7 +143,7 @@ export default abstract class Object3D extends Object {
             break
           case 'vn':
             normals.push(
-              glMatrix.vec3.fromValues(
+              new Vector3(
                 parseFloat(parts[1]),
                 parseFloat(parts[2]),
                 parseFloat(parts[3])
