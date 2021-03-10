@@ -52,6 +52,7 @@
     "url": "git@github.com:taniarascia/webpack-boilerplate"
   },
   "dependencies": {
+    "@math.gl/core": "^3.4.2",
     "@types/jquery": "^3.5.5",
     "gl-matrix": "^3.3.0",
     "jquery": "^3.6.0"
