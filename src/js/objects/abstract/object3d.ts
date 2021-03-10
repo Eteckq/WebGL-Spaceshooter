@@ -21,7 +21,7 @@ export default abstract class Object3D extends Object {
   protected bbminP: Vector4 = new Vector4(Vector4.ZERO)
   protected bbmaxP: Vector4 = new Vector4(Vector4.ZERO)
 
-  public position: [number, number, number] = [0, 0, 0]
+  public position: Vector3 = new Vector3(Vector3.ZERO)
   protected time: number = 0
 
   constructor() {

@@ -73,7 +73,7 @@ export default class Player extends Object3D {
 
     // on utilise des variables pour se rappeler quelles sont les transformations courantes
     // rotation, translation, scaling de l'objet
-    this.position = [0, 0, 0] // position de l'objet dans l'espace
+    this.position = new Vector3(0, -3, 0) // position de l'objet dans l'espace
     this.rotation = 0 // angle de rotation en radian autour de l'axe Y
     this.scale = 0.2 // mise à l'echelle (car l'objet est trop  gros par défaut)
 
@@ -106,6 +106,16 @@ export default class Player extends Object3D {
         false,
         this.projMatrix
       )
+
+      /*       
+      this.bbminP.multiply([this.bbmin[0], this.bbmin[1], this.bbmin[2], 1])
+      this.bbmaxP.multiply([this.bbmax[0], this.bbmax[1], this.bbmax[2], 1])
+
+      this.bbminP.multiply(v)
+      this.bbmaxP.multiply(v)
+      this.bbminP.multiply(p)
+      this.bbmaxP.multiply(p) 
+      */
 
       multiplyVec4(
         m,

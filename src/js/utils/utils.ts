@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { Vector2, Vector3 } from '../../../node_modules/@math.gl/core/src/index'
 import { gl } from './gl'
 
 function handleLoadedTexture(texture: any) {
@@ -33,6 +34,17 @@ export function getRandomInt(min: number, max: number) {
 
 export function getRandomBoolValue() {
   return Math.round(Math.random()) === 0 ? 1 : -1
+}
+
+export function getDirection(p1: Vector3, p2: Vector3) {
+  let d = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2))
+
+  let speedCoef = 1 / d
+
+  let xCoef = (p1.x - p2.x) * 0.005
+  let yCoef = (p1.y - p2.y) * 0.005
+
+  return { coef: new Vector2(xCoef, yCoef), speed: speedCoef }
 }
 
 export function initTexture(filename: string, width: number, height: number) {

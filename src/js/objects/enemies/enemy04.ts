@@ -40,7 +40,7 @@ export default class Enemy04 extends Enemy {
     this.move(newX, newY)
   }
   shoot() {
-    let nbrOfShots = 6
+    let nbrOfShots = 12
     let delayBetweenShots = 150
 
     this.isShooting = true
@@ -56,7 +56,7 @@ export default class Enemy04 extends Enemy {
         let x = x0 + r * Math.cos(t)
         let y = y0 + r * Math.sin(t)
 
-        let newSplat = new UfoEnemyMissile(new Vector3(x, y, 0.5))
+        new UfoEnemyMissile(new Vector3(x, y, 0.5), this.position)
       }, i * delayBetweenShots)
     }
 
