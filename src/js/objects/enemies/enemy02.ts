@@ -18,7 +18,7 @@ export default class Enemy02 extends Enemy {
     this.directionX = getRandomBoolValue()
 
     this.maxTop = 1
-    this.maxBottom = 0.3
+    this.maxBottom = 0
     this.maxLeft = 1.1
     this.maxRight = 1.1
   }

@@ -11,6 +11,7 @@ export default abstract class Bonus extends BoundedEntity {
     this.maxRight = 1
 
     this.directionX = getRandomInt(-1, 1)
+    this.directionY = -1
 
     this.position[0] = position.x
     this.position[1] = position.y
@@ -19,7 +20,7 @@ export default abstract class Bonus extends BoundedEntity {
   public tick(elapsed: number) {
     this.time += 0.01 * elapsed
 
-    if (this.time > 100) {
+    if (this.time > 50) {
       this.clear()
     }
 

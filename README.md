@@ -15,6 +15,8 @@ School project, built in Typescript from a js code base
 
 [Spaceshooter Sprites](https://opengameart.org/content/space-shooter-redux)
 
+[3D Spaceship model](https://www.turbosquid.com/3d-models/space-fighter-3ds-free/820608)
+
 ## Installation
 
 Clone this repo and npm install.

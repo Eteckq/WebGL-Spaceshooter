@@ -18,7 +18,7 @@ export default abstract class BoundedEntity extends Rectangle {
     this.position[0] = getRandomFloat(-0.9, 0.9)
     this.position[1] = this.maxTop + 0.5
 
-    this.directionY = 1
+    this.directionY = -1
   }
 
   public move(newX: number, newY: number) {

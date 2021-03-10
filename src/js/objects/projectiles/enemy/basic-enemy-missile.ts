@@ -7,6 +7,6 @@ export default class BasicEnemyMissile extends EnemyMissile {
 
   public update() {
     this.position[1] += this.speed * -0.05
-    this.position[0] += this.speed * 0.0007
+    // this.position[0] += this.speed * 0.0007
   }
 }

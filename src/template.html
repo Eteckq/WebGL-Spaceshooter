@@ -32,7 +32,7 @@
           type="text"
           name="pseudoTxt"
           id="pseudoTxt"
-          value=""
+          value="Yohan"
           placeholder="Pseudo"
         />
         <p id="pseudoBtn">START</p>
@@ -59,6 +59,7 @@
         <li class="tab-link" data-tab="tab-2">Enemies</li>
         <li class="tab-link" data-tab="tab-3">Weapons</li>
         <li class="tab-link" data-tab="tab-4">Bonus</li>
+        <li class="tab-link" data-tab="tab-5">Debug</li>
       </ul>
 
       <div id="tab-1" class="tab-content current">
@@ -98,6 +99,15 @@
               <td>+2</td>
               <td>Fast and random movements. Aim at the player</td>
               <td></td>
+            </tr>
+            <tr>
+              <td>
+                <img src="/assets/images/Enemies/ufoYellow.png" />
+              </td>
+              <td>150❤️</td>
+              <td>+20</td>
+              <td>Slow and random movements. Send multiple shoot around</td>
+              <td><img src="/assets/images/Missiles/Enemy/ufo.png" /> 10❤️</td>
             </tr>
             <tr>
               <td>
@@ -171,6 +181,36 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div id="tab-5" class="tab-content">
+        <div id="spawn01">
+          <img src="/assets/images/Enemies/enemyBlack1.png" />
+        </div>
+        <div id="spawn02">
+          <img src="/assets/images/Enemies/enemyBlue2.png" />
+        </div>
+        <div id="spawn03">
+          <img src="/assets/images/Enemies/enemyRed4.png" />
+        </div>
+        <div id="spawn04">
+          <img src="/assets/images/Enemies/ufoYellow.png" />
+        </div>
+        <div id="spawn05">
+          <img src="/assets/images/Enemies/enemyGreen5.png" />
+        </div>
+
+        <div>
+          angle
+          <input type="number" id="angle" value="0.1" />
+        </div>
+        <div>
+          b
+          <input type="number" id="b" value="230" />
+        </div>
+        <div>
+          speed
+          <input type="number" id="speed" value="0.00015" />
+        </div>
       </div>
     </div>
   </body>

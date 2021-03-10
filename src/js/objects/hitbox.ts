@@ -1,12 +1,18 @@
 import { gl } from '../utils/gl'
 import { initTexture } from '../utils/utils'
 import Rectangle from './abstract/rectangle'
+import FastEnemyMissile from './projectiles/enemy/fast-enemy-missile'
+import UfoEnemyMissile from './projectiles/enemy/ufo-enemy-missile'
 
 export default class Hitbox extends Rectangle {
   constructor(width: number, height: number) {
     super(`/assets/images/Backgrounds/black.png`, width, height)
     document.onmousemove = (e) => {
       this.handleMouseMove(e)
+    }
+
+    document.onclick = (e) => {
+      this.handleClick(e)
     }
   }
 
@@ -15,6 +21,11 @@ export default class Hitbox extends Rectangle {
 
     // this.position[1] += this.speed * 0.05 * this.direction // permet de déplacer le splat vers le haut au fil du temps
     // this.position[0] += this.speed * 0.0007 * this.angle // permet de déplacer le splat sur l'axe X
+  }
+
+  private handleClick(event: any) {
+    let missile = new FastEnemyMissile()
+    missile.setPosition({ x: this.position[0], y: this.position[1] })
   }
 
   private handleMouseMove(event: any) {

@@ -11,7 +11,12 @@ export default abstract class Missile extends Rectangle implements Damager {
   }
 
   public tick(elapsed: number) {
-    if (this.position[1] > 1) {
+    if (
+      this.position[1] > 1.2 ||
+      this.position[1] < -1.2 ||
+      this.position[0] > 1.2 ||
+      this.position[0] < -1.2
+    ) {
       this.clear()
       return
     }

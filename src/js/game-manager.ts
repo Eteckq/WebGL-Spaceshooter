@@ -17,8 +17,9 @@ import { generateOdds } from './utils/utils'
 import view from './view'
 import SlotBonus from './objects/bonus/consumables/slot'
 import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
+import Enemy04 from './objects/enemies/enemy04'
 
-const DEBUG = false
+const DEBUG = true
 
 export default class GameManager {
   private objectsInScene: Object[] = []

@@ -1,6 +1,11 @@
 import * as $ from 'jquery'
 import { startGame } from '../app'
 import SlotBonus from './objects/bonus/consumables/slot'
+import Enemy01 from './objects/enemies/enemy01'
+import Enemy02 from './objects/enemies/enemy02'
+import Enemy03 from './objects/enemies/enemy03'
+import Enemy04 from './objects/enemies/enemy04'
+import Enemy05 from './objects/enemies/enemy05'
 
 const api = 'https://api-score.yohangastoud.fr/scores'
 class View {
@@ -140,6 +145,22 @@ $(() => {
   $('#restartBtn').on('click', () => {
     startGame()
     $('#endgameModal').hide()
+  })
+
+  $('#spawn01').on('click', () => {
+    new Enemy01()
+  })
+  $('#spawn02').on('click', () => {
+    new Enemy02()
+  })
+  $('#spawn03').on('click', () => {
+    new Enemy03()
+  })
+  $('#spawn04').on('click', () => {
+    new Enemy04()
+  })
+  $('#spawn05').on('click', () => {
+    new Enemy05()
   })
 
   // SET TABLES

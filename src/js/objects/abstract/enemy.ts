@@ -1,4 +1,4 @@
-import { getRandomBoolValue } from '../../utils/utils'
+import { getRandomBoolValue, getRandomFloat } from '../../utils/utils'
 import Damageable from '../interface/damageable'
 import Damager from '../interface/damager'
 import GameManager from '../../game-manager'
@@ -18,6 +18,8 @@ export default abstract class Enemy
     super(`/assets/images/Enemies/${texture}.png`, width, height)
 
     GameManager.Instance.waveManager.numberOfEnemies++
+    // TODO Not here, but fix transparency
+    // this.position[2] = getRandomFloat(0.2, 0.5)
   }
 
   protected onCollision(other: Object) {
