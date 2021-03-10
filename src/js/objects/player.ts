@@ -1,16 +1,16 @@
 import { gl } from '../utils/gl'
 import Object3D from './abstract/object3d'
-import * as glMatrix from 'gl-matrix'
 
 import GameManager from '../game-manager'
 import EnemyMissile from './abstract/enemy-missile'
 import Bonus from './abstract/bonus'
 import Enemy from './abstract/enemy'
 
+import { Matrix4 } from '../../../node_modules/@math.gl/core/src/index'
 export default class Player extends Object3D {
-  private modelMatrix: any
-  private viewMatrix: any
-  private projMatrix: any
+  private modelMatrix: Matrix4
+  private viewMatrix: Matrix4
+  private projMatrix: Matrix4
 
   private rotation: any
   private scale: any
@@ -50,26 +50,26 @@ export default class Player extends Object3D {
   }
 
   private initParameters() {
-    this.modelMatrix = glMatrix.mat4.identity(glMatrix.mat4.create())
-    this.viewMatrix = glMatrix.mat4.identity(glMatrix.mat4.create())
-    this.projMatrix = glMatrix.mat4.identity(glMatrix.mat4.create())
+    this.modelMatrix = new Matrix4(Matrix4.IDENTITY)
+    this.viewMatrix = new Matrix4(Matrix4.IDENTITY)
+    this.projMatrix = new Matrix4(Matrix4.IDENTITY)
 
     // la caméra est positionné sur l'axe Z et regarde le point 0,0,0
-    this.viewMatrix = glMatrix.mat4.lookAt(
-      glMatrix.mat4.create(),
+    this.viewMatrix = new Matrix4(Matrix4.IDENTITY).lookAt(
       [0, 0, 10],
       [0, 0, 0],
       [0, 1, 0]
     )
 
+    //
+
     // matrice de projection perspective classique
-    this.projMatrix = glMatrix.mat4.perspective(
-      glMatrix.mat4.create(),
-      45.0,
-      1,
-      0.1,
-      30
-    )
+    this.projMatrix = new Matrix4().perspective({
+      fovy: 0.785398,
+      aspect: 1,
+      near: 0.1,
+      far: 30,
+    })
 
     // on utilise des variables pour se rappeler quelles sont les transformations courantes
     // rotation, translation, scaling de l'objet
@@ -154,28 +154,35 @@ export default class Player extends Object3D {
   public tick(elapsed: number) {
     this.time += 0.01 * elapsed
 
-    let rMat = glMatrix.mat4.rotate(
-      glMatrix.mat4.create(),
-      glMatrix.mat4.identity(glMatrix.mat4.create()),
-      this.rotation,
-      [0, 1, 0]
-    )
-    let tMat = glMatrix.mat4.translate(
-      glMatrix.mat4.create(),
-      glMatrix.mat4.identity(glMatrix.mat4.create()),
-      [this.position[0], this.position[1], this.position[2]]
-    )
-    let sMat = glMatrix.mat4.scale(
-      glMatrix.mat4.create(),
-      glMatrix.mat4.identity(glMatrix.mat4.create()),
-      [this.scale, this.scale, this.scale]
-    )
+    let rMat = new Matrix4(Matrix4.IDENTITY).rotateAxis(this.rotation, [
+      0,
+      1,
+      0,
+    ])
+    let tMat = new Matrix4(Matrix4.IDENTITY).translate([
+      this.position[0],
+      this.position[1],
+      this.position[2],
+    ])
+
+    let sMat = new Matrix4(Matrix4.IDENTITY).scale([
+      this.scale,
+      this.scale,
+      this.scale,
+    ])
 
     // on applique les transformations successivement
-    this.modelMatrix = glMatrix.mat4.identity(glMatrix.mat4.create())
+    this.modelMatrix = new Matrix4(Matrix4.IDENTITY)
     this.modelMatrix = multiply(sMat as any, this.modelMatrix)
     this.modelMatrix = multiply(rMat as any, this.modelMatrix)
     this.modelMatrix = multiply(tMat as any, this.modelMatrix)
+
+    /* 
+
+this.modelMatrix = new Matrix4(Matrix4.IDENTITY)
+this.modelMatrix = this.modelMatrix.multiplyByScalar(sMat)
+this.modelMatrix = this.modelMatrix.multiplyByScalar(rMat)
+this.modelMatrix = this.modelMatrix.multiplyByScalar(tMat) */
 
     this.acc += 0.01
   }
@@ -224,7 +231,7 @@ const multiplyVec4 = function (mat: number[], vec: any[], dest?: number[]) {
   return dest
 }
 
-const multiply = function (mat: any[], mat2: any[], dest?: number[]) {
+const multiply = function (mat: any[], mat2: any[], dest?: number[]): Matrix4 {
   if (!dest) {
     dest = mat
   }
@@ -280,5 +287,5 @@ const multiply = function (mat: any[], mat2: any[], dest?: number[]) {
   dest[14] = b30 * a02 + b31 * a12 + b32 * a22 + b33 * a32
   dest[15] = b30 * a03 + b31 * a13 + b32 * a23 + b33 * a33
 
-  return dest
+  return dest as Matrix4
 }
