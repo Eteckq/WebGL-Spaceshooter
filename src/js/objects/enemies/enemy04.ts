@@ -40,8 +40,8 @@ export default class Enemy04 extends Enemy {
     this.move(newX, newY)
   }
   shoot() {
-    let nbrOfShots = 12
-    let delayBetweenShots = 150
+    let nbrOfShots = 30
+    let delayBetweenShots = 0
 
     this.isShooting = true
     for (let i = 1; i <= nbrOfShots; i++) {

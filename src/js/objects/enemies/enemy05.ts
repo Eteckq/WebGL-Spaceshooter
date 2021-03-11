@@ -1,6 +1,7 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
-import { getRandomBoolValue } from '../../utils/utils'
+import { generateOdds, getRandomBoolValue } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
+import GreenEnemyMissile from '../projectiles/enemy/green-enemy-missile'
 
 export default class Enemy05 extends Enemy {
   constructor(position: Vector3 = new Vector3(Vector3.ZERO)) {
@@ -20,9 +21,17 @@ export default class Enemy05 extends Enemy {
   }
 
   public update() {
+    if (generateOdds(150)) {
+      this.shoot()
+    }
+
     let newX = this.speed * 0.003 * this.directionX
     let newY = this.speed * 0.003 * this.directionY
 
     this.move(newX, newY)
+  }
+
+  private shoot() {
+    new GreenEnemyMissile(this.getPosition())
   }
 }

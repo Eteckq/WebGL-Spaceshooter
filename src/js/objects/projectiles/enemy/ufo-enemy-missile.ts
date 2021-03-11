@@ -2,7 +2,6 @@ import {
   Vector2,
   Vector3,
 } from '../../../../../node_modules/@math.gl/core/src/index'
-import GameManager from '../../../game-manager'
 import { getDirection } from '../../../utils/utils'
 import EnemyMissile from '../../abstract/enemy-missile'
 
@@ -19,7 +18,7 @@ export default class UfoEnemyMissile extends EnemyMissile {
   }
 
   public update() {
-    this.position[0] += this.coef.x * this.speedCoef * this.speed
-    this.position[1] += this.coef.y * this.speedCoef * this.speed
+    this.position[0] -= this.coef.x * this.speedCoef * this.speed
+    this.position[1] -= this.coef.y * this.speedCoef * this.speed
   }
 }
