@@ -6,7 +6,7 @@ import BombMissile from '../projectiles/player/bomb-missile'
 export default class BombWeapon extends Weapon {
   constructor() {
     super()
-    this.SHOOT_COOLDOWN = 60
+    this.SHOOT_COOLDOWN = 80
   }
 
   public use(position: Vector3, level: number) {
@@ -23,13 +23,7 @@ export default class BombWeapon extends Weapon {
   }
 
   private shootLevel1(position: Vector3) {
-    this.spawnMissile(position, 2)
-    console.log('shoot')
-  }
-
-  private spawnMissile(position: Vector3, count: number) {
-    for (let i = 0; i < count; i++) {
-      new BombMissile(position)
-    }
+    new BombMissile(position, 0.5)
+    new BombMissile(position, -0.5)
   }
 }

@@ -10,7 +10,7 @@ import WaveWeapon from './objects/weapons/wave-weapon'
 import view from './view'
 
 export default class WeaponManager {
-  private upgrades: WeaponUpgrade[] = []
+  private upgrades: WeaponUpgrade[] = [new BombWeaponUpgrade(new Vector3())]
 
   private maxBonusSlots: number = 8
   private currentBonusSlots: number = 3
