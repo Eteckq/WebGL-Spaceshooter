@@ -1,4 +1,5 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
+import GameManager from '../../game-manager'
 import Weapon from '../abstract/weapon'
 import BombMissile from '../projectiles/player/bomb-missile'
 

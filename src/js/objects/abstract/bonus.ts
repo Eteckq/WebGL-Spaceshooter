@@ -20,6 +20,7 @@ export default abstract class Bonus extends BoundedEntity {
 
     if (this.time > 50) {
       this.clear()
+      return
     }
 
     let newX = this.speed * 0.02 * this.directionX

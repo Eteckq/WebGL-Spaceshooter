@@ -36,11 +36,11 @@ export default class GameManager {
   private score: number = 0
 
   private spawnableBonus: any = [
-    WaveWeaponUpgrade,
-    BasicWeaponUpgrade,
+    // WaveWeaponUpgrade,
+    // BasicWeaponUpgrade,
     BombWeaponUpgrade,
     HealthBonus,
-    SlotBonus,
+    // SlotBonus,
   ]
 
   constructor() {
@@ -65,6 +65,27 @@ export default class GameManager {
     if (generateOdds(2)) {
       this.spawnRandomBonus(enemy.getPosition())
     }
+  }
+
+  public getClosestEnemy(): Enemy {
+    let enemies: Enemy[] = this.objectsInScene.filter(
+      (o) => o instanceof Enemy
+    ) as Enemy[]
+
+    let playerPosition = this.playerManager.player.getPosition()
+
+    let closest: Enemy
+    let tinyestD = 10
+    for (const enemy of enemies) {
+      let enemyPosition = enemy.getPosition()
+      let d = playerPosition.distance(enemyPosition)
+      if (tinyestD > d) {
+        tinyestD = d
+        closest = enemy
+      }
+    }
+
+    return closest
   }
 
   private spawnRandomBonus(position: Vector3) {

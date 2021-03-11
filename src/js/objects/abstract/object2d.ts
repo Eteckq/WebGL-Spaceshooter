@@ -18,7 +18,7 @@ export default abstract class Object2D extends Object {
     gl.bindVertexArray(this.vao)
 
     this.time = 0.0
-    this.position = spawnPosition
+    this.position = spawnPosition.clone()
   }
 
   abstract sendUniformVariables(): any
