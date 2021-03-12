@@ -7,7 +7,7 @@ export default class BasicMissile extends PlayerMissile {
   }
 
   public update() {
-    this.position[1] += this.speed * 0.05 // permet de déplacer le splat vers le haut au fil du temps
-    this.position[0] += this.speed * 0.0007 * this.angle // permet de déplacer le splat sur l'axe X
+    this.position[1] += this.speed * 0.05
+    this.position[0] += this.speed * 0.0007 * this.angle
   }
 }

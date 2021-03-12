@@ -36,14 +36,6 @@ export default class GameManager {
 
   private score: number = 0
 
-  public spawnableBonus: any[] = [
-    WaveWeaponUpgrade,
-    BasicWeaponUpgrade,
-    BombWeaponUpgrade,
-    HealthBonus,
-    SlotBonus,
-  ]
-
   constructor() {
     GameManager.Instance = this
 
@@ -62,10 +54,6 @@ export default class GameManager {
     this.waveManager.numberOfEnemies--
     this.score += enemy.score
     View.setScore(this.score)
-
-    if (generateOdds(10)) {
-      this.spawnRandomBonus(enemy.getPosition())
-    }
   }
 
   public getClosestEnemy(): Enemy {
@@ -87,12 +75,6 @@ export default class GameManager {
     }
 
     return closest
-  }
-
-  private spawnRandomBonus(position: Vector3) {
-    new this.spawnableBonus[
-      Math.floor(Math.random() * this.spawnableBonus.length)
-    ](position)
   }
 
   public gameOver() {

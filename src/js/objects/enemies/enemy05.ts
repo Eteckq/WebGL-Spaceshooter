@@ -33,6 +33,10 @@ export default class Enemy05 extends Enemy {
   }
 
   private shoot() {
-    new GreenEnemyMissile(this.getPosition())
+    new GreenEnemyMissile(this.getPosition(), -9)
+    new GreenEnemyMissile(this.getPosition(), -5)
+    new GreenEnemyMissile(this.getPosition(), 0)
+    new GreenEnemyMissile(this.getPosition(), 5)
+    new GreenEnemyMissile(this.getPosition(), 9)
   }
 }

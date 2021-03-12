@@ -35,7 +35,7 @@ export default class PlayerManager {
 
   public healthBonus() {
     if (this.health < 50) {
-      this.health += 10
+      this.health += 5
     }
     if (this.health > 50) {
       this.health = 50
@@ -45,8 +45,8 @@ export default class PlayerManager {
 
   public slotBonus() {
     if (this.weaponManager.addSlot()) {
-      let i = GameManager.Instance.spawnableBonus.indexOf(SlotBonus)
-      GameManager.Instance.spawnableBonus.splice(i, 1)
+      let i = GameManager.Instance.waveManager.spawnableBonus.indexOf(SlotBonus)
+      GameManager.Instance.waveManager.spawnableBonus.splice(i, 1)
     }
   }
 

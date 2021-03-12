@@ -1,5 +1,11 @@
+import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
 import GameManager from './game-manager'
 import Enemy from './objects/abstract/enemy'
+import HealthBonus from './objects/bonus/consumables/health'
+import SlotBonus from './objects/bonus/consumables/slot'
+import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
+import BombWeaponUpgrade from './objects/bonus/upgrades/bomb-weapon-upgrade'
+import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
 import Enemy01 from './objects/enemies/enemy01'
 import Enemy02 from './objects/enemies/enemy02'
 import Enemy03 from './objects/enemies/enemy03'
@@ -44,6 +50,14 @@ export default class WaveManager {
     new WaveEnemy(Enemy05, 20),
   ]
 
+  public spawnableBonus: any[] = [
+    WaveWeaponUpgrade,
+    BasicWeaponUpgrade,
+    BombWeaponUpgrade,
+    HealthBonus,
+    SlotBonus,
+  ]
+
   start() {
     this.playing = true
   }
@@ -62,6 +76,12 @@ export default class WaveManager {
 
   private spawnNewWave() {
     if (this.currentWave >= 70) return
+
+    if (this.currentWave % 3 === 0) {
+      new this.spawnableBonus[
+        Math.floor(Math.random() * this.spawnableBonus.length)
+      ](new Vector3(0, 1, 0.5))
+    }
 
     this.currentWave++
     GameManager.Instance.difficulty += 0.01
