@@ -11,10 +11,10 @@ precision highp float; // precision des nombres flottant
 	// affichage d'une texture
 	vec2 coord = vTextureCoord;
 	vec4 color = texture(uTex, vTextureCoord);
-	if (color.a < 0.5) {
+	if (color.a < 0.2) {
 		discard;  // don't draw this pixel
 	}
-	outColor = texture(uTex,coord);
+	outColor = color;
 
 // affichage d'un rond bleu
 // float test = distance(vec2(.5),vTextureCoord);
