@@ -27,7 +27,7 @@ class WaveEnemy {
 }
 
 export default class WaveManager {
-  private WAVE_COOLDOWN = 100
+  private WAVE_COOLDOWN = 300
   private currentWave = 0
   private waveCooldown = 0
 
@@ -76,10 +76,9 @@ export default class WaveManager {
     }
 
     // Pick 5 random enemies in pool
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 5; i++) {
       let actual = 0
       let freqRdm = Math.random() * freqTotal
-      console.log(freqRdm)
       let j = 0
       if (!pool[j]) {
         console.error('No more waves available !')

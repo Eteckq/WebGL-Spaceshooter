@@ -16,6 +16,9 @@ import { generateOdds } from './utils/utils'
 import view from './view'
 import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
 import BombWeaponUpgrade from './objects/bonus/upgrades/bomb-weapon-upgrade'
+import SlotBonus from './objects/bonus/consumables/slot'
+import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
+import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
 
 const DEBUG = false
 
@@ -32,11 +35,11 @@ export default class GameManager {
   private score: number = 0
 
   private spawnableBonus: any = [
-    // WaveWeaponUpgrade,
-    // BasicWeaponUpgrade,
+    WaveWeaponUpgrade,
+    BasicWeaponUpgrade,
     BombWeaponUpgrade,
     HealthBonus,
-    // SlotBonus,
+    SlotBonus,
   ]
 
   constructor() {
