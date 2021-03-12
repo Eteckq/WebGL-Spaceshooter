@@ -34,6 +34,7 @@ export default class WeaponManager {
       this.currentBonusSlots++
       this.updateLevels()
     }
+    return this.currentBonusSlots === this.maxBonusSlots
   }
 
   public pushUpgrade(upgrade: WeaponUpgrade) {

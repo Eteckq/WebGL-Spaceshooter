@@ -22,8 +22,6 @@ export default class BasicWeapon extends Weapon {
       case 3:
         this.shootLevel3(position)
         break
-      case 4:
-      case 5:
       default:
         this.shootLevel4(position)
         break

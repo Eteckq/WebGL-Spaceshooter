@@ -9,6 +9,7 @@ export default class GreenEnemyMissile extends EnemyMissile {
   constructor(position: Vector3) {
     super(position, 'laserGreen16', 0.035, 0.035)
     this.speed = 0.0002
+    this.attack = 30
   }
 
   public update() {
