@@ -9,8 +9,8 @@ import UfoEnemyMissile from '../projectiles/enemy/ufo-enemy-missile'
 
 export default class Enemy04 extends Enemy {
   private isShooting = false
-  constructor(position: Vector3 = new Vector3(Vector3.ZERO)) {
-    super(position, 'ufoYellow', 0.15, 0.15)
+  constructor() {
+    super('ufoYellow', 0.15, 0.15)
     // this.speed = getRandomFloat(0.4, 0.9)
 
     this.speed = 2

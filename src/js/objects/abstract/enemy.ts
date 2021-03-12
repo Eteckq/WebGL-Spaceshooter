@@ -15,13 +15,13 @@ export default abstract class Enemy
 
   public score: number = 1
 
-  constructor(
-    position: Vector3,
-    texture: string,
-    width: number,
-    height: number
-  ) {
-    super(position, `/assets/images/Enemies/${texture}.png`, width, height)
+  constructor(texture: string, width: number, height: number) {
+    super(
+      new Vector3(Vector3.ZERO),
+      `/assets/images/Enemies/${texture}.png`,
+      width,
+      height
+    )
 
     GameManager.Instance.waveManager.numberOfEnemies++
     // TODO Not here, but fix transparency

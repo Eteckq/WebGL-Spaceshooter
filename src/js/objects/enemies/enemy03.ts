@@ -3,8 +3,8 @@ import { getRandomFloat } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
 
 export default class Enemy03 extends Enemy {
-  constructor(position: Vector3 = new Vector3(Vector3.ZERO)) {
-    super(position, 'enemyRed4', 0.15, 0.25)
+  constructor() {
+    super('enemyRed4', 0.15, 0.25)
     this.speed = getRandomFloat(0.4, 0.9)
     this.health = 100
     this.score = 10

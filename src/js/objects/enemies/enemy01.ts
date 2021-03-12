@@ -9,8 +9,8 @@ import Enemy from '../abstract/enemy'
 import BasicEnemyMissile from '../projectiles/enemy/basic-enemy-missile'
 
 export default class Enemy01 extends Enemy {
-  constructor(position: Vector3 = new Vector3(Vector3.ZERO)) {
-    super(position, 'enemyBlack1', 0.08, 0.08)
+  constructor() {
+    super('enemyBlack1', 0.08, 0.08)
     this.speed = getRandomFloat(0.4, 0.7)
     this.health = 20
     this.score = 2

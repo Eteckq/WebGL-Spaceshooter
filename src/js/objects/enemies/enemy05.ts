@@ -4,8 +4,8 @@ import Enemy from '../abstract/enemy'
 import GreenEnemyMissile from '../projectiles/enemy/green-enemy-missile'
 
 export default class Enemy05 extends Enemy {
-  constructor(position: Vector3 = new Vector3(Vector3.ZERO)) {
-    super(position, 'enemyGreen5', 0.08, 0.08)
+  constructor() {
+    super('enemyGreen5', 0.08, 0.08)
 
     this.speed = 1
     this.health = 75
