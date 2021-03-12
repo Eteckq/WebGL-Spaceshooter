@@ -1,4 +1,5 @@
 import GameManager from './game-manager'
+import SlotBonus from './objects/bonus/consumables/slot'
 import Player from './objects/player'
 import { currentlyPressedKeys, registerOnShiftCallback } from './utils/inputs'
 import View from './view'
@@ -43,7 +44,10 @@ export default class PlayerManager {
   }
 
   public slotBonus() {
-    this.weaponManager.addSlot()
+    if (this.weaponManager.addSlot()) {
+      let i = GameManager.Instance.spawnableBonus.indexOf(SlotBonus)
+      GameManager.Instance.spawnableBonus.splice(i, 1)
+    }
   }
 
   public tick() {
@@ -95,19 +99,12 @@ export default class PlayerManager {
     this.player.setRotation(pos.x * 0.5)
     let xMax = 1.1
     let yMax = 1
-    let scale = 5
-    if (pos.x > xMax) {
-      this.player.position[0] = -xMax * scale
-    }
-
-    if (pos.x < -xMax) {
-      this.player.position[0] = xMax * scale
+    if (pos.x + x > -xMax && pos.x + x < xMax) {
+      this.player.position[0] += x
     }
 
     if (pos.y + y > -yMax && pos.y + y < yMax) {
       this.player.position[1] += y
     }
-
-    this.player.position[0] += x
   }
 }

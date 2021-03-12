@@ -75,8 +75,8 @@ export default class WaveManager {
       }
     }
 
-    // Pick 5 random enemies in pool
-    for (let i = 0; i < 5; i++) {
+    // Pick random enemies in pool
+    for (let i = 0; i < 3; i++) {
       let actual = 0
       let freqRdm = Math.random() * freqTotal
       let j = 0

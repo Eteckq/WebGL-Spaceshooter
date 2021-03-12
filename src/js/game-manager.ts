@@ -34,7 +34,7 @@ export default class GameManager {
 
   private score: number = 0
 
-  private spawnableBonus: any = [
+  public spawnableBonus: any[] = [
     WaveWeaponUpgrade,
     BasicWeaponUpgrade,
     BombWeaponUpgrade,
@@ -61,7 +61,7 @@ export default class GameManager {
     this.score += enemy.score
     View.setScore(this.score)
 
-    if (generateOdds(2)) {
+    if (generateOdds(10)) {
       this.spawnRandomBonus(enemy.getPosition())
     }
   }
