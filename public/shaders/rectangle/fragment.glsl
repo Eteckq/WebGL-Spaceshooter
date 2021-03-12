@@ -1,30 +1,17 @@
 #version 300 es
-precision highp float; // precision des nombres flottant
+precision highp float; 
 
-	uniform vec3 maCouleur;
-	uniform sampler2D uTex;
+uniform vec3 maCouleur;
+uniform sampler2D uTex;
 
-	in vec2 vTextureCoord; // recuperation de la coord rasterisee
-	out vec4 outColor;
+in vec2 vTextureCoord; // recuperation de la coord rasterisee
+out vec4 outColor;
 
-	void main(void) {
-	// affichage d'une texture
+void main(void) {
 	vec2 coord = vTextureCoord;
 	vec4 color = texture(uTex, vTextureCoord);
 	if (color.a < 0.2) {
-		discard;  // don't draw this pixel
+		discard;  
 	}
 	outColor = color;
-
-// affichage d'un rond bleu
-// float test = distance(vec2(.5),vTextureCoord);
-// if(test<0.1) {
-//     outColor = vec4(0.,0.,1.,1.);
-// } else {
-//     outColor = vec4(0.);
-// }
-
-// affichage d'un rond avec couleur param�tr�e et bords lisses 
-// float alpha = 1.-smoothstep(0.2,0.25,distance(vec2(.5),vTextureCoord));
-// outColor = vec4(alpha*maCouleur,alpha);
 }
