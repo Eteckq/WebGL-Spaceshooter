@@ -10,7 +10,7 @@ export default class FastEnemyMissile extends EnemyMissile {
   speedCoef: number
   coef: Vector2
   constructor(position: Vector3) {
-    super(position, 'laserBlue09', 0.03, 0.03)
+    super(position)
     this.speed = 2
     let playerPosition = GameManager.Instance.playerManager.player.getPosition()
 

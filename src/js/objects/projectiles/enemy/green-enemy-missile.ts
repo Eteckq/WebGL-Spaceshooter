@@ -7,7 +7,7 @@ import EnemyMissile from '../../abstract/enemy-missile'
 
 export default class GreenEnemyMissile extends EnemyMissile {
   constructor(position: Vector3, protected angle: number = 0) {
-    super(position, 'laserGreen16', 0.035, 0.035)
+    super(position)
     this.speed = 0.2
     this.attack = 30
   }

@@ -3,7 +3,7 @@ import EnemyMissile from '../../abstract/enemy-missile'
 
 export default class BasicEnemyMissile extends EnemyMissile {
   constructor(position: Vector3) {
-    super(position, 'laserRed06', 0.02, 0.06)
+    super(position)
   }
 
   public update() {
