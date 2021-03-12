@@ -6,16 +6,19 @@ import Enemy04 from './objects/enemies/enemy04'
 import Enemy05 from './objects/enemies/enemy05'
 
 class WaveEnemy {
-  constructor(public enemy: any, public spawnAtWave: number) {}
+  constructor(
+    public enemy: typeof Enemy,
+    public spawnAtWave: number,
+    public stopAtWave: number = 50
+  ) {}
 
   getFrequencyFromWave(wave: number) {
     if (this.spawnAtWave >= wave) {
       return 0
     }
 
-    let freq = -0.03 * (wave - 1 - this.spawnAtWave) + 1
-    if (freq <= 0) {
-      console.error('Freq < 0 ?', freq)
+    let freq = (-1 / this.stopAtWave) * (wave - 1 - this.spawnAtWave) + 1
+    if (freq < 0) {
       return 0
     }
 
@@ -24,7 +27,7 @@ class WaveEnemy {
 }
 
 export default class WaveManager {
-  private WAVE_COOLDOWN = 0
+  private WAVE_COOLDOWN = 100
   private currentWave = 0
   private waveCooldown = 0
 
@@ -57,7 +60,7 @@ export default class WaveManager {
   }
 
   private spawnNewWave() {
-    if (this.currentWave >= 100) return
+    if (this.currentWave >= 70) return
 
     this.currentWave++
     this.waveCooldown = this.WAVE_COOLDOWN
@@ -73,7 +76,7 @@ export default class WaveManager {
     }
 
     // Pick 5 random enemies in pool
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 1; i++) {
       let actual = 0
       let freqRdm = Math.random() * freqTotal
       console.log(freqRdm)

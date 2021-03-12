@@ -24,13 +24,10 @@ export default class Hitbox extends Rectangle {
 
   public tick(elapsed: number) {
     this.time += 0.01 * elapsed
-
-    // this.position[1] += this.speed * 0.05 * this.direction // permet de déplacer le splat vers le haut au fil du temps
-    // this.position[0] += this.speed * 0.0007 * this.angle // permet de déplacer le splat sur l'axe X
   }
 
   private handleClick(event: any) {
-    let missile = new FastEnemyMissile(this.getPosition())
+    new FastEnemyMissile(this.getPosition())
   }
 
   private handleMouseMove(event: any) {

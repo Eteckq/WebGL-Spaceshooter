@@ -45,6 +45,6 @@ export default class Enemy02 extends Enemy {
   }
 
   public shoot() {
-    let newSplat = new FastEnemyMissile(this.getPosition())
+    new FastEnemyMissile(this.getPosition())
   }
 }
