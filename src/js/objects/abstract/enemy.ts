@@ -24,8 +24,6 @@ export default abstract class Enemy
     )
 
     GameManager.Instance.waveManager.numberOfEnemies++
-    // TODO Not here, but fix transparency
-    // this.position[2] = getRandomFloat(0.2, 0.5)
   }
 
   protected onCollision(other: Object) {

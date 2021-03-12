@@ -1,3 +1,4 @@
+import GameManager from './game-manager'
 import Enemy from './objects/abstract/enemy'
 import Enemy01 from './objects/enemies/enemy01'
 import Enemy02 from './objects/enemies/enemy02'
@@ -63,6 +64,7 @@ export default class WaveManager {
     if (this.currentWave >= 70) return
 
     this.currentWave++
+    GameManager.Instance.difficulty += 0.01
     this.waveCooldown = this.WAVE_COOLDOWN
 
     let pool: { enemy: any; freq: number }[] = []
@@ -76,7 +78,11 @@ export default class WaveManager {
     }
 
     // Pick random enemies in pool
-    for (let i = 0; i < 3; i++) {
+    for (
+      let i = 0;
+      i < 3 + Math.round(GameManager.Instance.difficulty * 2);
+      i++
+    ) {
       let actual = 0
       let freqRdm = Math.random() * freqTotal
       let j = 0

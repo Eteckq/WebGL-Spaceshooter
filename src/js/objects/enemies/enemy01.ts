@@ -1,4 +1,5 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
+import GameManager from '../../game-manager'
 import {
   generateOdds,
   getRandomBoolValue,
@@ -11,7 +12,7 @@ import BasicEnemyMissile from '../projectiles/enemy/basic-enemy-missile'
 export default class Enemy01 extends Enemy {
   constructor() {
     super('enemyBlack1', 0.08, 0.08)
-    this.speed = getRandomFloat(0.4, 0.7)
+    this.speed = getRandomFloat(0.2, 0.7)
     this.health = 20
     this.score = 2
 
@@ -24,7 +25,7 @@ export default class Enemy01 extends Enemy {
   }
 
   public update() {
-    if (generateOdds(150)) {
+    if (generateOdds((150 * 1) / GameManager.Instance.difficulty)) {
       this.shoot()
     }
 
@@ -42,6 +43,6 @@ export default class Enemy01 extends Enemy {
   }
 
   public shoot() {
-    let newSplat = new BasicEnemyMissile(this.getPosition())
+    new BasicEnemyMissile(this.getPosition())
   }
 }

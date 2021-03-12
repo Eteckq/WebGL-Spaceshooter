@@ -25,6 +25,8 @@ const DEBUG = false
 export default class GameManager {
   private objectsInScene: Object[] = []
 
+  public difficulty = 1
+
   static Instance: GameManager
   public playerManager: PlayerManager
 

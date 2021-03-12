@@ -1,4 +1,5 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
+import GameManager from '../../game-manager'
 import {
   generateOdds,
   getRandomBoolValue,
@@ -30,7 +31,7 @@ export default class Enemy04 extends Enemy {
     if (this.isShooting) {
       return
     }
-    if (generateOdds(100)) {
+    if (generateOdds((200 * 1) / GameManager.Instance.difficulty)) {
       this.shoot()
     }
 
