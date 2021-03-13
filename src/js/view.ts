@@ -13,6 +13,8 @@ class View {
 
   constructor() {
     this.healtBar = new HealthBar()
+    this.setScore(0)
+    this.setWaves(0)
   }
 
   public setHp(hp: number) {

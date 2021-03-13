@@ -7,7 +7,7 @@ import {
 } from '../../../../node_modules/@math.gl/core/src/index'
 export default abstract class Object3D extends Object {
   public static SHADER?: any
-  protected loaded: boolean = false
+  loaded: boolean = false
 
   protected triangles: any
 

@@ -7,10 +7,14 @@ import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
 import BasicWeapon from './objects/weapons/basic-weapon'
 import BombWeapon from './objects/weapons/bomb-weapon'
 import WaveWeapon from './objects/weapons/wave-weapon'
+import RafalWeapon from './objects/weapons/rafal-weapon'
 import view from './view'
+import RafalWeaponUpgrade from './objects/bonus/upgrades/rafal-weapon-upgrade'
 
 export default class WeaponManager {
-  private upgrades: WeaponUpgrade[] = []
+  private upgrades: WeaponUpgrade[] = [
+    new RafalWeaponUpgrade(new Vector3(Vector3.ZERO)),
+  ]
 
   private maxBonusSlots: number = 8
   private currentBonusSlots: number = 3
@@ -19,11 +23,13 @@ export default class WeaponManager {
     basic: new BasicWeapon(),
     wave: new WaveWeapon(),
     bomb: new BombWeapon(),
+    rafal: new RafalWeapon(),
   }
 
   basicWeaponLevel: number = 1
   waveWeaponLevel: number = 0
   bombWeaponlevel: number = 0
+  rafalWeaponlevel: number = 0
 
   constructor() {
     this.updateLevels()
@@ -58,6 +64,10 @@ export default class WeaponManager {
     //
     this.bombWeaponlevel = this.upgrades.filter(
       (upgrade) => upgrade instanceof BombWeaponUpgrade
+    ).length
+    //
+    this.rafalWeaponlevel = this.upgrades.filter(
+      (upgrade) => upgrade instanceof RafalWeaponUpgrade
     ).length
     let bonusPngs = []
     for (const upgrade of this.upgrades) {
@@ -97,5 +107,6 @@ export default class WeaponManager {
     this.weapons.basic.shoot(position, this.basicWeaponLevel)
     this.weapons.wave.shoot(position, this.waveWeaponLevel)
     this.weapons.bomb.shoot(position, this.bombWeaponlevel)
+    this.weapons.rafal.shoot(position, this.rafalWeaponlevel)
   }
 }

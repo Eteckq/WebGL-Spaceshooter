@@ -12,6 +12,7 @@ import TankEnemy from './objects/enemies/tank'
 import UfoEnemy from './objects/enemies/ufo'
 import StrongEnemy from './objects/enemies/strong'
 import view from './view'
+import RafalWeaponUpgrade from './objects/bonus/upgrades/rafal-weapon-upgrade'
 
 class WaveEnemy {
   constructor(
@@ -59,6 +60,7 @@ export default class WaveManager {
     WaveWeaponUpgrade,
     BasicWeaponUpgrade,
     BombWeaponUpgrade,
+    RafalWeaponUpgrade,
     HealthBonus,
     SlotBonus,
   ]

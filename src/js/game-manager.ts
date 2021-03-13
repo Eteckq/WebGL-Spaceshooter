@@ -43,6 +43,8 @@ export default class GameManager {
     if (DEBUG) new Hitbox(0.03, 0.03)
     new Background()
     this.waveManager = new WaveManager()
+    View.setScore(0)
+    View.setWaves(0)
 
     // Wait 3s before starting waves
     setTimeout(() => {
@@ -56,18 +58,19 @@ export default class GameManager {
     View.setScore(this.score)
   }
 
-  public getClosestEnemy(): Enemy {
+  public getClosestEnemy(from?: Vector3): Enemy {
     let enemies: Enemy[] = this.objectsInScene.filter(
       (o) => o instanceof Enemy
     ) as Enemy[]
-
-    let playerPosition = this.playerManager.player.getPosition()
+    if (!from) {
+      from = this.playerManager.player.getPosition()
+    }
 
     let closest: Enemy
     let tinyestD = 10
     for (const enemy of enemies) {
       let enemyPosition = enemy.getPosition()
-      let d = playerPosition.distance(enemyPosition)
+      let d = from.distance(enemyPosition)
       if (tinyestD > d) {
         tinyestD = d
         closest = enemy
