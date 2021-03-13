@@ -1,38 +1,81 @@
 import * as Chart from 'chart.js'
+import { ChartData, ChartDataSets } from 'chart.js'
+import WaveManager from './wave-manager'
+
+function rdmRgba() {
+  return (
+    'rgba(' +
+    Math.round(Math.random() * 255) +
+    ',' +
+    Math.round(Math.random() * 255) +
+    ',' +
+    Math.round(Math.random() * 255) +
+    ', 0.2)'
+  )
+}
+
+let colorsMap = {
+  BasicEnemy: 'rgba(134, 140, 150, 0.2)',
+  FastEnemy: 'rgba(81, 124, 196, 0.2)',
+  UfoEnemy: 'rgba(255, 255, 66, 0.2)',
+  TankEnemy: 'rgba(227, 200, 50, 0.2)',
+  StrongEnemy: 'rgba(61, 209, 95, 0.2)',
+}
 
 $(() => {
+  let datasets: ChartDataSets[] = []
 
-  let data = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [
-        {
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
-          borderWidth: 1,
-        },
-      ],
+  for (const wave of WaveManager.WavesEnemies) {
+    let dataset: ChartDataSets = datasets.find(
+      (ds) => ds.label === wave.enemy.name
+    )
+    let exists = !!dataset
+    if (!dataset) {
+      let color = (colorsMap as any)[wave.enemy.name] || rdmRgba()
+      dataset = {
+        label: wave.enemy.name,
+        backgroundColor: color,
+        lineTension: 0,
+      }
+      dataset.data = []
     }
 
+    ;(dataset.data as any).push(
+      {
+        x: wave.spawnAtWave,
+        y: 0,
+      },
+      {
+        x: wave.spawnAtWave,
+        y: wave.startFreq,
+      },
+      {
+        x: wave.spawnAtWave + wave.stopAtWave,
+        y: 0,
+      }
+    )
 
+    if (!exists) {
+      datasets.push(dataset)
+    }
+  }
+
+  let data: ChartData = {
+    datasets: datasets,
+  }
 
   new Chart($('#chart') as any, {
     type: 'line',
-    data: data
+    data: data,
+    options: {
+      scales: {
+        xAxes: [
+          {
+            type: 'linear',
+            position: 'bottom',
+          },
+        ],
+      },
+    },
   })
 })

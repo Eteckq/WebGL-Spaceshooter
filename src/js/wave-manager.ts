@@ -6,11 +6,12 @@ import SlotBonus from './objects/bonus/consumables/slot'
 import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
 import BombWeaponUpgrade from './objects/bonus/upgrades/bomb-weapon-upgrade'
 import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
-import Enemy01 from './objects/enemies/enemy01'
-import Enemy02 from './objects/enemies/enemy02'
-import Enemy03 from './objects/enemies/enemy03'
-import Enemy04 from './objects/enemies/enemy04'
-import Enemy05 from './objects/enemies/enemy05'
+import BasicEnemy from './objects/enemies/basic'
+import FastEnemy from './objects/enemies/fast'
+import TankEnemy from './objects/enemies/tank'
+import UfoEnemy from './objects/enemies/ufo'
+import StrongEnemy from './objects/enemies/strong'
+import view from './view'
 
 class WaveEnemy {
   constructor(
@@ -46,18 +47,12 @@ export default class WaveManager {
 
   private playing = false
 
-  private wavesEnemies: WaveEnemy[] = [
-    new WaveEnemy(Enemy01, 0, 1),
-    new WaveEnemy(Enemy02, 5, 1),
-    new WaveEnemy(Enemy03, 10, 0.25),
-    new WaveEnemy(Enemy04, 15, 0.8),
-    new WaveEnemy(Enemy05, 20, 1),
-
-    new WaveEnemy(Enemy01, 25, 1, 3),
-    new WaveEnemy(Enemy03, 30, 1, 3),
-    new WaveEnemy(Enemy04, 35, 1, 3),
-    new WaveEnemy(Enemy04, 45, 1, 1000),
-    new WaveEnemy(Enemy05, 45, 1, 1000),
+  public static WavesEnemies: WaveEnemy[] = [
+    new WaveEnemy(BasicEnemy, 0, 1),
+    new WaveEnemy(FastEnemy, 5, 1),
+    new WaveEnemy(TankEnemy, 10, 0.25),
+    new WaveEnemy(UfoEnemy, 15, 0.8),
+    new WaveEnemy(StrongEnemy, 20, 1),
   ]
 
   public spawnableBonus: any[] = [
@@ -87,6 +82,7 @@ export default class WaveManager {
   private spawnNewWave() {
     if (this.currentWave >= 70) return
     // console.log(this.currentWave)
+    view.setWaves(this.currentWave)
 
     if (this.currentWave % 3 === 0) {
       new this.spawnableBonus[
@@ -100,7 +96,7 @@ export default class WaveManager {
 
     let pool: { enemy: any; freq: number }[] = []
     let freqTotal = 0
-    for (const waveEnemy of this.wavesEnemies) {
+    for (const waveEnemy of WaveManager.WavesEnemies) {
       let freq = waveEnemy.getFrequencyFromWave(this.currentWave)
       if (freq > 0) {
         pool.push({ enemy: waveEnemy.enemy, freq: freq })

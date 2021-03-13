@@ -8,7 +8,7 @@ import {
 import Enemy from '../abstract/enemy'
 import UfoEnemyMissile from '../projectiles/enemy/ufo-enemy-missile'
 
-export default class Enemy04 extends Enemy {
+export default class UfoEnemy extends Enemy {
   private isShooting = false
   constructor() {
     super('ufoYellow', 0.15, 0.15)

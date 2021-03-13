@@ -2,7 +2,7 @@ import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { getRandomFloat } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
 
-export default class Enemy03 extends Enemy {
+export default class TankEnemy extends Enemy {
   constructor() {
     super('enemyRed4', 0.15, 0.25)
     this.speed = getRandomFloat(0.4, 0.9)

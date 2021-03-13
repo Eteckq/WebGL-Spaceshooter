@@ -4,7 +4,7 @@ import { generateOdds, getRandomBoolValue } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
 import GreenEnemyMissile from '../projectiles/enemy/green-enemy-missile'
 
-export default class Enemy05 extends Enemy {
+export default class StrongEnemy extends Enemy {
   constructor() {
     super('enemyGreen5', 0.08, 0.08)
 

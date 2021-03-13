@@ -1,10 +1,10 @@
 import * as $ from 'jquery'
 import { startGame } from '../app'
-import Enemy01 from './objects/enemies/enemy01'
-import Enemy02 from './objects/enemies/enemy02'
-import Enemy03 from './objects/enemies/enemy03'
-import Enemy04 from './objects/enemies/enemy04'
-import Enemy05 from './objects/enemies/enemy05'
+import BasicEnemy from './objects/enemies/basic'
+import FastEnemy from './objects/enemies/fast'
+import TankEnemy from './objects/enemies/tank'
+import UfoEnemy from './objects/enemies/ufo'
+import StrongEnemy from './objects/enemies/strong'
 
 const api = 'https://api-score.yohangastoud.fr/scores'
 class View {
@@ -22,6 +22,10 @@ class View {
   // TODO Use UI icon to display score
   public setScore(score: number) {
     $('.info_SCORE').html(score.toString())
+  }
+
+  public setWaves(wave: number) {
+    $('.info_WAVES').html(wave.toString())
   }
 
   public sendScore(score: number) {
@@ -147,19 +151,19 @@ $(() => {
   })
 
   $('#spawn01').on('click', () => {
-    new Enemy01()
+    new BasicEnemy()
   })
   $('#spawn02').on('click', () => {
-    new Enemy02()
+    new FastEnemy()
   })
   $('#spawn03').on('click', () => {
-    new Enemy03()
+    new TankEnemy()
   })
   $('#spawn04').on('click', () => {
-    new Enemy04()
+    new UfoEnemy()
   })
   $('#spawn05').on('click', () => {
-    new Enemy05()
+    new StrongEnemy()
   })
 
   window.addEventListener('keydown', function (e) {
