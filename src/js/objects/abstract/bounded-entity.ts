@@ -22,7 +22,7 @@ export default abstract class BoundedEntity extends Rectangle {
     super(position, texture, width, height)
 
     this.position[0] = getRandomFloat(-0.9, 0.9)
-    this.position[1] = this.maxTop + 0.5
+    this.position[1] = 1.1
 
     this.directionY = -1
   }

@@ -12,7 +12,7 @@ import BasicEnemyMissile from '../projectiles/enemy/basic-enemy-missile'
 export default class Enemy01 extends Enemy {
   constructor() {
     super('enemyBlack1', 0.08, 0.08)
-    this.speed = getRandomFloat(0.2, 0.7)
+    this.speed = getRandomFloat(0.2, 0.4) * GameManager.Instance.difficulty
     this.health = 20
     this.score = 2
 

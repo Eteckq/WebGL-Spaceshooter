@@ -1,4 +1,5 @@
 import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
+import GameManager from '../../../game-manager'
 import EnemyMissile from '../../abstract/enemy-missile'
 
 export default class BasicEnemyMissile extends EnemyMissile {
@@ -7,7 +8,7 @@ export default class BasicEnemyMissile extends EnemyMissile {
   }
 
   public update() {
-    this.position[1] += this.speed * -0.05
+    this.position[1] += this.speed * -0.04 * GameManager.Instance.difficulty
     // this.position[0] += this.speed * 0.0007
   }
 }

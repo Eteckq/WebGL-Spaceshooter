@@ -16,15 +16,19 @@ class WaveEnemy {
   constructor(
     public enemy: typeof Enemy,
     public spawnAtWave: number,
+    public startFreq: number = 1,
     public stopAtWave: number = 50
-  ) {}
+  ) {
+    // this.stopAtWave *= 1 / this.startFreq
+  }
 
   getFrequencyFromWave(wave: number) {
     if (this.spawnAtWave >= wave) {
       return 0
     }
 
-    let freq = (-1 / this.stopAtWave) * (wave - 1 - this.spawnAtWave) + 1
+    let freq =
+      (-1 / this.stopAtWave) * (wave - 1 - this.spawnAtWave) + this.startFreq
     if (freq < 0) {
       return 0
     }
@@ -43,11 +47,17 @@ export default class WaveManager {
   private playing = false
 
   private wavesEnemies: WaveEnemy[] = [
-    new WaveEnemy(Enemy01, 0),
-    new WaveEnemy(Enemy02, 5),
-    new WaveEnemy(Enemy03, 10),
-    new WaveEnemy(Enemy04, 15),
-    new WaveEnemy(Enemy05, 20),
+    new WaveEnemy(Enemy01, 0, 1),
+    new WaveEnemy(Enemy02, 5, 1),
+    new WaveEnemy(Enemy03, 10, 0.25),
+    new WaveEnemy(Enemy04, 15, 0.8),
+    new WaveEnemy(Enemy05, 20, 1),
+
+    new WaveEnemy(Enemy01, 25, 1, 3),
+    new WaveEnemy(Enemy03, 30, 1, 3),
+    new WaveEnemy(Enemy04, 35, 1, 3),
+    new WaveEnemy(Enemy04, 45, 1, 1000),
+    new WaveEnemy(Enemy05, 45, 1, 1000),
   ]
 
   public spawnableBonus: any[] = [
@@ -76,6 +86,7 @@ export default class WaveManager {
 
   private spawnNewWave() {
     if (this.currentWave >= 70) return
+    // console.log(this.currentWave)
 
     if (this.currentWave % 3 === 0) {
       new this.spawnableBonus[
@@ -97,12 +108,15 @@ export default class WaveManager {
       }
     }
 
+    // console.log(
+    //   'Wave ' +
+    //     this.currentWave +
+    //     ': ' +
+    //     (3 + Math.round(GameManager.Instance.difficulty * 2))
+    // )
+
     // Pick random enemies in pool
-    for (
-      let i = 0;
-      i < 3 + Math.round(GameManager.Instance.difficulty * 2);
-      i++
-    ) {
+    for (let i = 0; i < Math.floor(GameManager.Instance.difficulty * 5); i++) {
       let actual = 0
       let freqRdm = Math.random() * freqTotal
       let j = 0
@@ -114,6 +128,8 @@ export default class WaveManager {
         actual += pool[j].freq
         j += 1
       }
+      // console.log(pool[j].enemy.name + ' freq: ' + pool[j].freq)
+
       new pool[j].enemy()
     }
   }

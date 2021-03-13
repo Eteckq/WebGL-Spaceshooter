@@ -4,7 +4,7 @@ import Damager from '../interface/damager'
 import Rectangle from './rectangle'
 
 export default abstract class Missile extends Rectangle implements Damager {
-  protected speed: number = 0.5
+  protected speed: number = 0.4
   public attack: number = 10
 
   constructor(

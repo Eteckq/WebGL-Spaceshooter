@@ -7,8 +7,8 @@ export default abstract class EnemyMissile extends Missile {
     super(
       position,
       `/assets/images/Missiles/Enemy/enemy.png`,
-      0.025 * GameManager.Instance.difficulty,
-      0.025 * GameManager.Instance.difficulty
+      0.02 * GameManager.Instance.difficulty,
+      0.02 * GameManager.Instance.difficulty
     )
   }
 }
