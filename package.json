@@ -54,5 +54,8 @@
     "type": "git",
     "url": "git@github.com:taniarascia/webpack-boilerplate"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/chart.js": "^2.9.31",
+    "chart.js": "^2.9.4"
+  }
 }

@@ -1,4 +1,5 @@
 import './styles/index.scss'
+import './js/wave-builder'
 import * as $ from 'jquery'
 
 import { initGL, gl } from './js/utils/gl'

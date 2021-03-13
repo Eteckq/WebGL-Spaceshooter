@@ -19,221 +19,211 @@
 
   <body>
     <!-- Game -->
-    <div class="left">
-      <canvas
-        id="SpaceShip"
-        style="border: none"
-        width="800"
-        height="800"
-      ></canvas>
-      <!-- Pseudo Modal -->
-      <div class="pseudoModal">
-        <input
-          type="text"
-          name="pseudoTxt"
-          id="pseudoTxt"
-          value="Yohan"
-          placeholder="Pseudo"
-        />
-        <p id="pseudoBtn">START</p>
-      </div>
-      <!-- End game modal -->
-      <div id="endgameModal">
-        <p class="info_SCORE">0</p>
-        <p id="restartBtn">Restart</p>
-      </div>
-      <!-- Score -->
-      <p id="score">Score: <span class="info_SCORE">0</span></p>
-      <!-- Health -->
-      <div class="health-bar" data-total="50" data-value="0">
-        <div class="bar">
-          <div class="hit"></div>
+    <div id="game">
+      <div class="left">
+        <canvas
+          id="SpaceShip"
+          style="border: none"
+          width="800"
+          height="800"
+        ></canvas>
+        <!-- Pseudo Modal -->
+        <div class="pseudoModal">
+          <input
+            type="text"
+            name="pseudoTxt"
+            id="pseudoTxt"
+            value="Yohan"
+            placeholder="Pseudo"
+          />
+          <p id="pseudoBtn">START</p>
         </div>
+        <!-- End game modal -->
+        <div id="endgameModal">
+          <p class="info_SCORE">0</p>
+          <p id="restartBtn">Restart</p>
+        </div>
+        <!-- Score -->
+        <p id="score">Score: <span class="info_SCORE">0</span></p>
+        <!-- Health -->
+        <div class="health-bar" data-total="50" data-value="0">
+          <div class="bar">
+            <div class="hit"></div>
+          </div>
+        </div>
+        <!-- Bonus -->
+        <ul id="bonusList"></ul>
       </div>
-      <!-- Bonus -->
-      <ul id="bonusList"></ul>
-    </div>
-    <div class="right">
-      <ul class="tabs">
-        <li class="tab-link current" data-tab="tab-1">Leaderboard</li>
-        <li class="tab-link" data-tab="tab-2">Enemies</li>
-        <li class="tab-link" data-tab="tab-3">Weapons</li>
-        <li class="tab-link" data-tab="tab-4">Bonus</li>
-        <li class="tab-link" data-tab="tab-5">Debug</li>
-      </ul>
+      <div class="right">
+        <ul class="tabs">
+          <li class="tab-link current" data-tab="tab-1">Leaderboard</li>
+          <li class="tab-link" data-tab="tab-2">Enemies</li>
+          <li class="tab-link" data-tab="tab-3">Weapons</li>
+          <li class="tab-link" data-tab="tab-4">Bonus</li>
+          <li class="tab-link" data-tab="tab-5">Debug</li>
+        </ul>
 
-      <div id="tab-1" class="tab-content current">
-        <!-- Leaderboard -->
-        <div class="leaderboard">
-          <h1>Top 10</h1>
-          <table id="LeaderboardList"></table>
+        <div id="tab-1" class="tab-content current">
+          <!-- Leaderboard -->
+          <div class="leaderboard">
+            <h1>Top 10</h1>
+            <table id="LeaderboardList"></table>
+          </div>
         </div>
-      </div>
-      <div id="tab-2" class="tab-content">
-        <table>
-          <thead>
-            <tr>
-              <td></td>
-              <td>PV</td>
-              <td>Score</td>
-              <td>Capacity</td>
-              <td>Damages</td>
-            </tr>
-          </thead>
-          <tbody class="">
-            <tr>
-              <td><img src="/assets/images/Enemies/enemyBlack1.png" /></td>
-              <td>20❤️</td>
-              <td>+2</td>
-              <td>Random movements. Shoot straight below</td>
-              <td>10❤️</td>
-            </tr>
-            <tr>
-              <td>
-                <img src="/assets/images/Enemies/enemyBlue2.png" />
-              </td>
-              <td>10❤️</td>
-              <td>+2</td>
-              <td>Fast and random movements. Aim at the player</td>
-              <td>10❤️</td>
-            </tr>
-            <tr>
-              <td>
-                <img src="/assets/images/Enemies/ufoYellow.png" />
-              </td>
-              <td>150❤️</td>
-              <td>+15</td>
-              <td>Slow and random movements. Send multiple shoot around</td>
-              <td>10❤️</td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  src="/assets/images/Enemies/enemyRed4.png"
-                  height="100px"
-                  width="82px"
-                />
-              </td>
-              <td>100❤️</td>
-              <td>+10</td>
-              <td>Go forward, without stopping</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <img src="/assets/images/Enemies/enemyGreen5.png" />
-              </td>
-              <td>75❤️</td>
-              <td>+11</td>
-              <td>WIP - Useless</td>
-              <td>30❤️</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div id="tab-3" class="tab-content">
-        <table>
-          <thead>
-            <tr>
-              <td></td>
-              <td>Description</td>
-              <td>Damages</td>
-            </tr>
-          </thead>
-          <tbody id="weaponsTable">
-            <tr>
-              <td style="text-align: center">
-                <img src="/assets/images/Missiles/Player/laserBlue06.png" />
-              </td>
-              <td>Basic weapon missile. Go forward</td>
-              <td>10❤️</td>
-            </tr>
-            <tr>
-              <td style="text-align: center">
-                <img src="/assets/images/Missiles/Player/laserGreen14.png" />
-              </td>
-              <td>
-                Green weapon missile. Go forward, making random wave movements
-              </td>
-              <td>10❤️</td>
-            </tr>
-            <tr>
-              <td style="text-align: center">
-                <img src="/assets/images/Missiles/Player/laserRed08.png" />
-              </td>
-              <td>
-                Red weapon missile. Aim the closest enemy, doing a lot of
-                damages
-              </td>
-              <td>30❤️</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div id="tab-4" class="tab-content">
-        <table>
-          <thead>
-            <tr>
-              <td></td>
-              <td>Description</td>
-            </tr>
-          </thead>
-          <tbody id="bonusTable">
-            <tr>
-              <td>
-                <img src="/assets/images/Bonus/red.png" />
-                <img src="/assets/images/Bonus/blue.png" />
-                <img src="/assets/images/Bonus/green.png" />
-              </td>
-              <td>Weapon upgrades</td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  width="35"
-                  height="35"
-                  src="/assets/images/Bonus/health.png"
-                />
-              </td>
-              <td>Add 5❤️ (max 50❤️)</td>
-            </tr>
-            <tr>
-              <td><img src="/assets/images/Bonus/slot.png" /></td>
-              <td>Add a new weapon slot (max 8)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div id="tab-5" class="tab-content">
-        <div id="spawn01">
-          <img src="/assets/images/Enemies/enemyBlack1.png" />
+        <div id="tab-2" class="tab-content">
+          <table>
+            <thead>
+              <tr>
+                <td></td>
+                <td>PV</td>
+                <td>Score</td>
+                <td>Capacity</td>
+                <td>Damages</td>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr>
+                <td><img src="/assets/images/Enemies/enemyBlack1.png" /></td>
+                <td>20❤️</td>
+                <td>+2</td>
+                <td>Random movements. Shoot straight below</td>
+                <td>10❤️</td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="/assets/images/Enemies/enemyBlue2.png" />
+                </td>
+                <td>10❤️</td>
+                <td>+2</td>
+                <td>Fast and random movements. Aim at the player</td>
+                <td>10❤️</td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="/assets/images/Enemies/ufoYellow.png" />
+                </td>
+                <td>150❤️</td>
+                <td>+15</td>
+                <td>Slow and random movements. Send multiple shoot around</td>
+                <td>10❤️</td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="/assets/images/Enemies/enemyRed4.png"
+                    height="100px"
+                    width="82px"
+                  />
+                </td>
+                <td>100❤️</td>
+                <td>+10</td>
+                <td>Go forward, without stopping</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="/assets/images/Enemies/enemyGreen5.png" />
+                </td>
+                <td>75❤️</td>
+                <td>+11</td>
+                <td>WIP - Useless</td>
+                <td>30❤️</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div id="spawn02">
-          <img src="/assets/images/Enemies/enemyBlue2.png" />
+        <div id="tab-3" class="tab-content">
+          <table>
+            <thead>
+              <tr>
+                <td></td>
+                <td>Description</td>
+                <td>Damages</td>
+              </tr>
+            </thead>
+            <tbody id="weaponsTable">
+              <tr>
+                <td style="text-align: center">
+                  <img src="/assets/images/Missiles/Player/laserBlue06.png" />
+                </td>
+                <td>Basic weapon missile. Go forward</td>
+                <td>10❤️</td>
+              </tr>
+              <tr>
+                <td style="text-align: center">
+                  <img src="/assets/images/Missiles/Player/laserGreen14.png" />
+                </td>
+                <td>
+                  Green weapon missile. Go forward, making random wave movements
+                </td>
+                <td>10❤️</td>
+              </tr>
+              <tr>
+                <td style="text-align: center">
+                  <img src="/assets/images/Missiles/Player/laserRed08.png" />
+                </td>
+                <td>
+                  Red weapon missile. Aim the closest enemy, doing a lot of
+                  damages
+                </td>
+                <td>30❤️</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div id="spawn03">
-          <img src="/assets/images/Enemies/enemyRed4.png" />
+        <div id="tab-4" class="tab-content">
+          <table>
+            <thead>
+              <tr>
+                <td></td>
+                <td>Description</td>
+              </tr>
+            </thead>
+            <tbody id="bonusTable">
+              <tr>
+                <td>
+                  <img src="/assets/images/Bonus/red.png" />
+                  <img src="/assets/images/Bonus/blue.png" />
+                  <img src="/assets/images/Bonus/green.png" />
+                </td>
+                <td>Weapon upgrades</td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    width="35"
+                    height="35"
+                    src="/assets/images/Bonus/health.png"
+                  />
+                </td>
+                <td>Add 5❤️ (max 50❤️)</td>
+              </tr>
+              <tr>
+                <td><img src="/assets/images/Bonus/slot.png" /></td>
+                <td>Add a new weapon slot (max 8)</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div id="spawn04">
-          <img src="/assets/images/Enemies/ufoYellow.png" />
-        </div>
-        <div id="spawn05">
-          <img src="/assets/images/Enemies/enemyGreen5.png" />
-        </div>
-
-        <div>
-          angle
-          <input type="number" id="angle" value="0.1" />
-        </div>
-        <div>
-          b
-          <input type="number" id="b" value="230" />
-        </div>
-        <div>
-          speed
-          <input type="number" id="speed" value="0.00015" />
+        <div id="tab-5" class="tab-content">
+          <div id="spawn01">
+            <img src="/assets/images/Enemies/enemyBlack1.png" />
+          </div>
+          <div id="spawn02">
+            <img src="/assets/images/Enemies/enemyBlue2.png" />
+          </div>
+          <div id="spawn03">
+            <img src="/assets/images/Enemies/enemyRed4.png" />
+          </div>
+          <div id="spawn04">
+            <img src="/assets/images/Enemies/ufoYellow.png" />
+          </div>
+          <div id="spawn05">
+            <img src="/assets/images/Enemies/enemyGreen5.png" />
+          </div>
         </div>
       </div>
     </div>
+    <canvas id="chart"></canvas>
   </body>
 </html>

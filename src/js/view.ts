@@ -1,6 +1,5 @@
 import * as $ from 'jquery'
 import { startGame } from '../app'
-import SlotBonus from './objects/bonus/consumables/slot'
 import Enemy01 from './objects/enemies/enemy01'
 import Enemy02 from './objects/enemies/enemy02'
 import Enemy03 from './objects/enemies/enemy03'
@@ -162,8 +161,6 @@ $(() => {
   $('#spawn05').on('click', () => {
     new Enemy05()
   })
-
-  // SET TABLES
 
   window.addEventListener('keydown', function (e) {
     if (e.keyCode == 32 && e.target == document.body) {
