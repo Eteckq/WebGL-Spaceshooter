@@ -63,19 +63,19 @@ $(() => {
   let data: ChartData = {
     datasets: datasets,
   }
-
-  new Chart($('#chart') as any, {
-    type: 'line',
-    data: data,
-    options: {
-      scales: {
-        xAxes: [
-          {
-            type: 'linear',
-            position: 'bottom',
-          },
-        ],
+  if ($('#chart').length > 0)
+    new Chart($('#chart') as any, {
+      type: 'line',
+      data: data,
+      options: {
+        scales: {
+          xAxes: [
+            {
+              type: 'linear',
+              position: 'bottom',
+            },
+          ],
+        },
       },
-    },
-  })
+    })
 })

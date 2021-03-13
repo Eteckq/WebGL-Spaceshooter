@@ -13,7 +13,7 @@ import RafalWeaponUpgrade from './objects/bonus/upgrades/rafal-weapon-upgrade'
 
 export default class WeaponManager {
   private upgrades: WeaponUpgrade[] = [
-    new RafalWeaponUpgrade(new Vector3(Vector3.ZERO)),
+
   ]
 
   private maxBonusSlots: number = 8
