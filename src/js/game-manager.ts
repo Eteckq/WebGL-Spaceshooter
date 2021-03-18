@@ -13,6 +13,7 @@ import PlayerMissile from './objects/abstract/player-missile'
 import EnemyMissile from './objects/abstract/enemy-missile'
 import view from './view'
 import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
+import Projectile from './objects/abstract/objects/projectile'
 
 const DEBUG = false
 
@@ -156,6 +157,9 @@ export default class GameManager {
       }
       if (object instanceof Player) {
         gl.useProgram(Player.SHADER)
+      }
+      if (object instanceof Projectile) {
+        gl.useProgram(Projectile.SHADER)
       }
 
       object.sendUniformVariables()
