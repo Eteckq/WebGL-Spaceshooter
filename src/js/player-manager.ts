@@ -43,6 +43,10 @@ export default class PlayerManager {
     View.setHp(this.health)
   }
 
+  public invulBonus() {
+    this.damageCooldown = 200
+  }
+
   public slotBonus() {
     if (this.weaponManager.addSlot()) {
       let i = GameManager.Instance.waveManager.spawnableBonus.indexOf(SlotBonus)

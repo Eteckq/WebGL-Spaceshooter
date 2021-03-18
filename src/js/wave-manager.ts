@@ -13,6 +13,7 @@ import UfoEnemy from './objects/enemies/ufo'
 import StrongEnemy from './objects/enemies/strong'
 import view from './view'
 import RafalWeaponUpgrade from './objects/bonus/upgrades/rafal-weapon-upgrade'
+import InvulBonus from './objects/bonus/consumables/invul'
 
 class WaveEnemy {
   constructor(
@@ -63,6 +64,7 @@ export default class WaveManager {
     RafalWeaponUpgrade,
     HealthBonus,
     SlotBonus,
+    InvulBonus,
   ]
 
   start() {
