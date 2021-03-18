@@ -1,4 +1,4 @@
-import Rectangle from '../objects/abstract/rectangle'
+import Rectangle from '../objects/abstract/objects/rectangle'
 import Background from '../objects/background'
 import Player from '../objects/player'
 import { gl } from './gl'

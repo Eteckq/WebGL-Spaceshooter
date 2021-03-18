@@ -1,10 +1,11 @@
-import { gl } from '../../utils/gl'
-import Object from './object'
-import { getFile } from '../../utils/utils'
 import {
   Vector3,
   Vector4,
-} from '../../../../node_modules/@math.gl/core/src/index'
+} from '../../../../../node_modules/@math.gl/core/src/index'
+import { gl } from '../../../utils/gl'
+import { getFile } from '../../../utils/utils'
+import Object from './object'
+
 export default abstract class Object3D extends Object {
   public static SHADER?: any
   loaded: boolean = false

@@ -1,9 +1,7 @@
 import { Vector3 } from '../../../node_modules/@math.gl/core/src/index'
 import { gl } from '../utils/gl'
-import { initTexture } from '../utils/utils'
-import Rectangle from './abstract/rectangle'
+import Rectangle from './abstract/objects/rectangle'
 import FastEnemyMissile from './projectiles/enemy/fast-enemy-missile'
-import UfoEnemyMissile from './projectiles/enemy/ufo-enemy-missile'
 
 export default class Hitbox extends Rectangle {
   constructor(width: number, height: number) {

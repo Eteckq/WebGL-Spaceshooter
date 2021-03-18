@@ -1,7 +1,6 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { getRandomFloat } from '../../utils/utils'
 import Weapon from '../abstract/weapon'
-import BasicMissile from '../projectiles/player/basic-missile'
 import WaveMissile from '../projectiles/player/wave-missile'
 
 export default class WaveWeapon extends Weapon {

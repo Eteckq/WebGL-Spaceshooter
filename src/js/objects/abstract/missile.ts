@@ -1,7 +1,6 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
-import { initTexture } from '../../utils/utils'
 import Damager from '../interface/damager'
-import Rectangle from './rectangle'
+import Rectangle from './objects/rectangle'
 
 export default abstract class Missile extends Rectangle implements Damager {
   protected speed: number = 0.4

@@ -1,4 +1,3 @@
-import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import GameManager from '../../game-manager'
 import {
   generateOdds,
@@ -7,7 +6,6 @@ import {
   getRandomInt,
 } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
-import BasicEnemyMissile from '../projectiles/enemy/basic-enemy-missile'
 import FastEnemyMissile from '../projectiles/enemy/fast-enemy-missile'
 
 export default class FastEnemy extends Enemy {

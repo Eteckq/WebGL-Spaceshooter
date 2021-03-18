@@ -1,8 +1,4 @@
-import {
-  Vector2,
-  Vector3,
-} from '../../../../../node_modules/@math.gl/core/src/index'
-import { getDirection } from '../../../utils/utils'
+import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
 import EnemyMissile from '../../abstract/enemy-missile'
 
 export default class GreenEnemyMissile extends EnemyMissile {
