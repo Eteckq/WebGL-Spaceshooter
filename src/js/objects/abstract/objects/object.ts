@@ -1,5 +1,5 @@
-import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
-import GameManager from '../../game-manager'
+import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
+import GameManager from '../../../game-manager'
 export default abstract class Object {
   public static SHADER?: any
   public loaded: boolean = false

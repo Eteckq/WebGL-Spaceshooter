@@ -1,6 +1,6 @@
-import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
-import { gl } from '../../utils/gl'
-import { initTexture } from '../../utils/utils'
+import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
+import { gl } from '../../../utils/gl'
+import { initTexture } from '../../../utils/utils'
 import Object2D from './object2d'
 
 export default abstract class Rectangle extends Object2D {

@@ -1,4 +1,4 @@
-import Object from './abstract/object'
+import Object from './abstract/objects/object'
 import { gl } from '../utils/gl'
 import GameManager from '../game-manager'
 import { Vector3 } from '../../../node_modules/@math.gl/core/src/index'

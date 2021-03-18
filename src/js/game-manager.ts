@@ -1,6 +1,6 @@
-import Object from './objects/abstract/object'
+import Object from './objects/abstract/objects/object'
 import { gl } from './utils/gl'
-import Rectangle from './objects/abstract/rectangle'
+import Rectangle from './objects/abstract/objects/rectangle'
 import Background from './objects/background'
 import Player from './objects/player'
 import Enemy from './objects/abstract/enemy'

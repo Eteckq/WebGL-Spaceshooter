@@ -12,9 +12,7 @@ import view from './view'
 import RafalWeaponUpgrade from './objects/bonus/upgrades/rafal-weapon-upgrade'
 
 export default class WeaponManager {
-  private upgrades: WeaponUpgrade[] = [
-
-  ]
+  private upgrades: WeaponUpgrade[] = []
 
   private maxBonusSlots: number = 8
   private currentBonusSlots: number = 3
