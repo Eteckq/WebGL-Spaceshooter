@@ -13,6 +13,7 @@ import UfoEnemy from './objects/enemies/ufo'
 import StrongEnemy from './objects/enemies/strong'
 import view from './view'
 import RafalWeaponUpgrade from './objects/bonus/upgrades/rafal-weapon-upgrade'
+import InvulBonus from './objects/bonus/consumables/invul'
 
 class WaveEnemy {
   constructor(
@@ -63,6 +64,7 @@ export default class WaveManager {
     RafalWeaponUpgrade,
     HealthBonus,
     SlotBonus,
+    InvulBonus,
   ]
 
   start() {
@@ -86,7 +88,7 @@ export default class WaveManager {
     // console.log(this.currentWave)
     view.setWaves(this.currentWave)
 
-    if (this.currentWave % 3 === 0) {
+    if (this.currentWave % 1 === 0) {
       new this.spawnableBonus[
         Math.floor(Math.random() * this.spawnableBonus.length)
       ](new Vector3(0, 1, 0.5))

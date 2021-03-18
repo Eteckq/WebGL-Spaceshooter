@@ -21,6 +21,14 @@ class View {
     this.healtBar.setHp(hp)
   }
 
+  public setInvul(invul: boolean) {
+    if (invul) {
+      $('.bar').css('background-color', '#4169E1')
+    } else {
+      $('.bar').css('background-color', '#c54')
+    }
+  }
+
   // TODO Use UI icon to display score
   public setScore(score: number) {
     $('.info_SCORE').html(score.toString())
