@@ -1,5 +1,4 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
-import { initTexture } from '../../utils/utils'
 import Damager from '../interface/damager'
 import Rectangle from './objects/rectangle'
 

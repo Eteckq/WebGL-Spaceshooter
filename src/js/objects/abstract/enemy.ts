@@ -1,4 +1,3 @@
-import { getRandomBoolValue, getRandomFloat } from '../../utils/utils'
 import Damageable from '../interface/damageable'
 import Damager from '../interface/damager'
 import GameManager from '../../game-manager'

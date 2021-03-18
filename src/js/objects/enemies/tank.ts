@@ -1,4 +1,3 @@
-import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import { getRandomFloat } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
 

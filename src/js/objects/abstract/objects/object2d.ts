@@ -1,5 +1,5 @@
-import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
-import { gl } from '../../utils/gl'
+import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
+import { gl } from '../../../utils/gl'
 import Object from './object'
 export default abstract class Object2D extends Object {
   protected triangles: any

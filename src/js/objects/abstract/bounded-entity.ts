@@ -1,5 +1,5 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
-import { getRandomFloat, getRandomInt, initTexture } from '../../utils/utils'
+import { getRandomFloat } from '../../utils/utils'
 import Rectangle from './objects/rectangle'
 
 export default abstract class BoundedEntity extends Rectangle {

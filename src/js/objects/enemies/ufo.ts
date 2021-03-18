@@ -1,10 +1,6 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 import GameManager from '../../game-manager'
-import {
-  generateOdds,
-  getRandomBoolValue,
-  getRandomFloat,
-} from '../../utils/utils'
+import { generateOdds, getRandomBoolValue } from '../../utils/utils'
 import Enemy from '../abstract/enemy'
 import UfoEnemyMissile from '../projectiles/enemy/ufo-enemy-missile'
 

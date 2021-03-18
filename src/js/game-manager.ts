@@ -11,14 +11,8 @@ import PlayerManager from './player-manager'
 import Hitbox from './objects/hitbox'
 import PlayerMissile from './objects/abstract/player-missile'
 import EnemyMissile from './objects/abstract/enemy-missile'
-import HealthBonus from './objects/bonus/consumables/health'
-import { generateOdds } from './utils/utils'
 import view from './view'
 import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
-import BombWeaponUpgrade from './objects/bonus/upgrades/bomb-weapon-upgrade'
-import SlotBonus from './objects/bonus/consumables/slot'
-import BasicWeaponUpgrade from './objects/bonus/upgrades/basic-weapon-upgrade'
-import WaveWeaponUpgrade from './objects/bonus/upgrades/wave-weapon-upgrade'
 
 const DEBUG = false
 

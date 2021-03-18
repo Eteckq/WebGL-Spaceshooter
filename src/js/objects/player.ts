@@ -1,5 +1,5 @@
 import { gl } from '../utils/gl'
-import Object3D from './abstract/object3d'
+import Object3D from './abstract/objects/object3d'
 
 import GameManager from '../game-manager'
 import EnemyMissile from './abstract/enemy-missile'
