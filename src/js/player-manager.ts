@@ -35,7 +35,7 @@ export default class PlayerManager {
 
   public healthBonus() {
     if (this.health < 50) {
-      this.health += 5
+      this.health += 10
     }
     if (this.health > 50) {
       this.health = 50

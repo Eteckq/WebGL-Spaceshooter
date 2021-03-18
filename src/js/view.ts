@@ -89,19 +89,21 @@ class HealthBar {
   hBar: any
   bar: any
   hit: any
+  val: any
 
   constructor() {
     this.hBar = $('.health-bar')
     this.bar = this.hBar.find('.bar')
     this.hit = this.hBar.find('.hit')
+    this.val = this.hBar.find('.hpval')
   }
 
   public setHp(hp: number) {
     let total = this.hBar.data('total')
     let value = this.hBar.data('value')
-
     let diff = hp - value
 
+    this.val.html(hp)
     if (value < 0) {
       return
     }
