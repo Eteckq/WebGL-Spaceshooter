@@ -5,6 +5,7 @@ import EnemyMissile from '../../abstract/enemy-missile'
 export default class BasicEnemyMissile extends EnemyMissile {
   constructor(position: Vector3) {
     super(position)
+    this.attack = 5
   }
 
   public update() {

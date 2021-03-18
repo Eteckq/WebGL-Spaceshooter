@@ -3,9 +3,10 @@ import { gl } from '../../../utils/gl'
 import Object2D from './object2d'
 import Rectangle from './rectangle'
 
-export default class Projectile extends Object2D {
+export default abstract class Projectile extends Object2D {
   protected speed: number = 0.4
   protected customHitboxScale: { width: number; height: number }
+  public attack: number = 10
 
   constructor(
     position: Vector3,
@@ -68,7 +69,11 @@ export default class Projectile extends Object2D {
   public sendUniformVariables() {
     if (this.loaded) {
       gl.uniform3fv(Projectile.SHADER.uPosition, this.position)
-      gl.uniform3fv(Projectile.SHADER.couleurUniform, [1, 0, 0])
+      gl.uniform3fv(Projectile.SHADER.couleurUniform, [
+        1,
+        1 - ((this.attack - 5) * 4) / 100,
+        0,
+      ])
     }
   }
 

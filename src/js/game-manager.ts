@@ -14,6 +14,7 @@ import EnemyMissile from './objects/abstract/enemy-missile'
 import view from './view'
 import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
 import Projectile from './objects/abstract/objects/projectile'
+import BasicEnemyMissile from './objects/projectiles/enemy/basic-enemy-missile'
 
 const DEBUG = false
 
@@ -40,6 +41,8 @@ export default class GameManager {
     this.waveManager = new WaveManager()
     View.setScore(0)
     View.setWaves(0)
+
+    new BasicEnemyMissile(new Vector3(0, 0, 0))
 
     // Wait 3s before starting waves
     setTimeout(() => {

@@ -11,6 +11,7 @@ export default class UfoEnemyMissile extends EnemyMissile {
   constructor(position: Vector3, ufoPosition: Vector3) {
     super(position)
     this.speed = 2
+    this.attack = 20
 
     let direction = getDirection(ufoPosition, this.position)
     this.speedCoef = direction.speed

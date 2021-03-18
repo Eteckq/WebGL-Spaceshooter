@@ -7,8 +7,6 @@ import Projectile from './objects/projectile'
 export default abstract class EnemyMissile
   extends Projectile
   implements Damager {
-  public attack: number = 10
-
   constructor(position: Vector3) {
     super(
       position,
