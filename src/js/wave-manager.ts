@@ -88,7 +88,7 @@ export default class WaveManager {
     // console.log(this.currentWave)
     view.setWaves(this.currentWave)
 
-    if (this.currentWave % 3 === 0) {
+    if (this.currentWave % 1 === 0) {
       new this.spawnableBonus[
         Math.floor(Math.random() * this.spawnableBonus.length)
       ](new Vector3(0, 1, 0.5))

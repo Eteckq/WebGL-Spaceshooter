@@ -110,6 +110,12 @@ table {
     left: 300px;
     z-index: 50;
   }
+  .hpval {
+    position: absolute;
+    color: black;
+    z-index: 50;
+    padding-left: 90px;
+  }
 
   .bar {
     background: #c54;

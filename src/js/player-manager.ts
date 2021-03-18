@@ -45,6 +45,7 @@ export default class PlayerManager {
 
   public invulBonus() {
     this.damageCooldown = 200
+    View.setInvul(true)
   }
 
   public slotBonus() {
@@ -56,6 +57,9 @@ export default class PlayerManager {
 
   public tick() {
     this.damageCooldown--
+    if (this.damageCooldown <= 0) {
+      View.setInvul(false)
+    }
     this.weaponManager.tick()
 
     this.handleInputs()
