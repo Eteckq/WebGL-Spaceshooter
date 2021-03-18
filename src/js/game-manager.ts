@@ -42,8 +42,6 @@ export default class GameManager {
     View.setScore(0)
     View.setWaves(0)
 
-    new BasicEnemyMissile(new Vector3(0, 0, 0))
-
     // Wait 3s before starting waves
     setTimeout(() => {
       this.waveManager.start()
