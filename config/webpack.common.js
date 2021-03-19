@@ -1,8 +1,6 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const PrettierPlugin = require('prettier-webpack-plugin')
-const ESLintPlugin = require('eslint-webpack-plugin')
 const paths = require('./paths')
 
 module.exports = {
@@ -44,14 +42,6 @@ module.exports = {
       filename: 'index.html', // output file
     }),
 
-    // ESLint configuration
-    new ESLintPlugin({
-      files: ['.', 'src', 'config'],
-      formatter: 'table',
-    }),
-
-    // Prettier configuration
-    new PrettierPlugin(),
   ],
 
   // Determine how modules within the project are treated
