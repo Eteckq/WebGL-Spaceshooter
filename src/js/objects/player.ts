@@ -41,7 +41,7 @@ export default class Player extends Object3D {
 
     if (other instanceof Enemy) {
       this.damage(other.attack)
-      other.damage(5)
+      other.damage(50)
     }
   }
 

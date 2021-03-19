@@ -7,6 +7,7 @@ export default abstract class Rectangle extends Object2D {
   protected texture: WebGLTexture
   protected speed: number = 0.4
   protected customHitboxScale: { width: number; height: number }
+  public blink = false
 
   constructor(
     position: Vector3,
@@ -71,8 +72,14 @@ export default abstract class Rectangle extends Object2D {
   public sendUniformVariables() {
     if (this.loaded) {
       gl.uniform3fv(Rectangle.SHADER.positionUniform, this.position)
-
-      gl.uniform1f(Rectangle.SHADER.blinkUniform, 1)
+      if (this.blink) {
+        gl.uniform1f(
+          Rectangle.SHADER.blinkUniform,
+          0.75 + Math.sin(this.time * 0.8) / 4
+        )
+      } else {
+        gl.uniform1f(Rectangle.SHADER.blinkUniform, 0)
+      }
       // gl.uniform3fv(Splat.SHADER.couleurUniform, [1, 0, 0])
 
       // how to send a texture:

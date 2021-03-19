@@ -45,6 +45,11 @@ export default abstract class Enemy
     if (this.health <= 0) {
       GameManager.Instance.killEnemy(this)
       this.clear()
+    } else {
+      this.blink = true
+      setTimeout(() => {
+        this.blink = false
+      }, 300)
     }
   }
 
