@@ -17,7 +17,7 @@ export default class WeaponManager {
   private maxBonusSlots: number = 8
   private currentBonusSlots: number = 3
 
-  private weapons = {
+  public weapons = {
     basic: new BasicWeapon(),
     wave: new WaveWeapon(),
     bomb: new BombWeapon(),

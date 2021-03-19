@@ -71,6 +71,8 @@ export default abstract class Rectangle extends Object2D {
   public sendUniformVariables() {
     if (this.loaded) {
       gl.uniform3fv(Rectangle.SHADER.positionUniform, this.position)
+
+      gl.uniform1f(Rectangle.SHADER.blinkUniform, 1)
       // gl.uniform3fv(Splat.SHADER.couleurUniform, [1, 0, 0])
 
       // how to send a texture:
@@ -100,7 +102,7 @@ export default abstract class Rectangle extends Object2D {
       // adresse des variables uniform dans le shader
       shader.positionUniform = gl.getUniformLocation(shader, 'uPosition')
       shader.texUniform = gl.getUniformLocation(shader, 'uTex')
-      shader.couleurUniform = gl.getUniformLocation(shader, 'maCouleur')
+      shader.blinkUniform = gl.getUniformLocation(shader, 'uBlink')
     }
   }
 

@@ -1,4 +1,5 @@
 import { Vector3 } from '../../../../../node_modules/@math.gl/core/src/index'
+import GameManager from '../../../game-manager'
 import WeaponUpgrade from '../../abstract/weapon-upgrade'
 
 export default class BasicWeaponUpgrade extends WeaponUpgrade {
@@ -7,6 +8,9 @@ export default class BasicWeaponUpgrade extends WeaponUpgrade {
   }
 
   actionOnRelease(): void {
-    throw new Error('Method not implemented.')
+    GameManager.Instance.playerManager.weaponManager.weapons.basic.SHOOT_COOLDOWN -= 10
+    setTimeout(() => {
+      GameManager.Instance.playerManager.weaponManager.weapons.basic.SHOOT_COOLDOWN += 10
+    }, 1000)
   }
 }

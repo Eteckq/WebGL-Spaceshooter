@@ -1,7 +1,7 @@
 import { Vector3 } from '../../../../node_modules/@math.gl/core/src/index'
 
 export default abstract class Weapon {
-  protected SHOOT_COOLDOWN: number = 30
+  public SHOOT_COOLDOWN: number = 30
   protected shootCooldown: number = 0
 
   shoot(pos: Vector3, level: number) {
