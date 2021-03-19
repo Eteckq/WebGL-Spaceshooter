@@ -18,4 +18,6 @@ export default abstract class WeaponUpgrade extends Bonus {
   actionOnCatch(): void {
     GameManager.Instance.playerManager.weaponManager.pushUpgrade(this)
   }
+
+  abstract actionOnRelease(): void
 }

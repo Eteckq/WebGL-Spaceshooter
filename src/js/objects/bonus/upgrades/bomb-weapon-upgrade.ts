@@ -5,4 +5,8 @@ export default class BombWeaponUpgrade extends WeaponUpgrade {
   constructor(position: Vector3) {
     super('red', position)
   }
+
+  actionOnRelease(): void {
+    throw new Error('Method not implemented.')
+  }
 }

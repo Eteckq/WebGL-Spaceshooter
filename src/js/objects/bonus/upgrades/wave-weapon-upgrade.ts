@@ -5,4 +5,8 @@ export default class WaveWeaponUpgrade extends WeaponUpgrade {
   constructor(position: Vector3) {
     super('green', position)
   }
+
+  actionOnRelease(): void {
+    throw new Error('Method not implemented.')
+  }
 }

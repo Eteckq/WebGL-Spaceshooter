@@ -5,4 +5,8 @@ export default class RafalWeaponUpgrade extends WeaponUpgrade {
   constructor(position: Vector3) {
     super('yellow', position)
   }
+
+  actionOnRelease(): void {
+    throw new Error('Method not implemented.')
+  }
 }

@@ -5,4 +5,8 @@ export default class BasicWeaponUpgrade extends WeaponUpgrade {
   constructor(position: Vector3) {
     super('blue', position)
   }
+
+  actionOnRelease(): void {
+    throw new Error('Method not implemented.')
+  }
 }

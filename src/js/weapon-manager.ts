@@ -90,7 +90,7 @@ export default class WeaponManager {
   }
 
   private activatePower(upgrade: WeaponUpgrade) {
-    // TODO Active power when throw bonus
+    upgrade.actionOnRelease()
   }
 
   public tick() {
