@@ -2,7 +2,7 @@ import GameManager from './game-manager'
 import SlotBonus from './objects/bonus/consumables/slot'
 import Player from './objects/player'
 import { currentlyPressedKeys, registerOnShiftCallback } from './utils/inputs'
-import View from './view'
+import view from './view'
 import WeaponManager from './weapon-manager'
 
 export default class PlayerManager {
@@ -18,7 +18,7 @@ export default class PlayerManager {
 
   constructor() {
     this.player = new Player()
-    View.setHp(this.health)
+    view.setHp(this.health)
   }
 
   public damage(amount: number) {
@@ -26,7 +26,7 @@ export default class PlayerManager {
       this.damageCooldown = this.DAMAGE_COOLDOWN
       this.health -= amount
 
-      View.setHp(this.health)
+      view.setHp(this.health)
       if (this.health <= 0) {
         GameManager.Instance.gameOver()
       }
@@ -40,12 +40,12 @@ export default class PlayerManager {
     if (this.health > 50) {
       this.health = 50
     }
-    View.setHp(this.health)
+    view.setHp(this.health)
   }
 
   public invulBonus() {
     this.damageCooldown = 200
-    View.setInvul(true)
+    view.setInvul(true)
   }
 
   public slotBonus() {
@@ -58,7 +58,7 @@ export default class PlayerManager {
   public tick() {
     this.damageCooldown--
     if (this.damageCooldown <= 0) {
-      View.setInvul(false)
+      view.setInvul(false)
     }
     this.weaponManager.tick()
 

@@ -15,6 +15,7 @@ import view from './view'
 import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
 import Projectile from './objects/abstract/objects/projectile'
 import BasicEnemyMissile from './objects/projectiles/enemy/basic-enemy-missile'
+import Particle from './objects/particle'
 
 const DEBUG = false
 
@@ -41,6 +42,8 @@ export default class GameManager {
     this.waveManager = new WaveManager()
     View.setScore(0)
     View.setWaves(0)
+
+    new Particle(new Vector3(0, 0, 0))
 
     // Wait 3s before starting waves
     setTimeout(() => {
@@ -161,6 +164,9 @@ export default class GameManager {
       }
       if (object instanceof Projectile) {
         gl.useProgram(Projectile.SHADER)
+      }
+      if (object instanceof Particle) {
+        gl.useProgram(Particle.SHADER)
       }
 
       object.sendUniformVariables()

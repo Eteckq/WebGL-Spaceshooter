@@ -1,3 +1,4 @@
+import Particle from '../objects/particle'
 import Projectile from '../objects/abstract/objects/projectile'
 import Rectangle from '../objects/abstract/objects/rectangle'
 import Background from '../objects/background'
@@ -57,4 +58,5 @@ export async function initAllShaders() {
   Rectangle.INIT_SHADERS(await initShaders('rectangle'))
   Player.INIT_SHADERS(await initShaders('player'))
   Projectile.INIT_SHADERS(await initShaders('projectile'))
+  Particle.INIT_SHADERS(await initShaders('particle'))
 }
