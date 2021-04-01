@@ -1,98 +1,95 @@
-import Object from './objects/abstract/objects/object'
-import { gl } from './utils/gl'
-import Rectangle from './objects/abstract/objects/rectangle'
-import Background from './objects/background'
-import Player from './objects/player'
-import Enemy from './objects/abstract/enemy'
-import WaveManager from './wave-manager'
-import View from './view'
-import Bonus from './objects/abstract/bonus'
-import PlayerManager from './player-manager'
-import Hitbox from './objects/hitbox'
-import PlayerMissile from './objects/abstract/player-missile'
-import EnemyMissile from './objects/abstract/enemy-missile'
-import view from './view'
-import { Vector3 } from '../../node_modules/@math.gl/core/src/index'
-import Projectile from './objects/abstract/objects/projectile'
-import BasicEnemyMissile from './objects/projectiles/enemy/basic-enemy-missile'
-import Particle from './objects/particle'
+import Object from "./objects/abstract/objects/object";
+import { gl } from "./utils/gl";
+import Rectangle from "./objects/abstract/objects/rectangle";
+import Background from "./objects/background";
+import Player from "./objects/player";
+import Enemy from "./objects/abstract/enemy";
+import WaveManager from "./wave-manager";
+import View from "./view";
+import Bonus from "./objects/abstract/bonus";
+import PlayerManager from "./player-manager";
+import Hitbox from "./objects/hitbox";
+import PlayerMissile from "./objects/abstract/player-missile";
+import EnemyMissile from "./objects/abstract/enemy-missile";
+import view from "./view";
+import { Vector3 } from "../../node_modules/@math.gl/core/src/index";
+import Projectile from "./objects/abstract/objects/projectile";
+import Explosion from "./objects/explosion";
 
-const DEBUG = false
+const DEBUG = false;
 
 export default class GameManager {
-  private objectsInScene: Object[] = []
+  private objectsInScene: Object[] = [];
 
-  public difficulty = 1
+  public difficulty = 1;
 
-  static Instance: GameManager
-  public playerManager: PlayerManager
+  static Instance: GameManager;
+  public playerManager: PlayerManager;
 
-  public waveManager: WaveManager
+  public waveManager: WaveManager;
 
-  public over: boolean = false
+  public over: boolean = false;
 
-  private score: number = 0
+  private score: number = 0;
 
   constructor() {
-    GameManager.Instance = this
+    GameManager.Instance = this;
 
-    this.playerManager = new PlayerManager()
-    if (DEBUG) new Hitbox(0.03, 0.03)
-    new Background()
-    this.waveManager = new WaveManager()
-    View.setScore(0)
-    View.setWaves(0)
-
-    new Particle(new Vector3(0, 0, 0))
+    this.playerManager = new PlayerManager();
+    if (DEBUG) new Hitbox(0.03, 0.03);
+    new Background();
+    this.waveManager = new WaveManager();
+    View.setScore(0);
+    View.setWaves(0);
 
     // Wait 3s before starting waves
     setTimeout(() => {
-      this.waveManager.start()
-    }, 3000)
+      this.waveManager.start();
+    }, 3000);
   }
 
   public killEnemy(enemy: Enemy) {
-    this.waveManager.numberOfEnemies--
-    this.score += enemy.score
-    View.setScore(this.score)
+    this.waveManager.numberOfEnemies--;
+    this.score += enemy.score;
+    View.setScore(this.score);
   }
 
   public getClosestEnemy(from?: Vector3): Enemy {
     let enemies: Enemy[] = this.objectsInScene.filter(
       (o) => o instanceof Enemy
-    ) as Enemy[]
+    ) as Enemy[];
     if (!from) {
-      from = this.playerManager.player.getPosition()
+      from = this.playerManager.player.getPosition();
     }
 
-    let closest: Enemy
-    let tinyestD = 10
+    let closest: Enemy;
+    let tinyestD = 10;
     for (const enemy of enemies) {
-      let enemyPosition = enemy.getPosition()
-      let d = from.distance(enemyPosition)
+      let enemyPosition = enemy.getPosition();
+      let d = from.distance(enemyPosition);
       if (tinyestD > d) {
-        tinyestD = d
-        closest = enemy
+        tinyestD = d;
+        closest = enemy;
       }
     }
 
-    return closest
+    return closest;
   }
 
   public gameOver() {
-    this.over = true
-    this.destroy()
-    view.sendScore(this.score)
+    this.over = true;
+    this.destroy();
+    view.sendScore(this.score);
   }
 
   public tick() {
-    if (this.over) return
-    this.checkCollisions()
+    if (this.over) return;
+    this.checkCollisions();
 
-    this.draw()
-    this.animate()
-    this.waveManager.tick()
-    this.playerManager.tick()
+    this.draw();
+    this.animate();
+    this.waveManager.tick();
+    this.playerManager.tick();
   }
 
   // Pour les collisions, je teste uniquement les objets qui peuvent entrer en collision (évite de surcharger)
@@ -101,82 +98,82 @@ export default class GameManager {
       // uncomment to debug hitboxs
 
       if (DEBUG && object instanceof Hitbox) {
-        object.checkCollisions(this.objectsInScene)
+        object.checkCollisions(this.objectsInScene);
       }
 
       if (object instanceof Enemy) {
         object.checkCollisions(
           this.objectsInScene.filter((o) => o instanceof PlayerMissile)
-        )
+        );
       }
-    })
+    });
 
     this.playerManager.player.checkCollisions(
       this.objectsInScene.filter(
         (o) =>
           o instanceof EnemyMissile || o instanceof Bonus || o instanceof Enemy
       )
-    )
+    );
   }
 
   // Used by objects
 
   public addObject(object: Object) {
-    this.objectsInScene.push(object)
+    this.objectsInScene.push(object);
   }
 
   public removeFromScene(object: Object) {
-    this.objectsInScene = this.objectsInScene.filter((o) => o.id !== object.id)
+    this.objectsInScene = this.objectsInScene.filter((o) => o.id !== object.id);
   }
 
   // WEB GL
 
-  private lastTime: number = 0
+  private lastTime: number = 0;
   private animate() {
-    let timeNow = new Date().getTime()
+    let timeNow = new Date().getTime();
     if (this.lastTime != 0) {
-      let elapsed = timeNow - this.lastTime
+      let elapsed = timeNow - this.lastTime;
       this.objectsInScene.forEach((object) => {
-        object.tick(elapsed)
-      })
+        object.tick(elapsed);
+      });
     }
-    this.lastTime = timeNow
+    this.lastTime = timeNow;
   }
 
   private draw() {
-    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight)
+    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     // eslint-disable-next-line no-bitwise
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    gl.enable(gl.BLEND)
+    gl.enable(gl.BLEND);
 
     this.objectsInScene.forEach((object) => {
       if (object instanceof Background) {
-        gl.disable(gl.BLEND)
-        gl.useProgram(Background.SHADER)
-        gl.enable(gl.BLEND)
+        gl.disable(gl.BLEND);
+        gl.useProgram(Background.SHADER);
+        gl.enable(gl.BLEND);
       }
       if (object instanceof Rectangle) {
-        gl.useProgram(Rectangle.SHADER)
+        gl.useProgram(Rectangle.SHADER);
       }
       if (object instanceof Player) {
-        gl.useProgram(Player.SHADER)
+        gl.useProgram(Player.SHADER);
       }
       if (object instanceof Projectile) {
-        gl.useProgram(Projectile.SHADER)
+        gl.useProgram(Projectile.SHADER);
       }
-      if (object instanceof Particle) {
-        gl.useProgram(Particle.SHADER)
+      if (object instanceof Explosion) {
+        gl.useProgram(Explosion.SHADER);
       }
 
-      object.sendUniformVariables()
-      object.draw()
-    })
+      object.sendUniformVariables();
+      object.draw();
+    });
   }
 
   public destroy() {
     this.objectsInScene.forEach((object) => {
-      object.clear()
-    })
+      object.clear();
+    });
   }
 }

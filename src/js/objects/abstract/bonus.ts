@@ -18,9 +18,13 @@ export default abstract class Bonus extends BoundedEntity {
   public tick(elapsed: number) {
     this.time += 0.01 * elapsed
 
+    if (this.time > 50){
+      this.blink = true
+    }
+
     if (this.time > 80) {
-      this.clear()
-      return
+      this.clear();
+      return;
     }
 
     let newX = this.speed * 0.02 * this.directionX
