@@ -1,17 +1,35 @@
 import { Vector3 } from "../../../node_modules/@math.gl/core/src/index";
 import { gl } from "../utils/gl";
+import { initTexture } from "../utils/utils";
 import Object2D from "./abstract/objects/object2d";
 
 export default class Explosion extends Object2D {
   protected speed: number = 0.4;
   protected customHitboxScale: { width: number; height: number };
+  protected textures: WebGLTexture[];
+
+  protected state = 0;
+  private tState = 0;
 
   constructor(
     position: Vector3,
-    protected width: number = 0.005,
-    protected height: number = 0.005
+    protected width: number = 0.15,
+    protected height: number = 0.15
   ) {
     super(position);
+
+    this.textures = [];
+
+    for (let i = 0; i < 19; i++) {
+      this.textures.push(
+        initTexture(
+          `/assets/images/Explosions/${i}.png`,
+          this.width,
+          this.height
+        )
+      );
+    }
+
     let wo2 = this.width;
     let ho2 = this.height;
 
@@ -77,8 +95,11 @@ export default class Explosion extends Object2D {
 
   public sendUniformVariables() {
     if (this.loaded) {
-      gl.uniform3fv(Explosion.SHADER.uPosition, this.position);
-      gl.uniform3fv(Explosion.SHADER.couleurUniform, [1, 0, 0]);
+      gl.uniform3fv(Explosion.SHADER.positionUniform, this.position);
+
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, this.textures[this.state]);
+      gl.uniform1i(Explosion.SHADER.texUniform, 0);
     }
   }
 
@@ -100,8 +121,7 @@ export default class Explosion extends Object2D {
       gl.useProgram(shader);
 
       // adresse des variables uniform dans le shader
-      shader.uPosition = gl.getUniformLocation(shader, "pPos");
-      shader.couleurUniform = gl.getUniformLocation(shader, "uColor");
+      shader.positionUniform = gl.getUniformLocation(shader, "uPosition");
     }
   }
 
@@ -109,5 +129,15 @@ export default class Explosion extends Object2D {
     return this.position.clone();
   }
 
-  public tick(elapsed: number) {}
+  public tick(elapsed: number) {
+    this.tState++;
+    if (this.tState % 2 === 0) {
+      this.state++;
+    }
+
+    if (this.state > 19) {
+      this.clear();
+      return;
+    }
+  }
 }

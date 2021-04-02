@@ -42,6 +42,8 @@ export default class GameManager {
     View.setScore(0);
     View.setWaves(0);
 
+    new Explosion(new Vector3(1, 0.8, 0));
+
     // Wait 3s before starting waves
     setTimeout(() => {
       this.waveManager.start();
