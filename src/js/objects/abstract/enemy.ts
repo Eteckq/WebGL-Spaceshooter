@@ -55,7 +55,7 @@ export default abstract class Enemy
   }
 
   public clear() {
-    new Explosion(this.getPosition(), this.width * 1.5, this.height * 1.5);
+    new Explosion(this.getPosition());
     GameManager.Instance.waveManager.numberOfEnemies--;
     // clear all GPU memory
     this.loaded = false;

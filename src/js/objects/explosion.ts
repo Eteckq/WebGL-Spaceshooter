@@ -5,35 +5,19 @@ import Object2D from "./abstract/objects/object2d";
 
 export default class Explosion extends Object2D {
   protected speed: number = 0.4;
-  protected customHitboxScale: { width: number; height: number };
-  protected textures: WebGLTexture[];
+  static textures: WebGLTexture[];
+
+  protected width: number = 0.15;
+  protected height: number = 0.15;
 
   protected state = 0;
   private tState = 0;
 
-  constructor(
-    position: Vector3,
-    protected width: number = 0.15,
-    protected height: number = 0.15
-  ) {
+  constructor(position: Vector3) {
     super(position);
-
-    this.textures = [];
-
-    for (let i = 0; i < 19; i++) {
-      this.textures.push(
-        initTexture(
-          `/assets/images/Explosions/${i}.png`,
-          this.width,
-          this.height
-        )
-      );
-    }
 
     let wo2 = this.width;
     let ho2 = this.height;
-
-    this.customHitboxScale = { width: this.width, height: this.height };
 
     // TRectangle
     let vertices = [
@@ -93,18 +77,18 @@ export default class Explosion extends Object2D {
     this.loaded = true;
   }
 
+  getSize(): { width: number; height: number } {
+    return { width: this.width, height: this.height };
+  }
+
   public sendUniformVariables() {
     if (this.loaded) {
       gl.uniform3fv(Explosion.SHADER.positionUniform, this.position);
 
       gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, this.textures[this.state]);
+      gl.bindTexture(gl.TEXTURE_2D, Explosion.textures[this.state]);
       gl.uniform1i(Explosion.SHADER.texUniform, 0);
     }
-  }
-
-  public getSize() {
-    return this.customHitboxScale;
   }
 
   setPosition(position: Vector3) {
@@ -115,6 +99,14 @@ export default class Explosion extends Object2D {
 
   public static INIT_SHADERS(shader: any): void {
     {
+      Explosion.textures = [];
+
+      for (let i = 0; i < 19; i++) {
+        Explosion.textures.push(
+          initTexture(`/assets/images/Explosions/${i}.png`, 0.15, 0.15)
+        );
+      }
+
       Explosion.SHADER = shader;
 
       // active ce shader
@@ -135,7 +127,7 @@ export default class Explosion extends Object2D {
       this.state++;
     }
 
-    if (this.state > 19) {
+    if (this.state > 18) {
       this.clear();
       return;
     }
