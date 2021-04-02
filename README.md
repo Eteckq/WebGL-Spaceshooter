@@ -6,6 +6,10 @@ School project, built in Typescript from a js code base
 
 ## Features
 
+- Multiple weapons, to upgrade our spaceship
+- Multiple enemies; with custom behaviour & attack
+- Waves system, with incremental difficulty
+- Leaderboard
 
 ## Credits
 
@@ -43,6 +47,7 @@ npm run build
 
 You need to deploy a server:
 Example with http-server module
+
 > Install [http-server](https://www.npmjs.com/package/http-server) globally to deploy a simple server.
 
 ```bash
