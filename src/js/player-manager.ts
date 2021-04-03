@@ -67,7 +67,7 @@ export default class PlayerManager {
       this.player.color = new Vector3(0, 0, 1);
     }
 
-    if (this.damageCooldown > 0 && this.damageCooldown < 35) {
+    if (this.damageCooldown > 0 && this.damageCooldown < 50) {
       if (this.damageCooldown % 6 === 0) {
         this.player.color = new Vector3(0.8, 0.8, 0.2);
       } else {
