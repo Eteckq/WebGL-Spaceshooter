@@ -4,6 +4,8 @@ Live Exemple [here](https://spaceshooter.yohangastoud.fr)
 
 School project, built in Typescript from a js code base
 
+DUMAS Victor & GASTOUD Yohan
+
 ## Features
 
 - Multiple weapons, to upgrade our spaceship
@@ -44,6 +46,8 @@ You can view the development server at `localhost:8080`.
 ```bash
 npm run build
 ```
+
+### Start project local
 
 You need to deploy a server:
 Example with http-server module

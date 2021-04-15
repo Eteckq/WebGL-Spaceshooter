@@ -45,7 +45,7 @@ export default class PlayerManager {
   }
 
   public invulBonus() {
-    this.damageCooldown = 200;
+    this.damageCooldown = 1000;
     view.setInvul(true);
   }
 

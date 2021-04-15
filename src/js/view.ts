@@ -34,7 +34,13 @@ class View {
 
   // TODO Use UI icon to display score
   public setScore(score: number) {
-    $(".info_SCORE").html(score.toString());
+    $(".info_SCORE").html("");
+
+    for (const number of score.toString()) {
+      $(".info_SCORE").append(
+        `<img src="/assets/images/UI/numeral${number}.png" />`
+      );
+    }
   }
 
   public setWaves(wave: number) {
