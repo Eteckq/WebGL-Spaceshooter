@@ -9,6 +9,16 @@ html {
   overflow: hidden;
 }
 
+#git {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(243, 243, 243);
+  color: black;
+  border-bottom-left-radius: 40px;
+  padding: 2px 8px;
+}
+
 #game {
   display: flex;
 }
