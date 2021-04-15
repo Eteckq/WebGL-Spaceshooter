@@ -24,8 +24,8 @@
         <canvas
           id="SpaceShip"
           style="border: none"
-          width="800"
-          height="800"
+          width="750"
+          height="750"
         ></canvas>
         <!-- Pseudo Modal -->
         <div class="pseudoModal">
@@ -60,17 +60,17 @@
       </div>
       <div class="right">
         <ul class="tabs">
-          <li class="tab-link current" data-tab="tab-1">Leaderboard</li>
+          <li class="leaderboardTab tab-link" data-tab="tab-1">Leaderboard</li>
           <li class="tab-link" data-tab="tab-2">Enemies</li>
           <li class="tab-link" data-tab="tab-3">Weapons</li>
           <li class="tab-link" data-tab="tab-4">Bonus</li>
-          <li class="tab-link" data-tab="tab-5">Controls</li>
+          <li class="tab-link current" data-tab="tab-5">Controls</li>
         </ul>
 
-        <div id="tab-1" class="tab-content current">
+        <div id="tab-1" class="tab-content">
           <!-- Leaderboard -->
           <div class="leaderboard">
-            <h1>Top 10</h1>
+            <h1>Top Players</h1>
             <table id="LeaderboardList"></table>
           </div>
         </div>
@@ -233,7 +233,23 @@
             </tbody>
           </table>
         </div>
-        <div id="tab-5" class="tab-content">ZQSD</div>
+        <div id="tab-5" class="tab-content current">
+          <div class="keys">
+            <div class="key">Z</div>
+            <div class="key">Q</div>
+            <div class="key">S</div>
+            <div class="key">D</div>
+            <div class="label">Movements</div>
+          </div>
+          <div class="keys">
+            <div class="key">Space</div>
+            <div class="label">Shoot</div>
+          </div>
+          <div class="keys">
+            <div class="key">🠑 Maj</div>
+            <div class="label">Throw first bonus</div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- <canvas height="100" id="chart"></canvas> -->

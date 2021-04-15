@@ -49,6 +49,11 @@ class View {
 
   public sendScore(score: number) {
     $("#endgameModal").show();
+    $("ul.tabs li").removeClass("current");
+    $(".tab-content").removeClass("current");
+
+    $(".leaderboardTab").addClass("current");
+    $("#tab-1").addClass("current");
 
     $.post(api, {
       payload: btoa(

@@ -1,10 +1,10 @@
-@import 'reset';
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "reset";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 html {
   background: #121212;
   color: white;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
 #game {
@@ -200,5 +200,26 @@ table {
   #bonusTable {
     text-align: left;
     font-size: x-large;
+  }
+
+  .keys {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .key {
+      margin-left: 5px;
+      color: white;
+      font-size: 1.5em;
+      padding: 10px 13px;
+      border: 1px solid white;
+      border-radius: 5px;
+      background-color: rgb(26, 26, 26);
+    }
+
+    .label {
+      margin-left: 20px;
+      font-size: 1.8em;
+    }
   }
 }
