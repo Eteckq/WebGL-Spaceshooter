@@ -5,6 +5,8 @@ html {
   background: #121212;
   color: white;
   font-family: "Roboto";
+
+  overflow: hidden;
 }
 
 #game {
@@ -140,7 +142,7 @@ table {
 
 .right {
   width: 100%;
-  height: 800px;
+  height: 750px;
   ul.tabs {
     margin: 0px;
     padding: 0px;
@@ -174,6 +176,18 @@ table {
 
     font-size: xx-large;
     text-align: center;
+    overflow-y: scroll;
+    height: 600px;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 8px;
+    }
+
+    /* Add a thumb */
+    &::-webkit-scrollbar-thumb {
+      background: rgb(44, 44, 44);
+    }
 
     #LeaderboardList {
       text-align: left;
