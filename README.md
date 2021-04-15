@@ -13,6 +13,8 @@ DUMAS Victor & GASTOUD Yohan
 - Waves system, with incremental difficulty
 - Leaderboard
 
+Shaders are located in public/shaders
+
 ## Credits
 
 [Health Bar](https://codepen.io/dwidomski/pen/KBzuo)
