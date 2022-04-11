@@ -14,5 +14,7 @@ RUN npm install
 RUN npm run build
 RUN npm i -g http-server
 
+WORKDIR /usr/src/nuxt-app/dist
+
 # start the app
-CMD ["cd", "dist" ,"&&", "http-server" ]
+CMD ["http-server" ]
