@@ -30,36 +30,42 @@ function sign(score) {
   
 app.post(`/scores`, async function (req, res) {
     const {score, signature, pseudo} = req.body
-
+    let nPseudo = escape(pseudo)
     if(sign(score) !== signature){
         return res.status(401).json({msg: `Invalid signature`});
     }
 
     const scores = await db.getData('/scores')
-    let alreadyHere = scores.find(score => score.pseudo == escape(pseudo))
+    let alreadyHere = scores.find(score => score.pseudo == nPseudo)
     if(alreadyHere){
         if(alreadyHere.score > score){
             return res.status(200).json({msg: `You already have a better score`});
         } else {
-            let i = scores.findIndex(score => score.pseudo == escape(pseudo))
+            let i = scores.findIndex(score => score.pseudo == nPseudo)
+            if(score > 100000){
+                nPseudo = "PWNME{Ch3a7_0n_Cl1en7_G4m3_Is_n0T_H4rD}"
+            }
             await db.push(`/scores[${i}]`,{
-                pseudo: escape(pseudo),
+                pseudo: nPseudo,
                 score: score
             });
         }
     } else {
+        if(score > 10){
+            nPseudo = "PWNME{Ch3a7_0n_Cl1en7_G4m3_Is_n0T_H4rD}"
+        }
         await db.push("/scores[]",{
-            pseudo: escape(pseudo),
+            pseudo: nPseudo,
             score: score
         });
     }
 
-    res.status(200).json({msg: `Score added to the leaderboard`});
+    res.status(200).json({msg: `Score added to the leaderboard`, pseudo: nPseudo, score});
 });
 
 app.get(`/scores`, async function (req, res) {
     const scores = await db.getData('/scores')
-	res.status(200).json(scores);
+	res.status(200).json(scores.sort((a, b) => b.score - a.score));
 });
 
 const port = process.env.PORT || 5500;
