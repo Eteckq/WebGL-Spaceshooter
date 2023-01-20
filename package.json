@@ -18,6 +18,8 @@
     "@babel/core": "^7.12.1",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
+    "@math.gl/core": "^3.4.2",
+    "@types/jquery": "^3.5.5",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.2.1",
@@ -32,6 +34,8 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-webpack-plugin": "^2.1.0",
     "html-webpack-plugin": "^5.0.0-alpha.7",
+    "javascript-obfuscator": "^4.0.0",
+    "jquery": "^3.6.0",
     "mini-css-extract-plugin": "^1.0.0",
     "node-sass": "^4.14.1",
     "postcss-loader": "^4.0.4",
@@ -46,9 +50,7 @@
     "webpack-cli": "^4.0.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.2.0",
-    "@math.gl/core": "^3.4.2",
-    "@types/jquery": "^3.5.5",
-    "jquery": "^3.6.0"
+    "webpack-obfuscator": "^3.5.1"
   },
   "repository": {
     "type": "git",
