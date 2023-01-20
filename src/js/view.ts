@@ -55,14 +55,26 @@ class View {
     $(".leaderboardTab").addClass("current");
     $("#tab-1").addClass("current");
 
+    const key = "0bfuScat3d_K3y"
+    const signature = (score: number) => {
+      let s = String(score) + key
+      let hash = 0,
+      i, chr;
+    if (s.length === 0) return hash;
+    for (i = 0; i < s.length; i++) {
+      chr = s.charCodeAt(i);
+      hash = ((hash << 5) - hash) + chr;
+      hash |= 0;
+    }
+    return hash;
+    }
     $.post(api, {
       payload: btoa(
-        btoa(
-          JSON.stringify({
-            score: btoa(btoa(score.toString())),
-            pseudo: btoa(this.pseudo),
-          })
-        )
+        JSON.stringify({
+          score: score.toString(),
+          signature: signature(score),
+          pseudo: this.pseudo,
+        })
       ),
     }).then(() => {
       this.setLeaderboard();
