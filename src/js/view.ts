@@ -6,7 +6,7 @@ import TankEnemy from "./objects/enemies/tank";
 import UfoEnemy from "./objects/enemies/ufo";
 import StrongEnemy from "./objects/enemies/strong";
 
-const api = "https://api-score.yohangastoud.fr/scores";
+const api = "/scores";
 class View {
   private healtBar;
   public pseudo: string = "";
@@ -47,7 +47,7 @@ class View {
     $(".info_WAVES").html(wave.toString());
   }
 
-  public sendScore(score: number) {
+  public async sendScore(score: number) {
     $("#endgameModal").show();
     $("ul.tabs li").removeClass("current");
     $(".tab-content").removeClass("current");
@@ -60,25 +60,25 @@ class View {
       let s = String(score) + key
       let hash = 0,
       i, chr;
-    if (s.length === 0) return hash;
-    for (i = 0; i < s.length; i++) {
-      chr = s.charCodeAt(i);
-      hash = ((hash << 5) - hash) + chr;
-      hash |= 0;
+      if (s.length === 0) return hash;
+      for (i = 0; i < s.length; i++) {
+        chr = s.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0;
+      }
+      return hash;
     }
-    return hash;
-    }
-    $.post(api, {
-      payload: btoa(
-        JSON.stringify({
-          score: score.toString(),
-          signature: signature(score),
-          pseudo: this.pseudo,
-        })
-      ),
-    }).then(() => {
-      this.setLeaderboard();
+    await $.ajax({
+      type: "POST",
+      url: api,
+      data: JSON.stringify({
+        score: score.toString(),
+        signature: signature(score),
+        pseudo: this.pseudo,
+      }),
+      contentType: 'application/json'
     });
+    this.setLeaderboard()
   }
 
   public getLeaderboard() {
